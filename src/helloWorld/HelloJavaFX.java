@@ -20,6 +20,7 @@ public class HelloJavaFX extends Application {
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		 primaryStage.setTitle("Hello, 1.0.1.1.1.1lajföal");
+		 int l = 13;
 		 int i = 0; int j = 0; 
 		 primaryStage.setScene(scene);
 		 primaryStage.show();

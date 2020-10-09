@@ -10,15 +10,17 @@ public class HelloJavaFX extends Application {
 
 	public static void main(String[] args) {
 		launch();
-		}
+	}
 		@Override
 		public void start(Stage primaryStage) throws Exception {
 		Label lblHello = new Label("Hello, JavaFX!");
 		BorderPane root = new BorderPane();
 		root.setCenter(lblHello);
+		
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		 primaryStage.setTitle("Hello, JavaFX!");
 		 primaryStage.setScene(scene);
 		 primaryStage.show();
 		}
-		}
+	}

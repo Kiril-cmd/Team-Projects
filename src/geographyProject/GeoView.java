@@ -2,6 +2,7 @@ package geographyProject;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class GeoView {
@@ -16,6 +17,7 @@ public class GeoView {
 		
 		// Create Masterpane for the different UI areas
 		BorderPane root = new BorderPane();
+		root.setTop(createDataControls());
 		
 		// TO DO: set up scene
 		Scene scene = new Scene(root);
@@ -26,6 +28,12 @@ public class GeoView {
 	
 	public void start() {
 		stage.show();
+	}
+	
+	public HBox createDataControls() {
+		HBox topBtnPane = new HBox();
+		
+		return topBtnPane;
 	}
 
 }

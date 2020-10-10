@@ -1,6 +1,7 @@
 package geographyProject;
 
 import javafx.application.Application;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class GeoMVC extends Application {

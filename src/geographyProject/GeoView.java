@@ -2,6 +2,7 @@ package geographyProject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -93,13 +94,23 @@ public class GeoView {
 		Label lbInformation = new Label("Information");
 		Label[] lbListCountries = new Label[6];
 		String[] countryLabelText = {"Population", "Form-of-government", "Area", "States", "Cities", "History"};
+		Region[] spacer = new Region[lbListCountries.length];
 		
 		// This method creates static label objects for the country view and add those to the countryRoot
 		for (int i = 0; i < lbListCountries.length; i++) {
 			lbListCountries[i] = new Label(countryLabelText[i]);
 			countryRoot.add(lbListCountries[i], 0, i + 1);
 		}
+		
+		// Setting margins and gaps between cells 
+		
+		countryRoot.setHgap(20);
+		countryRoot.setVgap(20);
+		countryRoot.setPadding(new Insets(30, 10, 10, 30));
+		
+			
 		// Add remain objects to createCountryView
+		
 		countryRoot.add(lbInformation, 0, 0);
 		countryRoot.add(tfPopulation, 1, 1);
 		countryRoot.add(tfFormOfGovernment, 1, 2);
@@ -107,6 +118,7 @@ public class GeoView {
 		countryRoot.add(stateList, 1, 4);
 		countryRoot.add(cityList, 1, 5);
 		countryRoot.add(taHistory, 0, 7, 2, 7);
+		
 		
 		return countryRoot;
 	}

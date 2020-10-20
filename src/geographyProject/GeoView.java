@@ -70,7 +70,8 @@ public class GeoView {
 		leftControls.getChildren().addAll(leftControlBtns, geoList);
 		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 		geoList.setItems(items);
-				
+		
+		
 		return leftControls;
 	}
 

@@ -10,7 +10,13 @@ import javafx.stage.Stage;
 
 public class GeoView {
 	private Stage stage;
-	private GeoModel model;	
+	private GeoModel model;
+	
+	// Top controls
+	protected Button btnCreate = new Button ("Create");
+	protected Button btnEdit = new Button ("Edit");
+	protected Button btnDelete = new Button ("Delete");
+	protected Button btnSave = new Button ("Save");
 
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -44,10 +50,6 @@ public class GeoView {
 		spacer1.setPrefWidth(10);
 		spacer2.setPrefWidth(10);
 		
-		Button btnCreate = new Button ("Create");
-		Button btnEdit = new Button ("Edit");
-		Button btnDelete = new Button ("Delete");
-		Button btnSave = new Button ("Save");
 		topBtnPane.getChildren().addAll(btnCreate, spacer, btnEdit, spacer1, btnDelete, spacer2, btnSave);
 		
 		return topBtnPane;

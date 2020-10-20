@@ -91,8 +91,8 @@ public class GeoView {
 		GridPane countryRoot = new GridPane();
 		
 		Label lbInformation = new Label("Information");
-		Label[] lbListCountries = new Label[6];
-		String[] countryLabelText = {"Population", "Form-of-government", "Area", "States", "Cities", "History"};
+		Label[] lbListCountries = new Label[5];
+		String[] countryLabelText = {"Population", "Form-of-government", "Area", "States", "Cities"};
 		Label lbHistory = new Label("History");
 		
 		// This method creates static label objects for the country view and add those to the countryRoot
@@ -108,8 +108,6 @@ public class GeoView {
 		countryRoot.add(cityList, 1, 4);
 		countryRoot.add(lbHistory, 1, 5);
 		countryRoot.add(taHistory, 1, 6);
-
-		
 		
 		return countryRoot;
 	}

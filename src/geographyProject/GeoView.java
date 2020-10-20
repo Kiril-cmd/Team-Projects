@@ -4,8 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -25,6 +28,10 @@ public class GeoView {
 	protected Button btnState = new Button("State");
 	protected Button btnCity = new Button("City");
 	protected ListView<String> geoList = new ListView<String>();
+	// Center controls
+	protected TextField tfPopulation = new TextField();
+	protected TextField tfFormOfGovernment = new TextField();
+	protected TextField tfArea = new TextField();
 
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -73,6 +80,24 @@ public class GeoView {
 		
 		
 		return leftControls;
+	}
+	
+	public GridPane createCountryView() {
+		GridPane countryRoot = new GridPane();
+		
+		Label lbInformation = new Label("Information");
+		Label[] lbListCountries = new Label[6];
+		String[] countryLabelText = {"Population", "Form-of-government", "Area", "States", "Cities", "History"};
+		Label lbHistory = new Label("History");
+		
+		// This method creates static label objects for the country view and add those to the countryRoot
+		for (int i = 0; i < lbListCountries.length; i++) {
+			lbListCountries[i] = new Label(countryLabelText[i]);
+			countryRoot.add(lbListCountries[i], 0, i++);
+		}
+		
+		
+		return countryRoot;
 	}
 
 }

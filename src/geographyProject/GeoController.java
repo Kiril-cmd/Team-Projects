@@ -8,6 +8,11 @@ public class GeoController {
 		this.model = model;
 		this.view = view;
 		
+		//Button events
+		view.btnCreate.setOnAction(e -> {
+			
+		});
+		
 		
 	}
 

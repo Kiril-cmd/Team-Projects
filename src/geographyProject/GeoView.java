@@ -61,9 +61,9 @@ public class GeoView {
 		Region spacer1 = new Region();
 		Region spacer2 = new Region();
 		
-		spacer.setPrefWidth(10);
-		spacer1.setPrefWidth(10);
-		spacer2.setPrefWidth(10);
+		spacer.setPrefWidth(20);
+		spacer1.setPrefWidth(20);
+		spacer2.setPrefWidth(20);
 		
 		topBtnPane.getChildren().addAll(btnCreate, spacer, btnEdit, spacer1, btnDelete, spacer2, btnSave);
 		
@@ -77,7 +77,8 @@ public class GeoView {
 		leftControls.getChildren().addAll(leftControlBtns, geoList);
 		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 		geoList.setItems(items);
-				
+		
+		
 		return leftControls;
 	}
 	

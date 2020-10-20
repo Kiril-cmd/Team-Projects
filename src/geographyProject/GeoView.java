@@ -1,6 +1,7 @@
 package geographyProject;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,6 +35,13 @@ public class GeoView {
 	
 	public HBox createDataControls() {
 		HBox topBtnPane = new HBox();
+		
+
+		Button btnCreate = new Button ("Create");
+		Button btnEdit = new Button ("Edit");
+		Button btnDelete = new Button ("Delete");
+		Button btnSave = new Button ("Save");
+		topBtnPane = new HBox(btnCreate, btnEdit, btnDelete, btnSave);
 		
 		return topBtnPane;
 	}

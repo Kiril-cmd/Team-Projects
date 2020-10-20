@@ -1,7 +1,10 @@
 package geographyProject;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -17,6 +20,11 @@ public class GeoView {
 	protected Button btnEdit = new Button ("Edit");
 	protected Button btnDelete = new Button ("Delete");
 	protected Button btnSave = new Button ("Save");
+	// Left controls
+	protected Button btnCountry = new Button("Country");
+	protected Button btnState = new Button("State");
+	protected Button btnCity = new Button("City");
+	protected ListView<String> geoList = new ListView<String>();
 
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -56,8 +64,13 @@ public class GeoView {
 	}
 	
 	public VBox createLeftControls() {
+		HBox leftControlBtns = new HBox();
+		leftControlBtns.getChildren().addAll(btnCountry, btnState, btnCity);
 		VBox leftControls = new VBox();
-		
+		leftControls.getChildren().addAll(leftControlBtns, geoList);
+		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
+		geoList.setItems(items);
+				
 		return leftControls;
 	}
 

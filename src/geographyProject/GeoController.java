@@ -7,6 +7,8 @@ public class GeoController {
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
 		this.view = view;
+		
+		
 	}
 
 }

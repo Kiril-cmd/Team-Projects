@@ -104,10 +104,10 @@ public class GeoView {
 		countryRoot.add(lbInformation, 0, 0);
 		countryRoot.add(tfFormOfGovernment, 1, 1);
 		countryRoot.add(tfArea, 1, 2);
-		countryRoot.add(stateList, 1, 3);
-		countryRoot.add(cityList, 1, 4);
-		countryRoot.add(lbHistory, 1, 5);
-		countryRoot.add(taHistory, 1, 6);
+//		countryRoot.add(stateList, 1, 3);
+//		countryRoot.add(cityList, 1, 4);
+//		countryRoot.add(lbHistory, 1, 5);
+//		countryRoot.add(taHistory, 1, 6);
 		
 		return countryRoot;
 	}

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class GeoView {
 	private Stage stage;
-	private GeoModel model;
+	private GeoModel model;	
 
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;

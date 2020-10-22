@@ -98,6 +98,7 @@ public class GeoView {
 		for (int i = 0; i < lbListCountries.length; i++) {
 			lbListCountries[i] = new Label(countryLabelText[i]);
 			countryRoot.add(lbListCountries[i], 0, i + 1);
+
 		}
 		// Add remain objects to createCountryView
 		countryRoot.add(lbInformation, 0, 0);

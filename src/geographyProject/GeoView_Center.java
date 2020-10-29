@@ -14,16 +14,16 @@ public class GeoView_Center {
 	GridPane stateView;
 	GridPane cityView;
 	// Country controls
-	protected TextField tfPopulation = new TextField();
-	protected TextField tfArea = new TextField();
+	protected TextField tfPopulationCountry = new TextField();
+	protected TextField tfAreaCountry = new TextField();
 	protected TextField tfFormOfGovernment = new TextField();
-	protected TextField tfLanguages = new TextField();
+	protected TextField tfLanguagesCountry = new TextField();
 	protected TextField tfCurrency = new TextField();
 	protected TextField tfPhoneCode = new TextField();
-	protected ListView<String> stateList = new ListView<String>();
-	protected TextField tfCapitalCity = new TextField();
-	protected ListView<String> cityList = new ListView<String>();
-	protected TextArea taHistory = new TextArea();
+	protected ListView<String> stateListCountry = new ListView<String>();
+	protected TextField tfCapitalCityCountry = new TextField();
+	protected ListView<String> cityListCountry = new ListView<String>();
+	protected TextArea taHistoryCountry = new TextArea();
 	
 	public GeoView_Center() {
 		this.countryView = createCountryView();
@@ -54,16 +54,16 @@ public class GeoView_Center {
 					
 		// Add remain objects to createCountryView
 		countryRoot.add(lbInformationCountry, 0, 0);
-		countryRoot.add(tfPopulation, 1, 1);
-		countryRoot.add(tfArea, 1, 2);
+		countryRoot.add(tfPopulationCountry, 1, 1);
+		countryRoot.add(tfAreaCountry, 1, 2);
 		countryRoot.add(tfFormOfGovernment, 1, 3);
-		countryRoot.add(tfLanguages, 1, 4);
+		countryRoot.add(tfLanguagesCountry, 1, 4);
 		countryRoot.add(tfCurrency, 1, 5);
 		countryRoot.add(tfPhoneCode, 1, 6);
-		countryRoot.add(stateList, 1, 7);
-		countryRoot.add(tfCapitalCity, 1, 8);
-		countryRoot.add(cityList, 1, 9);
-		countryRoot.add(taHistory, 0, 11, 2, 11);
+		countryRoot.add(stateListCountry, 1, 7);
+		countryRoot.add(tfCapitalCityCountry, 1, 8);
+		countryRoot.add(cityListCountry, 1, 9);
+		countryRoot.add(taHistoryCountry, 0, 11, 2, 11);
 				
 		return countryRoot;
 	}

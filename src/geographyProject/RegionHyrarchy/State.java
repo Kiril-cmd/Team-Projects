@@ -1,4 +1,4 @@
-package geographyProject;
+package geographyProject.RegionHyrarchy;
 
 import java.util.ArrayList;
 

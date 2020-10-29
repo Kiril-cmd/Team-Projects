@@ -1,5 +1,7 @@
 package geographyProject;
 
+import geographyProject.RegionHyrarchy.Country;
+
 public class GeoController {
 	private GeoModel model;
 	private GeoView view;

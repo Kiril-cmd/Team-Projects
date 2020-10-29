@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +22,9 @@ public class GeoView {
 	private Stage stage;
 	private GeoModel model;
 	
+	ScrollPane centerView = new ScrollPane();
+	
+	
 	// Top controls
 	protected Button btnCreate = new Button ("Create");
 	protected Button btnEdit = new Button ("Edit");
@@ -30,13 +35,6 @@ public class GeoView {
 	protected Button btnState = new Button("State");
 	protected Button btnCity = new Button("City");
 	protected ListView<String> countryList = new ListView<String>();
-	// Center controls
-	protected TextField tfPopulation = new TextField();
-	protected TextField tfFormOfGovernment = new TextField();
-	protected TextField tfArea = new TextField();
-	protected ListView<String> stateList = new ListView<String>();
-	protected ListView<String> cityList = new ListView<String>();
-	protected TextArea taHistory = new TextArea();
 
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -44,17 +42,22 @@ public class GeoView {
 		
 		stage.setTitle("Geo Database");
 		
+		centerView.setHbarPolicy(ScrollBarPolicy.NEVER);
+		centerView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		centerView.setFitToWidth(true);
+		
 		// Create Masterpane for the different UI areas
 		BorderPane root = new BorderPane();
+		GeoView_Center centerRoot = new GeoView_Center();
+		centerView.setContent(centerRoot.getCountryView());
 		root.setTop(createDataControls());
 		root.setLeft(createLeftControls());
-		root.setCenter(createCountryView());
+		root.setCenter(centerView);
 		
 		// TO DO: set up scene
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("geographyProject.css").toExternalForm());
 		stage.setScene(scene);
-
 	}
 	
 	public void start() {
@@ -86,42 +89,6 @@ public class GeoView {
 		
 		
 		return leftControls;
-	}
-	
-	public GridPane createCountryView() {
-		GridPane countryRoot = new GridPane();
-		
-		Label lbInformation = new Label("Information");
-		Label[] lbListCountries = new Label[6];
-		String[] countryLabelText = {"Population", "Form-of-government", "Area", "States", "Cities", "History"};
-		Region[] spacer = new Region[lbListCountries.length];
-		
-		// This method creates static label objects for the country view and add those to the countryRoot
-		for (int i = 0; i < lbListCountries.length; i++) {
-			lbListCountries[i] = new Label(countryLabelText[i]);
-			countryRoot.add(lbListCountries[i], 0, i + 1);
-
-		}
-		
-		// Setting margins and gaps between cells 
-		
-		countryRoot.setHgap(20);
-		countryRoot.setVgap(20);
-		countryRoot.setPadding(new Insets(30, 10, 10, 30));
-		
-			
-		// Add remain objects to createCountryView
-		
-		countryRoot.add(lbInformation, 0, 0);
-		countryRoot.add(tfPopulation, 1, 1);
-		countryRoot.add(tfFormOfGovernment, 1, 2);
-		countryRoot.add(tfArea, 1, 3);
-		countryRoot.add(stateList, 1, 4);
-		countryRoot.add(cityList, 1, 5);
-		countryRoot.add(taHistory, 0, 7, 2, 7);
-		
-		
-		return countryRoot;
 	}
 
 }

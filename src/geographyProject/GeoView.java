@@ -63,15 +63,9 @@ public class GeoView {
 	
 	public HBox createDataControls() {
 		HBox topBtnPane = new HBox();
-		Region spacer = new Region();
-		Region spacer1 = new Region();
-		Region spacer2 = new Region();
-		
-		spacer.setPrefWidth(20);
-		spacer1.setPrefWidth(20);
-		spacer2.setPrefWidth(20);
-		
-		topBtnPane.getChildren().addAll(btnCreate, spacer, btnEdit, spacer1, btnDelete, spacer2, btnSave);
+				
+		topBtnPane.getChildren().addAll(btnCreate, btnEdit, btnDelete, btnSave);
+		topBtnPane.getStyleClass().add("top-pane");
 		
 		return topBtnPane;
 	}
@@ -83,8 +77,9 @@ public class GeoView {
 		leftControls.getChildren().addAll(leftControlBtns, countryList);
 		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 		countryList.setItems(items);
-		
-		
+		leftControlBtns.getStyleClass().add("left-control-btns");
+
+				
 		return leftControls;
 	}
 	
@@ -94,21 +89,16 @@ public class GeoView {
 		Label lbInformation = new Label("Information");
 		Label[] lbListCountries = new Label[6];
 		String[] countryLabelText = {"Population", "Form-of-government", "Area", "States", "Cities", "History"};
-		Region[] spacer = new Region[lbListCountries.length];
+		
 		
 		// This method creates static label objects for the country view and add those to the countryRoot
 		for (int i = 0; i < lbListCountries.length; i++) {
 			lbListCountries[i] = new Label(countryLabelText[i]);
 			countryRoot.add(lbListCountries[i], 0, i + 1);
-
 		}
 		
-		// Setting margins and gaps between cells 
 		
-		countryRoot.setHgap(20);
-		countryRoot.setVgap(20);
-		countryRoot.setPadding(new Insets(30, 10, 10, 30));
-		
+				
 			
 		// Add remain objects to createCountryView
 		
@@ -119,7 +109,7 @@ public class GeoView {
 		countryRoot.add(stateList, 1, 4);
 		countryRoot.add(cityList, 1, 5);
 		countryRoot.add(taHistory, 0, 7, 2, 7);
-		
+		countryRoot.getStyleClass().add("country-root");
 		
 		return countryRoot;
 	}

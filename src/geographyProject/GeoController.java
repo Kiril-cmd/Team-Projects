@@ -13,7 +13,6 @@ public class GeoController {
 		//Button events
 		view.btnCreate.setOnAction(e -> {
 			Country newCountry = new Country ("USA");
-			
 		});
 		
 		

@@ -15,8 +15,7 @@ public class GeoMVC extends Application {
 		this.view = new GeoView(primaryStage, model);
 		this.controller = new GeoController(model, view);
 		view.start();
-
-	}
+}
 
 	public static void main(String[] args) {
 		launch();

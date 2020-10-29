@@ -1,3 +1,45 @@
 .button {
 	-fx-font-size: 20pt;
+	-fx-cursor: hand;
+}
+.top-pane {
+	
+	-fx-background-color: #DDD56E /* #e3d105*/;	
+	-fx-padding: 10;
+	-fx-spacing: 10;
+	
+}
+
+.top-pane .button {
+	
+	-fx-margin-right: 15px;
+	-fx-font-weight: bold;
+	
+}
+.left-control-btns {
+	-fx-padding: 5px;
+    -fx-spacing: 10px;
+	
+	
+
+} 
+
+.left-control-btns .button {
+	-fx-font-size: 15pt;
+	 /* #8aaae5*/
+	 -fx-background-color: #6EB8DD;
+	 -fx-text-fill: white;
+	
+	/*-fx-border-style: solid; */
+	-fx-opacity: 0.80;
+	
+}
+.left-control-btns .button:hover {
+	-fx-opacity: 1;
+}
+
+.country-root{
+	-fx-padding: 15;
+	-fx-hgap: 10;
+    -fx-vgap: 10;
 }

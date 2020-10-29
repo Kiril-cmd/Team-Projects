@@ -2,19 +2,13 @@ package geographyProject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -23,7 +17,6 @@ public class GeoView {
 	private GeoModel model;
 	
 	ScrollPane centerView = new ScrollPane();
-	
 	
 	// Top controls
 	protected Button btnCreate = new Button ("Create");
@@ -35,7 +28,7 @@ public class GeoView {
 	protected Button btnState = new Button("State");
 	protected Button btnCity = new Button("City");
 	protected ListView<String> countryList = new ListView<String>();
-
+	
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
 		this.model = model;
@@ -58,6 +51,7 @@ public class GeoView {
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("geographyProject.css").toExternalForm());
 		stage.setScene(scene);
+
 	}
 	
 	public void start() {
@@ -66,15 +60,9 @@ public class GeoView {
 	
 	public HBox createDataControls() {
 		HBox topBtnPane = new HBox();
-		Region spacer = new Region();
-		Region spacer1 = new Region();
-		Region spacer2 = new Region();
-		
-		spacer.setPrefWidth(20);
-		spacer1.setPrefWidth(20);
-		spacer2.setPrefWidth(20);
-		
-		topBtnPane.getChildren().addAll(btnCreate, spacer, btnEdit, spacer1, btnDelete, spacer2, btnSave);
+				
+		topBtnPane.getChildren().addAll(btnCreate, btnEdit, btnDelete, btnSave);
+		topBtnPane.getStyleClass().add("top-pane");
 		
 		return topBtnPane;
 	}
@@ -86,8 +74,9 @@ public class GeoView {
 		leftControls.getChildren().addAll(leftControlBtns, countryList);
 		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 		countryList.setItems(items);
-		
-		
+		leftControlBtns.getStyleClass().add("left-control-btns");
+
+				
 		return leftControls;
 	}
 

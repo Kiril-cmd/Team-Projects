@@ -48,7 +48,7 @@ public class GeoView {
 		root.setCenter(centerView);
 		
 		// TO DO: set up scene
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, 800, 1000);
 		scene.getStylesheets().add(getClass().getResource("geographyProject.css").toExternalForm());
 		stage.setScene(scene);
 

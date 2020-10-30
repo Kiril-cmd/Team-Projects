@@ -39,18 +39,14 @@ public class GeoView_Center {
 		Label[] lbListCountries = new Label[10];
 		String[] countryLabelText = {"Population", "Area", "Form-of-government", "Languages", "Currency", "Phone code", 
 				"States", "Capital city", "Cities", "History"};
-		Region[] spacer = new Region[lbListCountries.length];
-		
+				
 		// This loop creates label objects for the country view and add those to the countryRoot
 		for (int i = 0; i < lbListCountries.length; i++) {
 			lbListCountries[i] = new Label(countryLabelText[i]);
 			countryRoot.add(lbListCountries[i], 0, i + 1);
 		}
 		
-		// Setting margins and gaps between cells 		
-		countryRoot.setHgap(20);
-		countryRoot.setVgap(20);
-		countryRoot.setPadding(new Insets(30, 10, 10, 30));
+		
 					
 		// Add remain objects to createCountryView
 		countryRoot.add(lbInformationCountry, 0, 0);
@@ -64,6 +60,7 @@ public class GeoView_Center {
 		countryRoot.add(tfCapitalCityCountry, 1, 8);
 		countryRoot.add(cityListCountry, 1, 9);
 		countryRoot.add(taHistoryCountry, 0, 11, 2, 11);
+		countryRoot.getStyleClass().add("country-root");
 				
 		return countryRoot;
 	}

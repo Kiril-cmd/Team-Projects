@@ -5,6 +5,9 @@ public abstract class GovernedRegion {
 	int population;
 	String formOfGovernment;
 	String language;
+	String capitalCity;
+	String history;
+	
 	
 	public GovernedRegion(){
 			

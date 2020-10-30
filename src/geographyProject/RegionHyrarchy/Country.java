@@ -23,5 +23,4 @@ public class Country extends GovernedRegion{
 	public void addCity (City newCity) {
 		cities.add(newCity);
 	}
-
 }

@@ -38,6 +38,7 @@ public class GeoView {
 		centerView.setHbarPolicy(ScrollBarPolicy.NEVER);
 		centerView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		centerView.setFitToWidth(true);
+
 		
 		// Create Masterpane for the different UI areas
 		BorderPane root = new BorderPane();

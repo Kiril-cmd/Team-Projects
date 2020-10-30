@@ -34,9 +34,10 @@
 	-fx-opacity: 1;
 }
 
-.country-root{
+.main-root {
 	-fx-padding: 15;
 	-fx-hgap: 10;
     -fx-vgap: 10;
+    
   
 }

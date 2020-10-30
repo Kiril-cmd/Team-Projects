@@ -13,6 +13,7 @@ public class GeoView_Center {
 	GridPane stateView;
 	GridPane cityView;
 	
+	
 	// Country controls
 	protected TextField tfPopulationCountry = new TextField();
 	protected TextField tfAreaCountry = new TextField();
@@ -65,7 +66,9 @@ public class GeoView_Center {
 		
 		addStaticElements(countryRoot, lbTextCountry);
 		addControls(countryRoot, controls);
-				
+		
+		setStylesheets(countryRoot);
+		
 		return countryRoot;
 	}
 	
@@ -81,6 +84,8 @@ public class GeoView_Center {
 		addStaticElements(stateRoot, lbTextState);
 		addControls(stateRoot, controls);
 		
+		setStylesheets(stateRoot);
+		
 		return stateRoot;		
 		}
 	
@@ -95,6 +100,8 @@ public class GeoView_Center {
 		
 		addStaticElements(cityRoot, lbTextCity);
 		addControls(cityRoot, controls);
+		
+		setStylesheets(cityRoot);
 				
 		return cityRoot;
 	}
@@ -122,6 +129,10 @@ public class GeoView_Center {
 				pane.add(controls[i], 0, i + 2, 2, i + 2);
 			}			
 		}
+	}
+	
+	private void setStylesheets (GridPane pane) {
+		pane.getStyleClass().add("main-root");
 	}
 	
 	//getters for countryView, stateView and cityView

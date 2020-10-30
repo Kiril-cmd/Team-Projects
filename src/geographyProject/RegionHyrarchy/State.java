@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class State extends GovernedRegion{
 	String stateName;
+	int highestElevation;
+	int lowestElevation;
+	int averageElevation;
+	
 	ArrayList<City> cities;
 	
 	public State (String newStateName) {

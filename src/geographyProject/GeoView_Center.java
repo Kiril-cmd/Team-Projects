@@ -1,6 +1,5 @@
 package geographyProject;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -60,16 +59,12 @@ public class GeoView_Center {
 		
 		String[] lbTextCountry = {"Population", "Area", "Form-of-government", "Languages", "Currency", "Phone code", 
 				"States", "Capital city", "Cities", "History"};
+
 		Control[] controls = {tfPopulationCountry, tfAreaCountry, tfFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
 				stateListCountry, tfCapitalCityCountry, cityListCountry, taHistoryCountry};
 		
 		addStaticElements(countryRoot, lbTextCountry);
 		addControls(countryRoot, controls);
-		
-		// Setting margins and gaps between cells 		
-		countryRoot.setHgap(20);
-		countryRoot.setVgap(20);
-		countryRoot.setPadding(new Insets(30, 10, 10, 30));
 				
 		return countryRoot;
 	}
@@ -86,11 +81,6 @@ public class GeoView_Center {
 		addStaticElements(stateRoot, lbTextState);
 		addControls(stateRoot, controls);
 		
-		// Setting margins and gaps between cells 		
-		stateRoot.setHgap(20);
-		stateRoot.setVgap(20);
-		stateRoot.setPadding(new Insets(30, 10, 10, 30));
-		
 		return stateRoot;		
 		}
 	
@@ -105,11 +95,6 @@ public class GeoView_Center {
 		
 		addStaticElements(cityRoot, lbTextCity);
 		addControls(cityRoot, controls);
-		
-		// Setting margins and gaps between cells 		
-		cityRoot.setHgap(20);
-		cityRoot.setVgap(20);
-		cityRoot.setPadding(new Insets(30, 10, 10, 30));
 				
 		return cityRoot;
 	}

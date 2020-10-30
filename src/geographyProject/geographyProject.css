@@ -7,7 +7,6 @@
 	-fx-background-color: #DDD56E /* #e3d105*/;	
 	-fx-padding: 10;
 	-fx-spacing: 10;
-	
 }
 
 .top-pane .button {
@@ -19,9 +18,6 @@
 .left-control-btns {
 	-fx-padding: 5px;
     -fx-spacing: 10px;
-	
-	
-
 } 
 
 .left-control-btns .button {
@@ -42,4 +38,5 @@
 	-fx-padding: 15;
 	-fx-hgap: 10;
     -fx-vgap: 10;
+  
 }

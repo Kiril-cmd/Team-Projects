@@ -5,22 +5,23 @@
 .top-pane {
 	
 	-fx-background-color: #DDD56E /* #e3d105*/;	
-	-fx-padding: 10;
-	-fx-spacing: 15;
+	-fx-padding: 15 20 15 20;
+	-fx-spacing: 20;
 }
 
 .top-pane .button {
 	
-	-fx-margin-right: 15px;
 	-fx-font-weight: bold;
 	
 	
 }
 
-#enter-zone-button {
-	-fx-alignment: baseline-center;
+#enter-zone-tf {
+		-fx-alignment: center-left;
 	-fx-font-size: 12pt;
-	-fx-padding: 10px 0;
+	
+	
+	
 	
 	
 }

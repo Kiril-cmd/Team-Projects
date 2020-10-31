@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,6 +30,7 @@ public class GeoView {
 	protected Button btnCountry = new Button("Country");
 	protected Button btnState = new Button("State");
 	protected Button btnCity = new Button("City");
+	protected ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 	protected ListView<String> itemList = new ListView<String>();
 	
 	public GeoView(Stage primaryStage, GeoModel model) {
@@ -64,10 +66,11 @@ public class GeoView {
 	
 	public HBox createDataControls() {
 		HBox topBtnPane = new HBox();
+		Region spacing = new Region();
 				
-		topBtnPane.getChildren().addAll(tfEnterZone, btnCreate, btnEdit, btnDelete, btnSave);
+		topBtnPane.getChildren().addAll(tfEnterZone, spacing, btnCreate, btnEdit, btnDelete, btnSave);
 		tfEnterZone.setPromptText("Enter a country");
-		tfEnterZone.setId("enter-zone-button");
+		tfEnterZone.setId("enter-zone-tf");
 		topBtnPane.getStyleClass().add("top-pane");
 		
 		return topBtnPane;
@@ -80,7 +83,7 @@ public class GeoView {
 		
 		VBox leftControls = new VBox();
 		leftControls.getChildren().addAll(leftControlBtns, itemList);
-		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
+		
 		itemList.setItems(items);
 		
 		leftControlBtns.getStyleClass().add("left-control-btns");

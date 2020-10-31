@@ -10,21 +10,21 @@ import javafx.collections.ObservableList;
 
 public class GeoModel {
 	
-	private final ObservableList<Country> countries = FXCollections.observableArrayList();
-	private final ObservableList<State> states = FXCollections.observableArrayList();
-	private final ObservableList<City> cities = FXCollections.observableArrayList();
+	public final ObservableList<Country> countries = FXCollections.observableArrayList();
+	public final ObservableList<State> states = FXCollections.observableArrayList();
+	public final ObservableList<City> cities = FXCollections.observableArrayList();
 
 	
-	public void createData (String name) {
-		countries.add(new Country("USA"));
-		states.add(new State("California"));
-		cities.add(new City("Los Angeles"));
+	public void addCountry (String newCountry) {
+		countries.add(new Country(newCountry));
 	}
 	
 	public void deleteData ()
 	{
 		
 	}
+	
+
 	
 
 	

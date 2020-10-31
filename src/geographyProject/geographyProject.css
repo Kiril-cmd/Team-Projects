@@ -1,12 +1,12 @@
 .button {
-	-fx-font-size: 20pt;
+	-fx-font-size: 15pt;
 	-fx-cursor: hand;
 }
 .top-pane {
 	
 	-fx-background-color: #DDD56E /* #e3d105*/;	
 	-fx-padding: 10;
-	-fx-spacing: 10;
+	-fx-spacing: 15;
 }
 
 .top-pane .button {
@@ -14,7 +14,17 @@
 	-fx-margin-right: 15px;
 	-fx-font-weight: bold;
 	
+	
 }
+
+#enter-zone-button {
+	-fx-alignment: baseline-center;
+	-fx-font-size: 12pt;
+	-fx-padding: 10px 0;
+	
+	
+}
+
 .left-control-btns {
 	-fx-padding: 5px;
     -fx-spacing: 10px;
@@ -38,4 +48,8 @@
 	-fx-padding: 15;
 	-fx-hgap: 10;
     -fx-vgap: 10;
+}
+
+.active {
+	
 }

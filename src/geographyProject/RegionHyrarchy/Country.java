@@ -7,20 +7,31 @@ public class Country extends GovernedRegion{
 	String currency;
 	String phoneCode;
 	
+	ArrayList<Country> countries;
 	ArrayList<State> states;
-	ArrayList<City> cities;
-	
+		
 	public Country(String newCountryName) {
 		this.countryName = newCountryName;
+		countries = new ArrayList<Country>();
 		states = new ArrayList<State>();
-		cities = new ArrayList<City>();
+		
+	}
+	
+	public void addCountry (Country newCountry) {
+		countries.add(newCountry);
 	}
 	
 	public void addState (State newState) {
 		states.add(newState);
 	}
 	
-	public void addCity (City newCity) {
-		cities.add(newCity);
+		
+	public void removeCountry (Country newCountry) {
+		countries.remove(newCountry);
 	}
+	
+	public void removeState (State newState) {
+		states.remove(newState);
+	}
+	
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,11 +24,12 @@ public class GeoView {
 	protected Button btnEdit = new Button ("Edit");
 	protected Button btnDelete = new Button ("Delete");
 	protected Button btnSave = new Button ("Save");
+	protected TextField tfEnterZone = new TextField ();
 	// Left controls
 	protected Button btnCountry = new Button("Country");
 	protected Button btnState = new Button("State");
 	protected Button btnCity = new Button("City");
-	protected ListView<String> countryList = new ListView<String>();
+	protected ListView<String> itemList = new ListView<String>();
 	
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -63,7 +65,9 @@ public class GeoView {
 	public HBox createDataControls() {
 		HBox topBtnPane = new HBox();
 				
-		topBtnPane.getChildren().addAll(btnCreate, btnEdit, btnDelete, btnSave);
+		topBtnPane.getChildren().addAll(tfEnterZone, btnCreate, btnEdit, btnDelete, btnSave);
+		tfEnterZone.setPromptText("Enter a country");
+		tfEnterZone.setId("enter-zone-button");
 		topBtnPane.getStyleClass().add("top-pane");
 		
 		return topBtnPane;
@@ -72,14 +76,15 @@ public class GeoView {
 	public VBox createLeftControls() {
 		HBox leftControlBtns = new HBox();
 		leftControlBtns.getChildren().addAll(btnCountry, btnState, btnCity);
+		
+		
 		VBox leftControls = new VBox();
-		leftControls.getChildren().addAll(leftControlBtns, countryList);
+		leftControls.getChildren().addAll(leftControlBtns, itemList);
 		ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
-		countryList.setItems(items);
+		itemList.setItems(items);
+		
 		leftControlBtns.getStyleClass().add("left-control-btns");
 
-				
 		return leftControls;
 	}
-
 }

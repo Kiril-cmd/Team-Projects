@@ -20,25 +20,29 @@ public class GeoController {
 		//Button events
 		view.btnCreate.setOnAction(e -> {
 			//String country = view.itemList.getItems().add(e);
-			String newCountry= view.tfEnterZone.toString();
-			model.addCountry(newCountry); 
-			updateView(newCountry);
+		
+			String newCountry = view.tfEnterZone.getText();
+			if (newCountry.length() > 0 && !newCountry.contains(" ")) {
+				model.addCountry(newCountry); 
+				updateView(newCountry);
+			} else {
+				
+			}
 		});
 	}
 	
 	private void updateView (String newCountry) {
-		if (newCountry != null) {
+		
 			view.items.clear();
 			
 		for (int i = 0; i < model.countries.size(); i++) {
 			Country country = model.countries.get(i);
-			//String countryText = country.getName();
-			//view.items.add(countryText);
-			//view.items.add(newCountry);
+			String countryText = country.getName();
+			view.items.add(countryText);
 		}
 		
 		
-		}
+		
 	}
 
 }

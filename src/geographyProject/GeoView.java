@@ -20,7 +20,10 @@ public class GeoView {
 	private Stage stage;
 	private GeoModel model;
 	
-	ScrollPane centerView = new ScrollPane();
+	private ScrollPane centerView = new ScrollPane();
+	
+	// creates center of UI
+	protected GeoView_Center centerRoot = new GeoView_Center();
 	
 	// Top controls
 	protected Button btnCreate = new Button ("Create");
@@ -51,7 +54,6 @@ public class GeoView {
 		
 		// Create Masterpane for the different UI areas
 		BorderPane root = new BorderPane();
-		GeoView_Center centerRoot = new GeoView_Center();
 		centerView.setContent(centerRoot.getCountryView());
 		root.setTop(createDataControls());
 		root.setLeft(createLeftControls());

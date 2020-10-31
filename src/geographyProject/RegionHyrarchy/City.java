@@ -1,14 +1,13 @@
 package geographyProject.RegionHyrarchy;
 
 public class City extends GovernedRegion{
-	String cityName;
-	int highestElevation;
-	int averageElevation;
-	int zip;
-	String Mayor;
-	
-	public City (String newCityName) {
-		this.cityName = newCityName;
+	private int zip;
+	private String Mayor;
+	private String country;
+	private String state;
+		
+	public City (String name) {
+		super(name);
 	}
 	
 }

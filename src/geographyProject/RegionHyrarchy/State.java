@@ -2,20 +2,11 @@ package geographyProject.RegionHyrarchy;
 
 import java.util.ArrayList;
 
-public class State extends GovernedRegion{
-	String stateName;
-	int highestElevation;
-	int lowestElevation;
-	int averageElevation;
-	
-	ArrayList<City> cities;
-	
-	public State (String newStateName) {
-		this.stateName = newStateName;
-		cities = new ArrayList<City>();
+public class State extends MultiLocalities {
+	private Country country;
+		
+	public State (String name) {
+		super(name);
 	}
-	
-	public void addCity (City newCity) {
-		cities.add(newCity);
-	}
+
 }

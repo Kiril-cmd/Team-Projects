@@ -2,36 +2,45 @@ package geographyProject.RegionHyrarchy;
 
 import java.util.ArrayList;
 
-public class Country extends GovernedRegion{
-	String countryName;
-	String currency;
-	String phoneCode;
+public class Country extends MultiLocalities {
+	private String currency;
+	private String phoneCode;	
+	private ArrayList<State> states;
 	
-	ArrayList<Country> countries;
-	ArrayList<State> states;
-		
-	public Country(String newCountryName) {
-		this.countryName = newCountryName;
-		countries = new ArrayList<Country>();
-		states = new ArrayList<State>();
-		
-	}
-	
-	public void addCountry (Country newCountry) {
-		countries.add(newCountry);
+	public Country(String name) {
+		super(name);
+		this.states = new ArrayList<State>();
 	}
 	
 	public void addState (State newState) {
 		states.add(newState);
 	}
 	
-		
-	public void removeCountry (Country newCountry) {
-		countries.remove(newCountry);
+	public void removeState (State obsoleteState) {
+		states.remove(obsoleteState);
+	}
+
+	// getters & setters
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public String getPhoneCode() {
+		return phoneCode;
+	}
+
+	public void setPhoneCode(String phoneCode) {
+		this.phoneCode = phoneCode;
+	}
+
+	public ArrayList<State> getStates() {
+		return states;
 	}
 	
-	public void removeState (State newState) {
-		states.remove(newState);
-	}
 	
+
 }

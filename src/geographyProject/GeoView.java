@@ -3,6 +3,8 @@ package geographyProject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -33,6 +35,9 @@ public class GeoView {
 	protected ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 	protected ListView<String> itemList = new ListView<String>();
 	
+	// Alerts
+	Alert alertEntry = new Alert(AlertType.ERROR);
+	
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
 		this.model = model;
@@ -52,6 +57,12 @@ public class GeoView {
 		root.setLeft(createLeftControls());
 		root.setCenter(centerView);
 		
+		// Alert when invalid data
+		alertEntry.setTitle("Error Dialog");
+		alertEntry.setHeaderText("Invalid Data");
+		alertEntry.setContentText("Your entry is empty or contains spaces");
+
+				
 		
 		// TO DO: set up scene
 		Scene scene = new Scene(root, 800, 1000);

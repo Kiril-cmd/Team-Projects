@@ -13,22 +13,27 @@ public class GeoController {
 		
 		
 		leftControlsEvents();
+		topControlsEvents();
 	}
 	
-	private void leftControlsEvents () {
+	private void topControlsEvents() {
 		
 		//Button events
 		view.btnCreate.setOnAction(e -> {
-			//String country = view.itemList.getItems().add(e);
-		
 			String newCountry = view.tfEnterZone.getText();
+			
 			if (newCountry.length() > 0 && !newCountry.contains(" ")) {
 				model.addCountry(newCountry); 
 				updateView(newCountry);
 			} else {
-				
+				view.alertEntry.showAndWait();
 			}
 		});
+		
+	}
+
+	private void leftControlsEvents () {
+	
 	}
 	
 	private void updateView (String newCountry) {

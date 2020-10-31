@@ -10,10 +10,16 @@ public class GeoController {
 		this.model = model;
 		this.view = view;
 		
+		leftControlsEvents();
+	}
+	
+	private void leftControlsEvents () {
+		
 		//Button events
 		view.btnCreate.setOnAction(e -> {
-			Country newCountry = new Country ("USA");
+			//String country = view.itemList.getItems().add(e);
 		});
+		
 		
 		
 	}

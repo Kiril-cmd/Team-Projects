@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -29,9 +32,10 @@ public class GeoView {
 	protected Button btnSave = new Button ("Save");
 	protected TextField tfEnterZone = new TextField ();
 	// Left controls
-	protected Button btnCountry = new Button("Country");
-	protected Button btnState = new Button("State");
-	protected Button btnCity = new Button("City");
+	protected TabPane tabPane = new TabPane();
+	protected Tab tabCountry = new Tab("Country");
+	protected Tab tabState = new Tab("State");
+	protected Tab tabCity = new Tab("City");
 	protected ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
 	protected ListView<String> itemList = new ListView<String>();
 	
@@ -89,7 +93,12 @@ public class GeoView {
 	
 	public VBox createLeftControls() {
 		HBox leftControlBtns = new HBox();
-		leftControlBtns.getChildren().addAll(btnCountry, btnState, btnCity);
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		tabPane.getTabs().add(tabCountry);
+		tabPane.getTabs().add(tabState);
+		tabPane.getTabs().add(tabCity);
+		
+		leftControlBtns.getChildren().addAll(tabPane);
 		
 		
 		VBox leftControls = new VBox();

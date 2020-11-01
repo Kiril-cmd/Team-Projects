@@ -99,7 +99,7 @@ public class GeoView {
 		Region spacing = new Region();
 				
 		topBtnPane.getChildren().addAll(tfEnterZone, spacing, btnCreate, btnEdit, btnDelete, btnSave);
-		tfEnterZone.setPromptText("Enter a country");
+		tfEnterZone.setPromptText("Enter an area");
 		tfEnterZone.setId("enter-zone-tf");
 		topBtnPane.getStyleClass().add("top-pane");
 		

@@ -34,6 +34,11 @@ public class GeoModel {
 		}
 	}
 	
+	public void saveData ()
+	{
+		
+	}
+	
 	public void editData() {
 		
 	}

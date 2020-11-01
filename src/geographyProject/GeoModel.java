@@ -19,6 +19,14 @@ public class GeoModel {
 		countries.add(new Country(newCountry));
 	}
 	
+	public void addState (String newState) {
+		states.add(new State(newState));
+	}
+	
+	public void addCity (String newCity) {
+		cities.add(new City(newCity));
+	}
+	
 	public void deleteData ()
 	{
 		

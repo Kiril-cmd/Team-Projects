@@ -27,9 +27,11 @@ public class GeoModel {
 		cities.add(new City(newCity));
 	}
 	
-	public void deleteData ()
-	{
-		
+	public void deleteCountry(String name) {
+		boolean found = false;
+		for (int i = 0; i < countries.size() && found == false; i++) {
+			// will be implemented after implementing id
+		}
 	}
 	
 	public void editData() {

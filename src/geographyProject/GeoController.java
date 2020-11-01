@@ -3,7 +3,7 @@ package geographyProject;
 import geographyProject.RegionHyrarchy.Country;
 import geographyProject.RegionHyrarchy.State;
 import geographyProject.RegionHyrarchy.City;
-
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -20,10 +20,13 @@ public class GeoController {
 		topControlsEvents();
 	}
 	
-	private void topControlsEvents() {		
-		//Button events
+	private void topControlsEvents() {
+		// Button events
 		view.btnCreate.setOnMouseClicked(this::create);
-		view.btnEdit.setOnMouseClicked(this::edit);	
+		view.btnEdit.setOnMouseClicked(this::edit);
+		
+		// Listeners
+		view.btnEdit.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
 	}
 
 	private void leftControlsEvents () {
@@ -98,7 +101,7 @@ public class GeoController {
 				view.items.add(cityText);
 			}
 		}		
-		view.showCenterView(newValue);		
+		view.showCenterView(newValue);	
 	}
 
 }

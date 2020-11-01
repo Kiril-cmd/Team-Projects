@@ -72,18 +72,27 @@ public class GeoController {
 	
 
 	private void edit(MouseEvent e) {
-		if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry)
+		if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
 			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
 				view.centerRoot.controlsCountry[i].setDisable(false);
 			}
-		else if(view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabState)
+			view.itemList.setMouseTransparent(true);
+			view.itemList.setFocusTraversable(false);
+		}
+		else if(view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
 			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
 				view.centerRoot.controlsState[i].setDisable(false);
 			}
-		else if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity)
+			view.itemList.setMouseTransparent(true);
+			view.itemList.setFocusTraversable(false);
+		}
+		else if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
 			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
 				view.centerRoot.controlsCity[i].setDisable(false);
 			}
+			view.itemList.setMouseTransparent(true);
+			view.itemList.setFocusTraversable(false);
+		}
 		
 	}
 	

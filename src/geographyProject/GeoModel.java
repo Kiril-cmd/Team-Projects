@@ -27,7 +27,7 @@ public class GeoModel {
 		cities.add(new City(newCity));
 	}
 	
-	public void deleteData ()
+	public void saveData ()
 	{
 		
 	}

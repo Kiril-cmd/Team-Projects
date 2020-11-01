@@ -23,7 +23,10 @@ public class GeoView {
 	private Stage stage;
 	private GeoModel model;
 	
-	ScrollPane centerView = new ScrollPane();
+	private ScrollPane centerView = new ScrollPane();
+	
+	// creates center of UI
+	protected GeoView_Center centerRoot = new GeoView_Center();
 	
 	// Top controls
 	protected Button btnCreate = new Button ("Create");
@@ -51,22 +54,22 @@ public class GeoView {
 		centerView.setHbarPolicy(ScrollBarPolicy.NEVER);
 		centerView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		centerView.setFitToWidth(true);
-
+		
 		
 		// Create Masterpane for the different UI areas
 		BorderPane root = new BorderPane();
-		GeoView_Center centerRoot = new GeoView_Center();
 		centerView.setContent(centerRoot.getCountryView());
 		root.setTop(createDataControls());
 		root.setLeft(createLeftControls());
 		root.setCenter(centerView);
 		
+		
 		// Alert when invalid data
 		alertEntry.setTitle("Error Dialog");
 		alertEntry.setHeaderText("Invalid Data");
 		alertEntry.setContentText("Your entry is empty or contains spaces");
-
-				
+		
+		
 		
 		// TO DO: set up scene
 		Scene scene = new Scene(root, 800, 1000);
@@ -75,6 +78,18 @@ public class GeoView {
 
 	}
 	
+	public void showCenterView(Tab newValue) {
+		if (newValue == tabCountry) {
+			centerView.setContent(centerRoot.getCountryView());
+		}
+		if (newValue == tabState) {
+			centerView.setContent(centerRoot.getStateView());
+		}
+		if (newValue == tabCity) {
+			centerView.setContent(centerRoot.getCityView());
+		}
+	}
+
 	public void start() {
 		stage.show();
 	}

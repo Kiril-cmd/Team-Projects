@@ -1,15 +1,19 @@
 package geographyProject;
 
+import java.awt.event.ActionEvent;
+
 import geographyProject.RegionHyrarchy.Country;
 import geographyProject.RegionHyrarchy.State;
 import geographyProject.RegionHyrarchy.City;
 
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class GeoController {
 	private GeoModel model;
 	private GeoView view;
+	private GeoView_Center centerView;
 
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
@@ -54,6 +58,8 @@ public class GeoController {
 			
 		});
 		
+		view.btnEdit.setOnMouseClicked(this::edit);
+		
 	}
 
 	private void leftControlsEvents () {
@@ -62,8 +68,27 @@ public class GeoController {
         });
 	}
 	
-	private void updateView (Tab newValue) {
+
+	
+
+	private void edit(MouseEvent e) {
+		if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry)
+			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+				view.centerRoot.controlsCountry[i].setDisable(false);
+			}
+		else if(view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabState)
+			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+				view.centerRoot.controlsState[i].setDisable(false);
+			}
+		else if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity)
+			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+				view.centerRoot.controlsCity[i].setDisable(false);
+			}
 		
+	}
+	
+
+	private void updateView (Tab newValue) {
 		view.items.clear();
 		
 		if (newValue == view.tabCountry) {
@@ -85,6 +110,8 @@ public class GeoController {
 				view.items.add(cityText);
 			}
 		}
+		
+		view.showCenterView(newValue);
 		
 	}
 

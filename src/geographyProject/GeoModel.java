@@ -32,6 +32,10 @@ public class GeoModel {
 		
 	}
 	
+	public void editData() {
+		
+	}
+	
 
 	
 

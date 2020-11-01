@@ -25,6 +25,8 @@ public class GeoView_Center {
 	protected TextField tfCapitalCityCountry = new TextField();
 	protected ListView<String> cityListCountry = new ListView<String>();
 	protected TextArea taHistoryCountry = new TextArea();
+	protected Control[] controlsCountry = {tfPopulationCountry, tfAreaCountry, tfFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
+			stateListCountry, tfCapitalCityCountry, cityListCountry, taHistoryCountry};
 	
 	// State controls
 	protected TextField tfPopulationState = new TextField();
@@ -36,6 +38,8 @@ public class GeoView_Center {
 	protected TextField tfCapitalCityState = new TextField();
 	protected ListView<String> cityListState = new ListView<String>();
 	protected TextArea taHistoryState = new TextArea();
+	protected Control[] controlsState = {tfPopulationState, tfAreaState, tfMaxElevationState, tfMinElevationState, tfAvgElevationState, tfLanguageState, 
+			tfCapitalCityState, cityListState, taHistoryState};
 	
 	// City controls
 	protected TextField tfPopulationCity = new TextField();
@@ -47,6 +51,8 @@ public class GeoView_Center {
 	protected TextField tfZipCode = new TextField();
 	protected TextField tfMayor = new TextField();
 	protected TextArea taHistoryCity = new TextArea();
+	Control[] controlsCity = {tfPopulationCity, tfAreaCity, tfMaxElevationCity, tfMinElevationCity, tfAvgElevationCity, tfLanguageCity, 
+			tfZipCode, tfMayor, taHistoryCity};
 	
 	public GeoView_Center() {
 		this.countryView = createCountryView();
@@ -60,12 +66,9 @@ public class GeoView_Center {
 		
 		String[] lbTextCountry = {"Population", "Area", "Form-of-government", "Languages", "Currency", "Phone code", 
 				"States", "Capital city", "Cities", "History"};
-
-		Control[] controls = {tfPopulationCountry, tfAreaCountry, tfFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
-				stateListCountry, tfCapitalCityCountry, cityListCountry, taHistoryCountry};
 		
 		addStaticElements(countryRoot, lbTextCountry);
-		addControls(countryRoot, controls);
+		addControls(countryRoot, controlsCountry);
 		
 		setStylesheets(countryRoot);
 		
@@ -78,11 +81,9 @@ public class GeoView_Center {
 		
 		String[] lbTextState = {"Population", "Area", "Highest elevation", "Lowest Elevation", "Average Elevation", "Language", 
 				"Capital city", "Cities", "History"};
-		Control[] controls = {tfPopulationState, tfAreaState, tfMaxElevationState, tfMinElevationState, tfAvgElevationState, tfLanguageState, 
-				tfCapitalCityState, cityListState, taHistoryState};
 		
 		addStaticElements(stateRoot, lbTextState);
-		addControls(stateRoot, controls);
+		addControls(stateRoot, controlsState);
 		
 		setStylesheets(stateRoot);
 		
@@ -95,11 +96,9 @@ public class GeoView_Center {
 		
 		String[] lbTextCity = {"Population", "Area", "Highest elevation", "Lowest elevation", "Average elevation",
 				"Language", "Zip code", "Mayor", "History"};
-		Control[] controls = {tfPopulationCity, tfAreaCity, tfMaxElevationCity, tfMinElevationCity, tfAvgElevationCity, tfLanguageCity, 
-				tfZipCode, tfMayor, taHistoryCity};
 		
 		addStaticElements(cityRoot, lbTextCity);
-		addControls(cityRoot, controls);
+		addControls(cityRoot, controlsCity);
 		
 		setStylesheets(cityRoot);
 				
@@ -127,7 +126,8 @@ public class GeoView_Center {
 				pane.add(controls[i], columnIndex, i + 1);
 			}else {
 				pane.add(controls[i], 0, i + 2, 2, i + 2);
-			}			
+			}
+			controls[i].setDisable(true);
 		}
 	}
 	

@@ -88,7 +88,7 @@ public class GeoView_Center {
 		setStylesheets(stateRoot);
 		
 		return stateRoot;		
-		}
+	}
 	
 	// This method creates the cityView for user input
 	public GridPane createCityView() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import geographyProject.RegionHyrarchy.City;
 import geographyProject.RegionHyrarchy.Country;
+import geographyProject.RegionHyrarchy.GovernedRegion;
 import geographyProject.RegionHyrarchy.State;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,9 +35,9 @@ public class GeoModel {
 		}
 	}
 	
-	public void saveData ()
-	{
-		
+	public void saveData (String[] userInput, GovernedRegion inputClass) {
+		if (inputClass.getClass() == Country.class) {
+		}
 	}
 	
 	public void editData() {

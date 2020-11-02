@@ -3,12 +3,13 @@ package geographyProject.RegionHyrarchy;
 public class City extends GovernedRegion{
 	private long zipCode;
 	private String Mayor;
-	private Country country;
-	private State state;
+	private String country;
+	private String state;
 		
-	public City (String name) {
+	public City(String name) {
 		super(name);
 	}
+	
 
 	// getters & setters
 	public long getZipCode() {
@@ -27,19 +28,19 @@ public class City extends GovernedRegion{
 		Mayor = mayor;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
-	public State getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	

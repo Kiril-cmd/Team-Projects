@@ -1,11 +1,13 @@
 package geographyProject;
 
 import geographyProject.RegionHyrarchy.Country;
+import geographyProject.RegionHyrarchy.GovernedRegion;
 import geographyProject.RegionHyrarchy.State;
 import geographyProject.RegionHyrarchy.City;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
 
 public class GeoController {
@@ -104,6 +106,21 @@ public class GeoController {
 		view.tabCity.setDisable(false);
 		view.itemList.setMouseTransparent(false);
 		view.itemList.setFocusTraversable(true);
+		
+		String[] userInput;
+		GovernedRegion inputClass;
+		String itemName = view.itemList.getSelectionModel().getSelectedItem();
+		
+		if (view.tabCountry.isSelected()) {
+			userInput = new String[view.centerRoot.controlsCountry.length];
+			inputClass = new Country("");
+			
+			for (int i = 0; i < userInput.length; i++) {
+				userInput[i] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
+			}
+		}
+		
+		
 	}
 	
 

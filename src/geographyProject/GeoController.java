@@ -1,6 +1,8 @@
 package geographyProject;
 
 import geographyProject.RegionHyrarchy.Country;
+import geographyProject.RegionHyrarchy.GovernedRegion;
+import geographyProject.RegionHyrarchy.GovernedRegion.FormOfGovernment;
 import geographyProject.RegionHyrarchy.State;
 
 import java.io.File;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import geographyProject.RegionHyrarchy.City;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
 
 
@@ -69,9 +72,6 @@ public class GeoController {
 				if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
 					view.tabState.setDisable(false);
 				}
-					
-				
-				
 			} 
 			else if (currentTab == view.tabState) {
 				lastSelectedState = newValue;
@@ -94,9 +94,6 @@ public class GeoController {
 	private void create(MouseEvent e) {
 		// Country, state or city
 		String entry = view.tfEnterZone.getText();
-		
-		
-		
 		// Create Country
 		if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
 			if (entry.length() > 0 && !entry.contains(" ")) {
@@ -124,8 +121,6 @@ public class GeoController {
 				view.alertEntry.showAndWait();
 			}
 		}
-		
-		
 		// tfEnterZone is empty after every entry
 		view.tfEnterZone.setText("");
 	}
@@ -164,19 +159,75 @@ public class GeoController {
 	
 	private void save(MouseEvent e) {
 		// Enable all tabs and item selection again
-		view.tabCountry.setDisable(false);
-		view.tabState.setDisable(false);
-		view.tabCity.setDisable(false);
+		// TO DO
+		
 		view.itemList.setMouseTransparent(false);
 		view.itemList.setFocusTraversable(true);
+		view.tabState.setDisable(false);
+		view.tabCity.setDisable(false);
+		
+		
+		String[] userInput;
+		String itemName = view.itemList.getSelectionModel().getSelectedItem();
+		FormOfGovernment formOfGovernment = view.centerRoot.cbFormOfGovernment.getSelectionModel().getSelectedItem();
+		int indexCounter = 0;
+		
+		if (view.tabCountry.isSelected()) {
+			userInput = getCountryData(indexCounter);
+			model.saveCountryData(itemName, userInput, formOfGovernment);
+		}else if(view.tabState.isSelected()) {
+			userInput = getStateData(indexCounter);
+			model.saveStateData(itemName, userInput);
+		}else if(view.tabCity.isSelected()) {
+			userInput = getCityData(indexCounter);
+			model.saveCityData(itemName, userInput);		
+		}		
+	}
+	
+	public String[] getCountryData(int indexCounter) {
+		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 3];
+		
+		for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+			if (i != 6 && i != 8 && i != 2) {
+				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
+				indexCounter++;
+			}
+			view.centerRoot.controlsCountry[i].setDisable(true);
+		}
+		return inputDataContainer;
+	}
+	
+	public String[] getStateData(int indexCounter) {
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 2];
+		
+		for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+			if (i != 4 && i != 7) {
+				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsState[i]).getText();
+				indexCounter++;
+			}
+			view.centerRoot.controlsState[i].setDisable(true);
+		}
+		return inputDataContainer;
+	}
+	
+	public String[] getCityData(int indexCounter) {
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 1];
+		
+		for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+			if (i != 4) {
+				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCity[i]).getText();
+				indexCounter++;
+			}
+			view.centerRoot.controlsCity[i].setDisable(true);
+		}
+		return inputDataContainer;
 	}
 	
 
 	private void updateView (Tab currentTab) {
-		
 		view.items.clear();
 		
-		if (currentTab == view.tabCountry ) {
+		if (currentTab == view.tabCountry) {
 			for (int i = 0; i < model.countries.size(); i++) {
 				Country country = model.countries.get(i);
 				String countryText = country.getName();

@@ -3,7 +3,7 @@ package geographyProject.RegionHyrarchy;
 import java.util.ArrayList;
 
 public abstract class MultiLocalities extends GovernedRegion {
-	private City capitalCity;
+	private String capitalCity;
 	private ArrayList<City> cities;
 	
 	public MultiLocalities(String name) {
@@ -16,11 +16,11 @@ public abstract class MultiLocalities extends GovernedRegion {
 	}
 
 	// getters & setters
-	public City getCapitalCity() {
+	public String getCapitalCity() {
 		return capitalCity;
 	}
 
-	public void setCapitalCity(City capitalCity) {
+	public void setCapitalCity(String capitalCity) {
 		this.capitalCity = capitalCity;
 	}
 

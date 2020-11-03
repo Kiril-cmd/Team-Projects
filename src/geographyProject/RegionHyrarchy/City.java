@@ -5,13 +5,10 @@ public class City extends GovernedRegion{
 	private String Mayor;
 	private String country;
 	private String state;
-	private int idCity;
-	private static int idCounter = -1; 
 		
 	public City (String name, String state) {
 		super(name);
 		this.state = state;
-		idCity= ++idCounter;
 	}
 
 	// getters & setters
@@ -47,9 +44,5 @@ public class City extends GovernedRegion{
 		this.state = state;
 	}
 	
-	public int getId () {
-		return idCity;
-	}
 	
-		
 }

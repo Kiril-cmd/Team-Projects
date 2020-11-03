@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public abstract class GovernedRegion {
 	private String name;
-	private final int id;
-	private static int idCounter = - 1;
 	private int area;
 	private long population;
 	protected enum FormOfGovernment {Autocracy, Aristocracy, Democracy, Republics, Federalism}
@@ -19,17 +17,17 @@ public abstract class GovernedRegion {
 	public GovernedRegion(String name){
 			this.name = name;
 			this.languages = new ArrayList<String>();
-			this.id = incrementIdCounter();
+			//this.id = incrementIdCounter();
 	}
 	
 	public void addLanguage(String newLanguage) {
 		languages.add(newLanguage);
 	}
 	
-	private int incrementIdCounter() {
-		idCounter++;
-		return idCounter;
-	}
+//	private int incrementIdCounter() {
+//		idCounter++;
+//		return idCounter;
+//	}
 
 	// getters & setters
 	public String getName() {

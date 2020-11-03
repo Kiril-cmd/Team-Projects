@@ -6,10 +6,13 @@ public class Country extends MultiLocalities {
 	private String currency;
 	private String phoneCode;	
 	private ArrayList<State> states;
+	private final int idCountry;
+	private static int idCounter = -1;
 	
 	public Country(String name) {
 		super(name);
 		this.states = new ArrayList<State>();
+		idCountry = ++idCounter;
 	}
 	
 	public void addState (State newState) {
@@ -39,6 +42,10 @@ public class Country extends MultiLocalities {
 
 	public ArrayList<State> getStates() {
 		return states;
+	}
+	
+	public int getId() {
+		return idCountry;
 	}
 	
 	

@@ -2,22 +2,36 @@ package geographyProject;
 
 import geographyProject.RegionHyrarchy.Country;
 import geographyProject.RegionHyrarchy.State;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import geographyProject.RegionHyrarchy.City;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
 
 public class GeoController {
 	private GeoModel model;
 	private GeoView view;
 
+	private Tab currentTab = new Tab ();
+	
+	private String lastSelectedCountry;
+	private String lastSelectedState;
+	private String lastSelectedCity;
+	
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
 		this.view = view;
 		
-		leftControlsEvents();
+		// Set selected tab to country when launching the first time
+		currentTab = view.tabCountry;
+		
 		topControlsEvents();
+		leftControlsEvents();
 	}
 	
 	private void topControlsEvents() {
@@ -31,15 +45,59 @@ public class GeoController {
 	}
 
 	private void leftControlsEvents () {
-		view.tabPane.getSelectionModel().selectedItemProperty().addListener((observable,oldValue,newValue)->{
-			updateView(newValue);
-        });
+		
+		disableTabs();
+				
+		// Track the current tab selection
+		view.tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
+						
+			currentTab = newValue;
+			disableTabs();
+			
+			updateView(currentTab);
+			
+		});
+		
+		// Track the current item selection
+		view.itemList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
+	
+			// Unblock tabs if an item is selected
+			 
+			if (currentTab == view.tabCountry)
+			{
+				lastSelectedCountry = newValue;
+				if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
+					view.tabState.setDisable(false);
+				}
+					
+				
+				
+			} 
+			else if (currentTab == view.tabState) {
+				lastSelectedState = newValue;
+				if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
+					view.tabCity.setDisable(false);
+				}
+				
+			} 
+			else if (currentTab == view.tabCity) {
+				lastSelectedCity = newValue;
+				view.tabCountry.setDisable(false);
+				view.tabState.setDisable(false);
+				
+			}
+		
+			 		
+		});
 	}
 	
 	private void create(MouseEvent e) {
 		// Country, state or city
 		String entry = view.tfEnterZone.getText();
-					
+		
+		
+		
+		// Create Country
 		if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
 			if (entry.length() > 0 && !entry.contains(" ")) {
 				model.addCountry(entry); 
@@ -47,22 +105,29 @@ public class GeoController {
 			} else {
 				view.alertEntry.showAndWait();
 			}
-		} else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
-										
+		}
+		// Create State
+		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {					
 			if (entry.length() > 0 && !entry.contains(" ")) {
-				model.addState(entry); 
+				model.addState(entry, lastSelectedCountry); 
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			} else {
 				view.alertEntry.showAndWait();
 			}
-		} else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
+		}
+		// Create City
+		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
 			if (entry.length() > 0 && !entry.contains(" ")) {
-				model.addCity(entry); 
+				model.addCity(entry, lastSelectedState); 
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			} else {
 				view.alertEntry.showAndWait();
 			}
-		}	
+		}
+		
+		
+		// tfEnterZone is empty after every entry
+		view.tfEnterZone.setText("");
 	}
 
 	private void edit(MouseEvent e) {
@@ -107,29 +172,74 @@ public class GeoController {
 	}
 	
 
-	private void updateView (Tab newValue) {
+	private void updateView (Tab currentTab) {
+		
 		view.items.clear();
 		
-		if (newValue == view.tabCountry) {
+		if (currentTab == view.tabCountry ) {
 			for (int i = 0; i < model.countries.size(); i++) {
 				Country country = model.countries.get(i);
 				String countryText = country.getName();
 				view.items.add(countryText);
 			}
-		} else if (newValue == view.tabState) {
+		} else if (currentTab == view.tabState) {
 			for(int i = 0; i < model.states.size(); i++) {
 				State state = model.states.get(i);
-				String stateText = state.getName();
-				view.items.add(stateText);
+				if (lastSelectedCountry == state.getCountry())
+				{
+					String stateText = state.getName();
+					view.items.add(stateText);
+				}
 			}
-		} else if (newValue == view.tabCity) {
+			
+		} else if (currentTab == view.tabCity ) {
 			for(int i = 0; i < model.cities.size(); i++) {
 				City city = model.cities.get(i);
-				String cityText = city.getName();
-				view.items.add(cityText);
+				if (lastSelectedState == city.getState())
+				{
+					String cityText = city.getName();
+					view.items.add(cityText);
+				}
 			}
-		}		
-		view.showCenterView(newValue);		
+			
+		} 
+		view.showCenterView(currentTab);		
 	}
-
+	
+	private void disableTabs () {
+		// Disable Tabs
+		if (currentTab == view.tabCountry) {
+			view.tabState.setDisable(true);
+			view.tabCity.setDisable(true);
+		} else if (currentTab == view.tabState) {
+			view.tabCity.setDisable(true);
+		}
+	}
+	
+	private void createFile () {
+		try {
+			File newFile = new File ("Data.txt");
+			if (newFile.createNewFile()) {
+				System.out.println("File created: " + newFile.getName());
+			} else {
+				System.out.println("File already exists.");
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred");
+			e.printStackTrace();
+		}
+	}
+	
+	private void writeToFile () {
+		try {
+		      FileWriter myWriter = new FileWriter("Data.txt");
+		      myWriter.write("Files in Java might be tricky, but it is fun enough!");
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		} catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		      }
+	}
+	
 }

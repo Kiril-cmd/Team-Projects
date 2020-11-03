@@ -33,13 +33,6 @@ public class GeoModel {
 		cities.add(new City(newCity, state));
 	}
 	
-	public void deleteCountry(String name) {
-		boolean found = false;
-		for (int i = 0; i < countries.size() && found == false; i++) {
-			// will be implemented after implementing id
-		}
-	}
-	
 	// Method saves entered user inputData (Country) in the concerning object
 	public void saveCountryData(String countryName, String[] userInput, FormOfGovernment formOfGovernment) {
 		listIndex = getCountryIndex(countryName);
@@ -82,8 +75,25 @@ public class GeoModel {
 		cities.get(listIndex).setHistory(userInput[7].toString());
 	}
 	
-	public void editData() {
-		
+	public void deleteCountry(String countryName) {
+		if (countries.size() > 0 ) {
+		listIndex = getCountryIndex(countryName);
+		countries.remove(listIndex);
+		}
+	}
+	
+	public void deleteState(String stateName) {
+		if (states.size() > 0) {
+		listIndex = getStateIndex(stateName);
+		states.remove(listIndex);
+		}
+	}
+	
+	public void deleteCity(String cityName) {
+		if (cities.size() > 0) {
+		listIndex = getCityIndex(cityName);
+		cities.remove(listIndex);
+		}
 	}
 		
 	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList

@@ -42,9 +42,11 @@ public class GeoController {
 		view.btnCreate.setOnMouseClicked(this::create);
 		view.btnEdit.setOnMouseClicked(this::edit);
 		view.btnSave.setOnMouseClicked(this::save);
+		view.btnDelete.setOnMouseClicked(this::delete);
 		
 		// Listeners
 		view.btnEdit.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
+		view.btnDelete.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
 	}
 
 	private void leftControlsEvents () {
@@ -168,7 +170,7 @@ public class GeoController {
 		
 		
 		String[] userInput;
-		String itemName = view.itemList.getSelectionModel().getSelectedItem();
+		String itemName = getSelectedItemName();
 		FormOfGovernment formOfGovernment = view.centerRoot.cbFormOfGovernment.getSelectionModel().getSelectedItem();
 		int indexCounter = 0;
 		
@@ -182,6 +184,19 @@ public class GeoController {
 			userInput = getCityData(indexCounter);
 			model.saveCityData(itemName, userInput);		
 		}		
+	}
+	
+	private void delete(MouseEvent e) {
+		String itemName = getSelectedItemName();
+		
+		if (view.tabCountry.isSelected())
+			model.deleteCountry(itemName);
+		if (view.tabState.isSelected())
+			model.deleteState(itemName);
+		if (view.tabCity.isSelected())
+			model.deleteCity(itemName);
+		
+		updateView(currentTab);
 	}
 	
 	public String[] getCountryData(int indexCounter) {
@@ -291,6 +306,11 @@ public class GeoController {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		      }
+	}
+	
+	private String getSelectedItemName() {
+		String selectedItem = view.itemList.getSelectionModel().getSelectedItem();
+		return selectedItem;
 	}
 	
 }

@@ -75,7 +75,6 @@ public class GeoModel {
 		cities.get(listIndex).setHistory(userInput[7].toString());
 	}
 	
-<<<<<<< HEAD
 	public void deleteCountry(String countryName) {
 		if (countries.size() > 0 ) {
 		listIndex = getCountryIndex(countryName);
@@ -96,8 +95,6 @@ public class GeoModel {
 		cities.remove(listIndex);
 		}
 	}
-=======
->>>>>>> branch 'main' of https://github.com/leandro-hoenen/Team-Projects.git
 		
 	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList
 	public int getCountryIndex(String countrySearchName) {

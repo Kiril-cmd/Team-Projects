@@ -25,6 +25,7 @@ public class GeoController {
 	private String lastSelectedCountry;
 	private String lastSelectedState;
 	private String lastSelectedCity;
+	private String currentSelectedItem;
 	
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
@@ -65,32 +66,33 @@ public class GeoController {
 		
 		// Track the current item selection
 		view.itemList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
-	
-			// Unblock tabs if an item is selected
-			 
-			if (currentTab == view.tabCountry)
-			{
-				lastSelectedCountry = newValue;
-				if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
-					view.tabState.setDisable(false);
-				}
-			} 
-			else if (currentTab == view.tabState) {
-				lastSelectedState = newValue;
-				if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
-					view.tabCity.setDisable(false);
-				}
-				
-			} 
-			else if (currentTab == view.tabCity) {
-				lastSelectedCity = newValue;
-				view.tabCountry.setDisable(false);
-				view.tabState.setDisable(false);
-				
-			}
-		
-			 		
+			currentSelectedItem = newValue;
+			unblockTabs(currentSelectedItem);
+					
 		});
+	}
+	
+	private void unblockTabs (String currentSelectedItem) {
+		// Unblock tabs if an item is selected
+		 if (currentTab == view.tabCountry)
+		{
+			lastSelectedCountry = currentSelectedItem;
+			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
+				view.tabState.setDisable(false);
+			}
+		} 
+		else if (currentTab == view.tabState) {
+			lastSelectedState = currentSelectedItem;
+			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
+				view.tabCity.setDisable(false);
+			}
+			
+		} 
+		else if (currentTab == view.tabCity) {
+			lastSelectedCity = currentSelectedItem;
+			view.tabCountry.setDisable(false);
+			view.tabState.setDisable(false);
+		}
 	}
 	
 	private void create(MouseEvent e) {
@@ -128,6 +130,8 @@ public class GeoController {
 	}
 
 	private void edit(MouseEvent e) {
+		
+		
 		if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
 			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
 				view.centerRoot.controlsCountry[i].setDisable(false);
@@ -161,13 +165,10 @@ public class GeoController {
 	
 	private void save(MouseEvent e) {
 		// Enable all tabs and item selection again
-		// TO DO
-		
+				
 		view.itemList.setMouseTransparent(false);
 		view.itemList.setFocusTraversable(true);
-		view.tabState.setDisable(false);
-		view.tabCity.setDisable(false);
-		
+		unblockTabs(currentSelectedItem);
 		
 		String[] userInput;
 		String itemName = getSelectedItemName();

@@ -95,7 +95,6 @@ public class GeoModel {
 		cities.remove(listIndex);
 		}
 	}
-
 		
 	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList
 	public int getCountryIndex(String countrySearchName) {

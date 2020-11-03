@@ -82,9 +82,6 @@ public class GeoModel {
 		cities.get(listIndex).setHistory(userInput[7].toString());
 	}
 	
-	public void editData() {
-		
-	}
 		
 	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList
 	public int getCountryIndex(String countrySearchName) {

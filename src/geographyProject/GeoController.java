@@ -2,6 +2,7 @@ package geographyProject;
 
 import geographyProject.RegionHyrarchy.Country;
 import geographyProject.RegionHyrarchy.GovernedRegion;
+import geographyProject.RegionHyrarchy.GovernedRegion.FormOfGovernment;
 import geographyProject.RegionHyrarchy.State;
 import geographyProject.RegionHyrarchy.City;
 import javafx.beans.binding.Bindings;
@@ -108,19 +109,59 @@ public class GeoController {
 		view.itemList.setFocusTraversable(true);
 		
 		String[] userInput;
-		GovernedRegion inputClass;
 		String itemName = view.itemList.getSelectionModel().getSelectedItem();
+		FormOfGovernment formOfGovernment = view.centerRoot.cbFormOfGovernment.getSelectionModel().getSelectedItem();
+		int indexCounter = 0;
 		
 		if (view.tabCountry.isSelected()) {
-			userInput = new String[view.centerRoot.controlsCountry.length];
-			inputClass = new Country("");
-			
-			for (int i = 0; i < userInput.length; i++) {
-				userInput[i] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
+			userInput = getCountryData(indexCounter);
+			model.saveCountryData(itemName, userInput, formOfGovernment);
+		}else if(view.tabState.isSelected()) {
+			userInput = getStateData(indexCounter);
+			model.saveStateData(itemName, userInput);
+		}else if(view.tabCity.isSelected()) {
+			userInput = getCityData(indexCounter);
+			model.saveCityData(itemName, userInput);		
+		}		
+	}
+	
+	public String[] getCountryData(int indexCounter) {
+		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 3];
+		
+		for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+			if (i != 6 && i != 8 && i != 2) {
+				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
+				indexCounter++;
 			}
+			view.centerRoot.controlsCountry[i].setDisable(true);
 		}
+		return inputDataContainer;
+	}
+	
+	public String[] getStateData(int indexCounter) {
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 2];
 		
+		for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+			if (i != 4 && i != 7) {
+				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsState[i]).getText();
+				indexCounter++;
+			}
+			view.centerRoot.controlsState[i].setDisable(true);
+		}
+		return inputDataContainer;
+	}
+	
+	public String[] getCityData(int indexCounter) {
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 1];
 		
+		for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+			if (i != 4) {
+				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCity[i]).getText();
+				indexCounter++;
+			}
+			view.centerRoot.controlsCity[i].setDisable(true);
+		}
+		return inputDataContainer;
 	}
 	
 

@@ -8,7 +8,7 @@ public abstract class GovernedRegion {
 	private static int idCounter = - 1;
 	private int area;
 	private long population;
-	protected enum FormOfGovernment {Autocracy, Aristocracy, Democracy, Republics, Federalism}
+	public enum FormOfGovernment {Autocracy, Aristocracy, Democracy, Republics, Federalism}
 	private FormOfGovernment formOfGovernment;
 	private ArrayList<String> languages;
 	private String history;

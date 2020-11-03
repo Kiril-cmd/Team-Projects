@@ -1,11 +1,15 @@
 package geographyProject;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import geographyProject.RegionHyrarchy.GovernedRegion.FormOfGovernment;
 
 public class GeoView_Center {
 	// Panes for countryView, stateView and cityView
@@ -17,7 +21,9 @@ public class GeoView_Center {
 	// Country controls
 	protected TextField tfPopulationCountry = new TextField();
 	protected TextField tfAreaCountry = new TextField();
-	protected TextField tfFormOfGovernment = new TextField();
+	protected ObservableList<FormOfGovernment> cbFormOfGovernmentOptions = FXCollections.observableArrayList(FormOfGovernment.Aristocracy, 
+			FormOfGovernment.Autocracy, FormOfGovernment.Democracy, FormOfGovernment.Federalism, FormOfGovernment.Republics);
+	protected final ComboBox<FormOfGovernment> cbFormOfGovernment = new ComboBox<FormOfGovernment>(cbFormOfGovernmentOptions);	
 	protected TextField tfLanguagesCountry = new TextField();
 	protected TextField tfCurrency = new TextField();
 	protected TextField tfPhoneCode = new TextField();
@@ -25,7 +31,7 @@ public class GeoView_Center {
 	protected TextField tfCapitalCityCountry = new TextField();
 	protected ListView<String> cityListCountry = new ListView<String>();
 	protected TextArea taHistoryCountry = new TextArea();
-	protected Control[] controlsCountry = {tfPopulationCountry, tfAreaCountry, tfFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
+	protected Control[] controlsCountry = {tfPopulationCountry, tfAreaCountry, cbFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
 			stateListCountry, tfCapitalCityCountry, cityListCountry, taHistoryCountry};
 	
 	// State controls

@@ -34,6 +34,7 @@ public class GeoController {
 		// Set selected tab to country when launching the first time
 		currentTab = view.tabCountry;
 		
+		// Load from a file
 		model.loadGeo();
 		
 		topControlsEvents();
@@ -175,16 +176,13 @@ public class GeoController {
 			view.itemList.setMouseTransparent(false);
 			view.itemList.setFocusTraversable(true);
 			unblockTabs(currentSelectedItem);
-			
+			// Save to a file
 			model.saveGeo();
 			}
 		catch(Exception e1) {
 			  view.alertEntryCenter.showAndWait();
 			  setCenterEditable();
 			}
-		
-		
-
 		}
 	
 	private void delete(MouseEvent e) {

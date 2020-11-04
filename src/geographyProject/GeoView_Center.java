@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -27,12 +26,12 @@ public class GeoView_Center {
 	protected TextField tfLanguagesCountry = new TextField();
 	protected TextField tfCurrency = new TextField();
 	protected TextField tfPhoneCode = new TextField();
-	protected ListView<String> stateListCountry = new ListView<String>();
+//	protected ListView<String> stateListCountry = new ListView<String>();
 	protected TextField tfCapitalCityCountry = new TextField();
-	protected ListView<String> cityListCountry = new ListView<String>();
+//	protected ListView<String> cityListCountry = new ListView<String>();
 	protected TextArea taHistoryCountry = new TextArea();
 	protected Control[] controlsCountry = {tfPopulationCountry, tfAreaCountry, cbFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
-			stateListCountry, tfCapitalCityCountry, cityListCountry, taHistoryCountry};
+			tfCapitalCityCountry, taHistoryCountry};
 	
 	// State controls
 	protected TextField tfPopulationState = new TextField();
@@ -42,10 +41,10 @@ public class GeoView_Center {
 	protected TextField tfAvgElevationState = new TextField();
 	protected TextField tfLanguageState = new TextField();
 	protected TextField tfCapitalCityState = new TextField();
-	protected ListView<String> cityListState = new ListView<String>();
+//	protected ListView<String> cityListState = new ListView<String>();
 	protected TextArea taHistoryState = new TextArea();
 	protected Control[] controlsState = {tfPopulationState, tfAreaState, tfMaxElevationState, tfMinElevationState, tfAvgElevationState, tfLanguageState, 
-			tfCapitalCityState, cityListState, taHistoryState};
+			tfCapitalCityState, taHistoryState};
 	
 	// City controls
 	protected TextField tfPopulationCity = new TextField();
@@ -71,7 +70,7 @@ public class GeoView_Center {
 		GridPane countryRoot = new GridPane();
 		
 		String[] lbTextCountry = {"Population", "Area", "Form-of-government", "Languages", "Currency", "Phone code", 
-				"States", "Capital city", "Cities", "History"};
+				 "Capital city", "History"};
 		
 		addStaticElements(countryRoot, lbTextCountry);
 		addControls(countryRoot, controlsCountry);
@@ -86,8 +85,9 @@ public class GeoView_Center {
 		GridPane stateRoot = new GridPane();
 		
 		String[] lbTextState = {"Population", "Area", "Highest elevation", "Lowest Elevation", "Average Elevation", "Language", 
-				"Capital city", "Cities", "History"};
+				"Capital city", "History"};
 		
+		tfAvgElevationState.setEditable(false);
 		addStaticElements(stateRoot, lbTextState);
 		addControls(stateRoot, controlsState);
 		
@@ -103,6 +103,7 @@ public class GeoView_Center {
 		String[] lbTextCity = {"Population", "Area", "Highest elevation", "Lowest elevation", "Average elevation",
 				"Language", "Zip code", "Mayor", "History"};
 		
+		tfAvgElevationCity.setEditable(false);
 		addStaticElements(cityRoot, lbTextCity);
 		addControls(cityRoot, controlsCity);
 		

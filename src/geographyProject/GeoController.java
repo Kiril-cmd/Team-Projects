@@ -88,12 +88,16 @@ public class GeoController {
 		 if (currentTab == view.tabCountry)
 		{
 			lastSelectedCountry = currentSelectedItem;
+			lastSelectedState = null;
+			lastSelectedCity = null;
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
 				view.tabState.setDisable(false);
 			}
 		} 
 		else if (currentTab == view.tabState) {
+			lastSelectedCountry = null;
 			lastSelectedState = currentSelectedItem;
+			lastSelectedCity = null;
 			view.tabCountry.setDisable(false);
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
 				view.tabCity.setDisable(false);
@@ -101,6 +105,8 @@ public class GeoController {
 			
 		} 
 		else if (currentTab == view.tabCity) {
+			lastSelectedCountry = null;
+			lastSelectedState = null;
 			lastSelectedCity = currentSelectedItem;
 			view.tabCountry.setDisable(false);
 			view.tabState.setDisable(false);

@@ -71,9 +71,11 @@ public class GeoController {
 			// Update Country, State, City View
 			if(model.countries.size()>0 && lastSelectedCountry != null && currentTab == view.tabCountry) {
 				updateCountryView();
+			} else if (model.states.size()>0 && lastSelectedState != null && currentTab == view.tabState) {
+				updateStateView();
+			} else if(model.cities.size()>0 && lastSelectedCity != null && currentTab == view.tabCity) {
+				updateCityView();
 			}
-			
-			
 		});
 	}
 	
@@ -311,16 +313,16 @@ public class GeoController {
 		*/
 		
 		
-//		City currentCity = model.getCity(currentSelectedItem);
-//		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));
-//		view.centerRoot.tfAreaCity.setText(Integer.toString(currentCity.getArea()));
-//		view.centerRoot.tfMaxElevationCity.setText(Double.toString(currentCity.getMaxElevation()));
-//		view.centerRoot.tfMinElevationCity.setText(Double.toString(currentCity.getMinElevation()));
-//		view.centerRoot.tfAvgElevationCity.setText(Double.toString(currentCity.getAvgElevation()));
-//		view.centerRoot.tfLanguageCity.setText(currentCity.getLanguages());
-//		view.centerRoot.tfZipCode.setText(Long.toString(currentCity.getZipCode()));
-//		view.centerRoot.tfMayor.setText(currentCity.getMayor());
-//		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());
+		City currentCity = model.getCity(currentSelectedItem);
+		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));
+		view.centerRoot.tfAreaCity.setText(Integer.toString(currentCity.getArea()));
+		view.centerRoot.tfMaxElevationCity.setText(Double.toString(currentCity.getMaxElevation()));
+		view.centerRoot.tfMinElevationCity.setText(Double.toString(currentCity.getMinElevation()));
+		view.centerRoot.tfAvgElevationCity.setText(Double.toString(currentCity.getAvgElevation()));
+		view.centerRoot.tfLanguageCity.setText(currentCity.getLanguages());
+		view.centerRoot.tfZipCode.setText(Long.toString(currentCity.getZipCode()));
+		view.centerRoot.tfMayor.setText(currentCity.getMayor());
+		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());
 		
 		
 	}

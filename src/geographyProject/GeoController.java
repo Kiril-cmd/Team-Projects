@@ -62,6 +62,7 @@ public class GeoController {
 			
 			updateView(currentTab);
 			
+			defaultView();
 		});
 		
 		// Track the current item selection
@@ -75,9 +76,7 @@ public class GeoController {
 				updateStateView();
 			} else if(model.cities.size()>0 && lastSelectedCity != null && currentTab == view.tabCity) {
 				updateCityView();
-			} else {
-				defaultView();
-			}
+			} 
 		});
 	}
 	
@@ -324,21 +323,21 @@ public class GeoController {
 	}
 	
 	private void defaultView() {
-//		if (currentTab == view.tabCountry) {
-//			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-//				if (i != 6 && i != 8)
-//				((TextInputControl) view.centerRoot.controlsCountry[i]).setText("");
-//			}
-//		}else if (currentTab == view.tabState) {
-//			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-//				if (i != 7)
-//				((TextInputControl) view.centerRoot.controlsState[i]).setText("");
-//			}
-//		}else if (currentTab == view.tabCity) {
-//			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
-//				((TextInputControl) view.centerRoot.controlsCity[i]).setText("");
-//			}
-//		}
+		if (currentTab == view.tabCountry) {
+			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+				if (i != 2 && i != 6 && i != 8)
+				((TextInputControl) view.centerRoot.controlsCountry[i]).setText("");
+			}
+		}else if (currentTab == view.tabState) {
+			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+				if (i != 7)
+				((TextInputControl) view.centerRoot.controlsState[i]).setText("");
+			}
+		}else if (currentTab == view.tabCity) {
+			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+				((TextInputControl) view.centerRoot.controlsCity[i]).setText("");
+			}
+		}
 		
 	}
 	
@@ -383,31 +382,6 @@ public class GeoController {
 		}
 	}
 	
-	private void createFile () {
-		try {
-			File newFile = new File ("Data.txt");
-			if (newFile.createNewFile()) {
-				System.out.println("File created: " + newFile.getName());
-			} else {
-				System.out.println("File already exists.");
-			}
-		} catch (IOException e) {
-			System.out.println("An error occurred");
-			e.printStackTrace();
-		}
-	}
-	
-	private void writeToFile () {
-		try {
-		      FileWriter myWriter = new FileWriter("Data.txt");
-		      myWriter.write("Files in Java might be tricky, but it is fun enough!");
-		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
-		} catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		      }
-	}
 	
 	private String getSelectedItemName() {
 		String selectedItem = view.itemList.getSelectionModel().getSelectedItem();

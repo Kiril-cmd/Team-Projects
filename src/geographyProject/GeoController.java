@@ -35,7 +35,7 @@ public class GeoController {
 		currentTab = view.tabCountry;
 		
 		// Load from a file
-		model.loadGeo();
+		//model.loadGeo();
 		
 		topControlsEvents();
 		leftControlsEvents();
@@ -202,7 +202,7 @@ public class GeoController {
 		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 3];
 		
 		for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-			if (i != 6 && i != 8 && i != 2) {
+			if (i != 2) {
 				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
 				indexCounter++;
 			}
@@ -215,7 +215,7 @@ public class GeoController {
 		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 2];
 		
 		for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-			if (i != 4 && i != 7) {
+			if (i != 4) {
 				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsState[i]).getText();
 				indexCounter++;
 			}

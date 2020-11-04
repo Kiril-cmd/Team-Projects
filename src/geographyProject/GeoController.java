@@ -34,6 +34,9 @@ public class GeoController {
 		// Set selected tab to country when launching the first time
 		currentTab = view.tabCountry;
 		
+		// Load from a file
+		model.loadGeo();
+		
 		topControlsEvents();
 		leftControlsEvents();
 	}
@@ -80,21 +83,23 @@ public class GeoController {
 		});
 	}
 	
+	
+
 	private void unblockTabs (String currentSelectedItem) {
 		// Unblock tabs if an item is selected
 		 if (currentTab == view.tabCountry)
 		{
 			lastSelectedCountry = currentSelectedItem;
-			lastSelectedState = null;
-			lastSelectedCity = null;
+//			lastSelectedState = null;
+//			lastSelectedCity = null;
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
 				view.tabState.setDisable(false);
 			}
 		} 
 		else if (currentTab == view.tabState) {
-			lastSelectedCountry = null;
+//			lastSelectedCountry = null;
 			lastSelectedState = currentSelectedItem;
-			lastSelectedCity = null;
+//			lastSelectedCity = null;
 			view.tabCountry.setDisable(false);
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
 				view.tabCity.setDisable(false);
@@ -102,8 +107,8 @@ public class GeoController {
 			
 		} 
 		else if (currentTab == view.tabCity) {
-			lastSelectedCountry = null;
-			lastSelectedState = null;
+//			lastSelectedCountry = null;
+//			lastSelectedState = null;
 			lastSelectedCity = currentSelectedItem;
 			view.tabCountry.setDisable(false);
 			view.tabState.setDisable(false);
@@ -171,12 +176,13 @@ public class GeoController {
 			view.itemList.setMouseTransparent(false);
 			view.itemList.setFocusTraversable(true);
 			unblockTabs(currentSelectedItem);
+			// Save to a file
+			model.saveGeo();
 			}
-			catch(Exception e1) {
+		catch(Exception e1) {
 			  view.alertEntryCenter.showAndWait();
 			  setCenterEditable();
 			}
-
 		}
 	
 	private void delete(MouseEvent e) {
@@ -193,10 +199,10 @@ public class GeoController {
 	}
 	
 	public String[] getCountryData(int indexCounter) {
-		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 1];
+		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 3];
 		
 		for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-			if (i != 2) {
+			if (i != 6 && i != 8 && i != 2) {
 				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
 				indexCounter++;
 			}
@@ -206,10 +212,10 @@ public class GeoController {
 	}
 	
 	public String[] getStateData(int indexCounter) {
-		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 1];
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 2];
 		
 		for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-			if (i != 4) {
+			if (i != 4 && i != 7) {
 				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsState[i]).getText();
 				indexCounter++;
 			}
@@ -219,7 +225,7 @@ public class GeoController {
 	}
 	
 	public String[] getCityData(int indexCounter) {
-		String inputDataContainer[] = new String[view.centerRoot.controlsCity.length - 1];
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 1];
 		
 		for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
 			if (i != 4) {
@@ -267,6 +273,7 @@ public class GeoController {
 	}
 	
 	private void updateCountryView () {
+
 		Country currentCountry = model.getCountry(currentSelectedItem);
 		view.centerRoot.tfPopulationCountry.setText(Long.toString(currentCountry.getPopulation()));
 		view.centerRoot.tfAreaCountry.setText(Integer.toString(currentCountry.getArea()));
@@ -291,6 +298,7 @@ public class GeoController {
 	}
 	
 	private void updateCityView () {
+		
 		City currentCity = model.getCity(currentSelectedItem);
 		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));
 		view.centerRoot.tfAreaCity.setText(Integer.toString(currentCity.getArea()));
@@ -300,25 +308,28 @@ public class GeoController {
 		view.centerRoot.tfLanguageCity.setText(currentCity.getLanguages());
 		view.centerRoot.tfZipCode.setText(Long.toString(currentCity.getZipCode()));
 		view.centerRoot.tfMayor.setText(currentCity.getMayor());
-		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());		
+		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());
+		
+		
 	}
 	
 	private void defaultView() {
 		if (currentTab == view.tabCountry) {
 			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-				if (i != 2)
-					((TextInputControl) view.centerRoot.controlsCountry[i]).clear();
+				if (i != 2 && i != 6 && i != 8)
+				((TextInputControl) view.centerRoot.controlsCountry[i]).setText("");
 			}
-			view.centerRoot.cbFormOfGovernment.getSelectionModel().clearSelection();
 		}else if (currentTab == view.tabState) {
 			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-					((TextInputControl) view.centerRoot.controlsState[i]).clear();;
+				if (i != 7)
+				((TextInputControl) view.centerRoot.controlsState[i]).setText("");
 			}
 		}else if (currentTab == view.tabCity) {
 			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
-				((TextInputControl) view.centerRoot.controlsCity[i]).clear();;
+				((TextInputControl) view.centerRoot.controlsCity[i]).setText("");
 			}
-		}		
+		}
+		
 	}
 	
 	private void disableTabs () {
@@ -361,6 +372,7 @@ public class GeoController {
 			view.tabState.setDisable(true);
 		}
 	}
+	
 	
 	private String getSelectedItemName() {
 		String selectedItem = view.itemList.getSelectionModel().getSelectedItem();

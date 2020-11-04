@@ -293,7 +293,15 @@ public class GeoController {
 	}
 	
 	private void updateStateView () {
-		
+		State currentState = model.getState(currentSelectedItem);
+		view.centerRoot.tfPopulationState.setText(Long.toString(currentState.getPopulation()));
+		view.centerRoot.tfAreaState.setText(Long.toString(currentState.getArea()));
+		view.centerRoot.tfMaxElevationState.setText(Double.toString(currentState.getMaxElevation()));
+		view.centerRoot.tfMinElevationState.setText(Double.toString(currentState.getMinElevation()));
+		view.centerRoot.tfAvgElevationState.setText(Double.toString(currentState.getAvgElevation()));
+		view.centerRoot.tfLanguageState.setText(currentState.getLanguages());
+		view.centerRoot.tfCapitalCityState.setText(currentState.getCapitalCity());
+		view.centerRoot.taHistoryState.setText(currentState.getHistory());
 	}
 	
 	private void updateCityView () {

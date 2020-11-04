@@ -44,6 +44,7 @@ public class GeoView {
 	
 	// Alerts
 	Alert alertEntry = new Alert(AlertType.ERROR);
+	Alert alertEntryCenter = new Alert(AlertType.ERROR);
 		
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -64,10 +65,15 @@ public class GeoView {
 		root.setCenter(centerView);
 		
 		
-		// Alert when invalid data
+		// Alert when invalid itemName
 		alertEntry.setTitle("Error Dialog");
 		alertEntry.setHeaderText("Invalid Data");
 		alertEntry.setContentText("Your entry is empty or contains spaces");
+		
+		// Alert when invalid centerEntry
+		alertEntryCenter.setTitle("Error Dialog");
+		alertEntryCenter.setHeaderText("Invalid Data");
+		alertEntryCenter.setContentText("Your entry contains invalid data");
 		
 		// TO DO: set up scene
 		Scene scene = new Scene(root, 800, 1000);

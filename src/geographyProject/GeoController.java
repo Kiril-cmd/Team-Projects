@@ -182,16 +182,23 @@ public class GeoController {
 		FormOfGovernment formOfGovernment = view.centerRoot.cbFormOfGovernment.getSelectionModel().getSelectedItem();
 		int indexCounter = 0;
 		
-		if (view.tabCountry.isSelected()) {
-			userInput = getCountryData(indexCounter);
-			model.saveCountryData(itemName, userInput, formOfGovernment);
-		}else if(view.tabState.isSelected()) {
-			userInput = getStateData(indexCounter);
-			model.saveStateData(itemName, userInput);
-		}else if(view.tabCity.isSelected()) {
-			userInput = getCityData(indexCounter);
-			model.saveCityData(itemName, userInput);		
-		}		
+		try {
+			if (view.tabCountry.isSelected()) {
+				userInput = getCountryData(indexCounter);
+				model.saveCountryData(itemName, userInput, formOfGovernment);
+			}else if(view.tabState.isSelected()) {
+				userInput = getStateData(indexCounter);
+				model.saveStateData(itemName, userInput);
+			}else if(view.tabCity.isSelected()) {
+				userInput = getCityData(indexCounter);
+				model.saveCityData(itemName, userInput);		
+			}		
+			}
+			catch(Exception e1) {
+			  view.alertEntryCenter.showAndWait();
+			}
+		
+		
 	}
 	
 	private void delete(MouseEvent e) {

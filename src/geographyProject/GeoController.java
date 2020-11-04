@@ -273,6 +273,18 @@ public class GeoController {
 		view.showCenterView(currentTab);		
 	}
 	
+	private void updateCountryView () {
+		
+	}
+	
+	private void updateStateView () {
+		
+	}
+	
+	private void updateCityView () {
+		
+	}
+	
 	private void disableTabs () {
 		// Disable Tabs
 		if (currentTab == view.tabCountry) {

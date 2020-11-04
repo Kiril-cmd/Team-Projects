@@ -259,7 +259,7 @@ public class GeoController {
 				}
 			}
 			
-		} else if (currentTab == view.tabCity ) {
+		} else if (currentTab == view.tabCity) {
 			for(int i = 0; i < model.cities.size(); i++) {
 				City city = model.cities.get(i);
 				if (lastSelectedState == city.getState())

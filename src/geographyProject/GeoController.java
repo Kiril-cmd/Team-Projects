@@ -141,46 +141,11 @@ public class GeoController {
 		view.tfEnterZone.setText("");
 	}
 
-	private void edit(MouseEvent e) {
-		
-		
-		if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
-			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-				view.centerRoot.controlsCountry[i].setDisable(false);
-			}
-			// Disable item selection and tabs switching when editing
-			view.itemList.setMouseTransparent(true);
-			view.itemList.setFocusTraversable(false);
-			view.tabState.setDisable(true);
-			view.tabCity.setDisable(true);
-		}
-		else if(view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
-			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-				view.centerRoot.controlsState[i].setDisable(false);
-			}
-			view.itemList.setMouseTransparent(true);
-			view.itemList.setFocusTraversable(false);
-			view.tabCountry.setDisable(true);
-			view.tabCity.setDisable(true);
-		}
-		else if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
-			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
-				view.centerRoot.controlsCity[i].setDisable(false);
-			}
-			view.itemList.setMouseTransparent(true);
-			view.itemList.setFocusTraversable(false);
-			view.tabCountry.setDisable(true);
-			view.tabState.setDisable(true);
-		}
-		
+	private void edit(MouseEvent e) {		
+		setCenterEditable();
 	}
 	
 	private void save(MouseEvent e) {
-		// Enable all tabs and item selection again
-				
-		view.itemList.setMouseTransparent(false);
-		view.itemList.setFocusTraversable(true);
-		unblockTabs(currentSelectedItem);
 		
 		String[] userInput;
 		String itemName = getSelectedItemName();
@@ -188,6 +153,7 @@ public class GeoController {
 		int indexCounter = 0;
 		
 		try {
+			
 			if (view.tabCountry.isSelected()) {
 				userInput = getCountryData(indexCounter);
 				model.saveCountryData(itemName, userInput, formOfGovernment);
@@ -197,14 +163,18 @@ public class GeoController {
 			}else if(view.tabCity.isSelected()) {
 				userInput = getCityData(indexCounter);
 				model.saveCityData(itemName, userInput);		
-			}		
+			}
+			// Enable all tabs and item selection again
+			view.itemList.setMouseTransparent(false);
+			view.itemList.setFocusTraversable(true);
+			unblockTabs(currentSelectedItem);
 			}
 			catch(Exception e1) {
 			  view.alertEntryCenter.showAndWait();
+			  setCenterEditable();
 			}
-		
-		
-	}
+
+		}
 	
 	private void delete(MouseEvent e) {
 		String itemName = getSelectedItemName();
@@ -348,7 +318,21 @@ public class GeoController {
 	}
 	
 	private void defaultView() {
-		
+//		if (currentTab == view.tabCountry) {
+//			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+//				if (i != 6 && i != 8)
+//				((TextInputControl) view.centerRoot.controlsCountry[i]).setText("");
+//			}
+//		}else if (currentTab == view.tabState) {
+//			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+//				if (i != 7)
+//				((TextInputControl) view.centerRoot.controlsState[i]).setText("");
+//			}
+//		}else if (currentTab == view.tabCity) {
+//			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+//				((TextInputControl) view.centerRoot.controlsCity[i]).setText("");
+//			}
+//		}
 		
 	}
 	
@@ -359,6 +343,37 @@ public class GeoController {
 			view.tabCity.setDisable(true);
 		} else if (currentTab == view.tabState) {
 			view.tabCity.setDisable(true);
+		}
+	}
+	
+	private void setCenterEditable() {
+		if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
+			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+				view.centerRoot.controlsCountry[i].setDisable(false);
+			}
+			// Disable item selection and tabs switching when editing
+			view.itemList.setMouseTransparent(true);
+			view.itemList.setFocusTraversable(false);
+			view.tabState.setDisable(true);
+			view.tabCity.setDisable(true);
+		}
+		else if(view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
+			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+				view.centerRoot.controlsState[i].setDisable(false);
+			}
+			view.itemList.setMouseTransparent(true);
+			view.itemList.setFocusTraversable(false);
+			view.tabCountry.setDisable(true);
+			view.tabCity.setDisable(true);
+		}
+		else if (view.itemList.getSelectionModel().getSelectedItem() != null && view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
+			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+				view.centerRoot.controlsCity[i].setDisable(false);
+			}
+			view.itemList.setMouseTransparent(true);
+			view.itemList.setFocusTraversable(false);
+			view.tabCountry.setDisable(true);
+			view.tabState.setDisable(true);
 		}
 	}
 	

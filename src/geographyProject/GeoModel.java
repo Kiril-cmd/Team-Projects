@@ -55,7 +55,7 @@ public class GeoModel {
 		states.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
 		states.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
 		states.get(listIndex).setAvgElevation();
-		// TODO: discuss about language attribute in state class
+		states.get(listIndex).setLanguages(userInput[4]);
 		states.get(listIndex).setCapitalCity(userInput[5].toString());
 		states.get(listIndex).setHistory(userInput[6].toString());		
 	}
@@ -68,7 +68,7 @@ public class GeoModel {
 		cities.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
 		cities.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
 		cities.get(listIndex).setAvgElevation();
-		// TODO: discuss about language attribute in city class
+		cities.get(listIndex).setLanguages(userInput[4]);
 		cities.get(listIndex).setZipCode(Integer.parseInt(userInput[5]));
 		cities.get(listIndex).setMayor(userInput[6].toString());
 		cities.get(listIndex).setHistory(userInput[7].toString());

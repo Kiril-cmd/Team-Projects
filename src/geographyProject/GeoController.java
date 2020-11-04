@@ -75,10 +75,14 @@ public class GeoController {
 				updateStateView();
 			} else if(model.cities.size()>0 && lastSelectedCity != null && currentTab == view.tabCity) {
 				updateCityView();
+			} else {
+				defaultView();
 			}
 		});
 	}
 	
+	
+
 	private void unblockTabs (String currentSelectedItem) {
 		// Unblock tabs if an item is selected
 		 if (currentTab == view.tabCountry)
@@ -90,6 +94,7 @@ public class GeoController {
 		} 
 		else if (currentTab == view.tabState) {
 			lastSelectedState = currentSelectedItem;
+			view.tabCountry.setDisable(false);
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
 				view.tabCity.setDisable(false);
 			}
@@ -331,6 +336,11 @@ public class GeoController {
 		view.centerRoot.tfZipCode.setText(Long.toString(currentCity.getZipCode()));
 		view.centerRoot.tfMayor.setText(currentCity.getMayor());
 		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());
+		
+		
+	}
+	
+	private void defaultView() {
 		
 		
 	}

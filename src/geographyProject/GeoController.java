@@ -62,6 +62,7 @@ public class GeoController {
 			
 			updateView(currentTab);
 			
+			defaultView();
 		});
 		
 		// Track the current item selection
@@ -75,9 +76,7 @@ public class GeoController {
 				updateStateView();
 			} else if(model.cities.size()>0 && lastSelectedCity != null && currentTab == view.tabCity) {
 				updateCityView();
-			} else {
-				defaultView();
-			}
+			} 
 		});
 	}
 	
@@ -88,12 +87,16 @@ public class GeoController {
 		 if (currentTab == view.tabCountry)
 		{
 			lastSelectedCountry = currentSelectedItem;
+			lastSelectedState = null;
+			lastSelectedCity = null;
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
 				view.tabState.setDisable(false);
 			}
 		} 
 		else if (currentTab == view.tabState) {
+			lastSelectedCountry = null;
 			lastSelectedState = currentSelectedItem;
+			lastSelectedCity = null;
 			view.tabCountry.setDisable(false);
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
 				view.tabCity.setDisable(false);
@@ -101,6 +104,8 @@ public class GeoController {
 			
 		} 
 		else if (currentTab == view.tabCity) {
+			lastSelectedCountry = null;
+			lastSelectedState = null;
 			lastSelectedCity = currentSelectedItem;
 			view.tabCountry.setDisable(false);
 			view.tabState.setDisable(false);
@@ -321,12 +326,12 @@ public class GeoController {
 		if (currentTab == view.tabCountry) {
 			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
 				if (i != 2 && i != 6 && i != 8)
-				((TextInputControl) view.centerRoot.controlsCountry[i]).clear();
+					((TextInputControl) view.centerRoot.controlsCountry[i]).clear();
 			}
 		}else if (currentTab == view.tabState) {
 			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
 				if (i != 7)
-				((TextInputControl) view.centerRoot.controlsState[i]).setText("");
+					((TextInputControl) view.centerRoot.controlsState[i]).setText("");
 			}
 		}else if (currentTab == view.tabCity) {
 			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
@@ -375,32 +380,6 @@ public class GeoController {
 			view.tabCountry.setDisable(true);
 			view.tabState.setDisable(true);
 		}
-	}
-	
-	private void createFile () {
-		try {
-			File newFile = new File ("Data.txt");
-			if (newFile.createNewFile()) {
-				System.out.println("File created: " + newFile.getName());
-			} else {
-				System.out.println("File already exists.");
-			}
-		} catch (IOException e) {
-			System.out.println("An error occurred");
-			e.printStackTrace();
-		}
-	}
-	
-	private void writeToFile () {
-		try {
-		      FileWriter myWriter = new FileWriter("Data.txt");
-		      myWriter.write("Files in Java might be tricky, but it is fun enough!");
-		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
-		} catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		      }
 	}
 	
 	private String getSelectedItemName() {

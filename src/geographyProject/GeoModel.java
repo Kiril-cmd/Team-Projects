@@ -1,5 +1,8 @@
 package geographyProject;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import geographyProject.RegionHyrarchy.City;
@@ -156,5 +159,32 @@ public class GeoModel {
 		}
 		return searchIndex;
 	}
+	
+	private void createFile () {
+		try {
+			File newFile = new File ("Data.txt");
+			if (newFile.createNewFile()) {
+				System.out.println("File created: " + newFile.getName());
+			} else {
+				System.out.println("File already exists.");
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred");
+			e.printStackTrace();
+		}
+	}
+	
+	private void writeToFile () {
+		try {
+		      FileWriter myWriter = new FileWriter("Data.txt");
+		      myWriter.write("Files in Java might be tricky, but it is fun enough!");
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		} catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		      }
+	}
+	
 	
 }

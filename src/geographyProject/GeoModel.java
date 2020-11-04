@@ -40,7 +40,7 @@ public class GeoModel {
 		countries.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
 		countries.get(listIndex).setArea(Integer.parseInt(userInput[1]));
 		countries.get(listIndex).setFormOfGovernment(formOfGovernment);
-		countries.get(listIndex).addLanguage(userInput[2].toString());
+		countries.get(listIndex).setLanguages(userInput[2].toString());
 		countries.get(listIndex).setCurrency(userInput[3].toString());
 		countries.get(listIndex).setPhoneCode(userInput[4].toString());
 		countries.get(listIndex).setCapitalCity(userInput[5].toString());

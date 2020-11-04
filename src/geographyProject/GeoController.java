@@ -68,7 +68,12 @@ public class GeoController {
 		view.itemList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
 			currentSelectedItem = newValue;
 			unblockTabs(currentSelectedItem);
-					
+			// Update Country, State, City View
+			if(model.countries.size()>0 && lastSelectedCountry != null && currentTab == view.tabCountry) {
+				updateCountryView();
+			}
+			
+			
 		});
 	}
 	
@@ -269,12 +274,22 @@ public class GeoController {
 				}
 			}
 			
+			
 		} 
 		view.showCenterView(currentTab);		
 	}
 	
 	private void updateCountryView () {
-		
+
+		Country currentCountry = model.getCountry(currentSelectedItem);
+		view.centerRoot.tfPopulationCountry.setText(Long.toString(currentCountry.getPopulation()));
+		view.centerRoot.tfAreaCountry.setText(Integer.toString(currentCountry.getArea()));
+		view.centerRoot.cbFormOfGovernment.setValue(currentCountry.getFormOfGovernment());
+		view.centerRoot.tfLanguagesCountry.setText(currentCountry.getLanguages());
+		view.centerRoot.tfCurrency.setText(currentCountry.getCurrency());
+		view.centerRoot.tfPhoneCode.setText(currentCountry.getPhoneCode());
+		view.centerRoot.tfCapitalCityCountry.setText(currentCountry.getCapitalCity());
+		view.centerRoot.taHistoryCountry.setText(currentCountry.getHistory());
 	}
 	
 	private void updateStateView () {
@@ -282,6 +297,31 @@ public class GeoController {
 	}
 	
 	private void updateCityView () {
+		
+		/*
+		view.centerRoot.tfPopulationCity.setText("");
+		view.centerRoot.tfAreaCity.setText("");
+		view.centerRoot.tfMaxElevationCity.setText("");
+		view.centerRoot.tfMinElevationCity.setText("");
+		view.centerRoot.tfAvgElevationCity.setText("");
+		view.centerRoot.tfLanguageCity.setText("");
+		view.centerRoot.tfZipCode.setText("");
+		view.centerRoot.tfMayor.setText("");
+		view.centerRoot.taHistoryCity.setText("");
+		*/
+		
+		
+//		City currentCity = model.getCity(currentSelectedItem);
+//		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));
+//		view.centerRoot.tfAreaCity.setText(Integer.toString(currentCity.getArea()));
+//		view.centerRoot.tfMaxElevationCity.setText(Double.toString(currentCity.getMaxElevation()));
+//		view.centerRoot.tfMinElevationCity.setText(Double.toString(currentCity.getMinElevation()));
+//		view.centerRoot.tfAvgElevationCity.setText(Double.toString(currentCity.getAvgElevation()));
+//		view.centerRoot.tfLanguageCity.setText(currentCity.getLanguages());
+//		view.centerRoot.tfZipCode.setText(Long.toString(currentCity.getZipCode()));
+//		view.centerRoot.tfMayor.setText(currentCity.getMayor());
+//		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());
+		
 		
 	}
 	

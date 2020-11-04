@@ -8,7 +8,7 @@ public abstract class GovernedRegion {
 	private long population;
 	public enum FormOfGovernment {Autocracy, Aristocracy, Democracy, Republics, Federalism}
 	private FormOfGovernment formOfGovernment;
-	private ArrayList<String> languages;
+	private String languages;
 	private String history;
 	private double maxElevation;
 	private double minElevation;
@@ -16,12 +16,12 @@ public abstract class GovernedRegion {
 
 	public GovernedRegion(String name){
 			this.name = name;
-			this.languages = new ArrayList<String>();
+			
 			//this.id = incrementIdCounter();
 	}
 	
-	public void addLanguage(String newLanguage) {
-		languages.add(newLanguage);
+	public void setLanguages(String languages) {
+		this.languages= languages;
 	}
 	
 //	private int incrementIdCounter() {
@@ -62,7 +62,7 @@ public abstract class GovernedRegion {
 		this.formOfGovernment = formOfGovernment;
 	}
 	
-	public ArrayList<String> getLanguages(){
+	public String getLanguages(){
 		return languages;
 	}
 	

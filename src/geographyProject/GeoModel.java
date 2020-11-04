@@ -39,7 +39,6 @@ public class GeoModel {
 		
 		countries.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
 		countries.get(listIndex).setArea(Integer.parseInt(userInput[1]));
-		// form of governemnt doesent work at the moment because of enum FormOfGovernement
 		countries.get(listIndex).setFormOfGovernment(formOfGovernment);
 		countries.get(listIndex).addLanguage(userInput[2].toString());
 		countries.get(listIndex).setCurrency(userInput[3].toString());
@@ -94,6 +93,28 @@ public class GeoModel {
 		listIndex = getCityIndex(cityName);
 		cities.remove(listIndex);
 		}
+	}
+	
+	public Country getCountry(String countryName) {
+		listIndex = getCountryIndex(countryName);
+		Country country = countries.get(listIndex);
+		
+		return country;
+		
+	}
+	
+	public State getState(String stateName) {
+		listIndex = getStateIndex(stateName);
+		State state = states.get(listIndex);
+		
+		return state;
+	}
+	
+	public City getCity(String cityName) {
+		listIndex = getCityIndex(cityName);
+		City city = cities.get(listIndex);
+		
+		return city;
 	}
 		
 	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList

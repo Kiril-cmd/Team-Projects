@@ -32,8 +32,11 @@ public class GeoModel {
 
 	
 	public void addCountry (String newCountry) {
+		listIndex = getCountryIndex(newCountry);
 		countries.add(new Country(newCountry));
 	}
+	
+//	public boolean 
 	
 	public void addState (String newState, String country) {
 		states.add(new State(newState, country));

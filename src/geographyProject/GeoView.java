@@ -39,7 +39,7 @@ public class GeoView {
 	protected Tab tabCountry = new Tab("Country");
 	protected Tab tabState = new Tab("State");
 	protected Tab tabCity = new Tab("City");
-	protected ObservableList<String> items = FXCollections.observableArrayList("Switzerland", "Germany", "USA", "Canada");
+	protected ObservableList<String> items = FXCollections.observableArrayList();
 	protected ListView<String> itemList = new ListView<String>();
 	
 	// Alerts

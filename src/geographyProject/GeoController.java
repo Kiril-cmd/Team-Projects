@@ -80,8 +80,6 @@ public class GeoController {
 		});
 	}
 	
-	
-
 	private void unblockTabs (String currentSelectedItem) {
 		// Unblock tabs if an item is selected
 		 if (currentTab == view.tabCountry)
@@ -195,10 +193,10 @@ public class GeoController {
 	}
 	
 	public String[] getCountryData(int indexCounter) {
-		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 3];
+		String inputDataContainer[] = new String[view.centerRoot.controlsCountry.length - 1];
 		
 		for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-			if (i != 6 && i != 8 && i != 2) {
+			if (i != 2) {
 				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsCountry[i]).getText();
 				indexCounter++;
 			}
@@ -208,10 +206,10 @@ public class GeoController {
 	}
 	
 	public String[] getStateData(int indexCounter) {
-		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 2];
+		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 1];
 		
 		for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-			if (i != 4 && i != 7) {
+			if (i != 4) {
 				inputDataContainer[indexCounter] = ((TextInputControl) view.centerRoot.controlsState[i]).getText();
 				indexCounter++;
 			}
@@ -221,7 +219,7 @@ public class GeoController {
 	}
 	
 	public String[] getCityData(int indexCounter) {
-		String inputDataContainer[] = new String[view.centerRoot.controlsState.length - 1];
+		String inputDataContainer[] = new String[view.centerRoot.controlsCity.length - 1];
 		
 		for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
 			if (i != 4) {
@@ -269,7 +267,6 @@ public class GeoController {
 	}
 	
 	private void updateCountryView () {
-
 		Country currentCountry = model.getCountry(currentSelectedItem);
 		view.centerRoot.tfPopulationCountry.setText(Long.toString(currentCountry.getPopulation()));
 		view.centerRoot.tfAreaCountry.setText(Integer.toString(currentCountry.getArea()));
@@ -294,20 +291,6 @@ public class GeoController {
 	}
 	
 	private void updateCityView () {
-		
-		/*
-		view.centerRoot.tfPopulationCity.setText("");
-		view.centerRoot.tfAreaCity.setText("");
-		view.centerRoot.tfMaxElevationCity.setText("");
-		view.centerRoot.tfMinElevationCity.setText("");
-		view.centerRoot.tfAvgElevationCity.setText("");
-		view.centerRoot.tfLanguageCity.setText("");
-		view.centerRoot.tfZipCode.setText("");
-		view.centerRoot.tfMayor.setText("");
-		view.centerRoot.taHistoryCity.setText("");
-		*/
-		
-		
 		City currentCity = model.getCity(currentSelectedItem);
 		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));
 		view.centerRoot.tfAreaCity.setText(Integer.toString(currentCity.getArea()));
@@ -317,28 +300,25 @@ public class GeoController {
 		view.centerRoot.tfLanguageCity.setText(currentCity.getLanguages());
 		view.centerRoot.tfZipCode.setText(Long.toString(currentCity.getZipCode()));
 		view.centerRoot.tfMayor.setText(currentCity.getMayor());
-		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());
-		
-		
+		view.centerRoot.taHistoryCity.setText(currentCity.getHistory());		
 	}
 	
 	private void defaultView() {
 		if (currentTab == view.tabCountry) {
 			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
-				if (i != 2 && i != 6 && i != 8)
+				if (i != 2)
 					((TextInputControl) view.centerRoot.controlsCountry[i]).clear();
 			}
+			view.centerRoot.cbFormOfGovernment.getSelectionModel().clearSelection();
 		}else if (currentTab == view.tabState) {
 			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
-				if (i != 7)
-					((TextInputControl) view.centerRoot.controlsState[i]).setText("");
+					((TextInputControl) view.centerRoot.controlsState[i]).clear();;
 			}
 		}else if (currentTab == view.tabCity) {
 			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
-				((TextInputControl) view.centerRoot.controlsCity[i]).setText("");
+				((TextInputControl) view.centerRoot.controlsCity[i]).clear();;
 			}
-		}
-		
+		}		
 	}
 	
 	private void disableTabs () {

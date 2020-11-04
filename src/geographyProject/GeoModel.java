@@ -33,6 +33,7 @@ public class GeoModel {
 		cities.add(new City(newCity, state));
 	}
 	
+	
 	// Method saves entered user inputData (Country) in the concerning object
 	public void saveCountryData(String countryName, String[] userInput, FormOfGovernment formOfGovernment) {
 		listIndex = getCountryIndex(countryName);

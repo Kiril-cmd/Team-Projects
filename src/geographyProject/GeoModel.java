@@ -1,8 +1,12 @@
 package geographyProject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.ArrayList;
 
 import geographyProject.RegionHyrarchy.City;
@@ -22,6 +26,9 @@ public class GeoModel {
 	private int searchIndex;
 	private int listIndex;
 	private boolean foundIndex;
+	
+	private final String SEPARATOR = ";";
+	private final String GEO_FILE = "GeoFile";
 
 	
 	public void addCountry (String newCountry) {
@@ -160,30 +167,50 @@ public class GeoModel {
 		return searchIndex;
 	}
 	
-	private void createFile () {
-		try {
-			File newFile = new File ("Data.txt");
-			if (newFile.createNewFile()) {
-				System.out.println("File created: " + newFile.getName());
-			} else {
-				System.out.println("File already exists.");
+	public void loadGeo () {
+		File geoFile = new File (GEO_FILE);
+		try (Reader inReader = new FileReader(geoFile)) {
+			BufferedReader in = new BufferedReader(inReader);
+			//countries = new ArrayList<Country>();
+			
+			String line = in.readLine();
+			while (line != null) {
+				Country country = readCountry(line);
+				countries.add(country);
+				line = in.readLine();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("An error occurred");
 			e.printStackTrace();
 		}
 	}
 	
-	private void writeToFile () {
-		try {
-		      FileWriter myWriter = new FileWriter("Data.txt");
-		      myWriter.write("Files in Java might be tricky, but it is fun enough!");
-		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
+	private Country readCountry (String line) {
+		String[] attributes = line.split(SEPARATOR);
+		String name = attributes[0];
+		long population = Long.parseLong(attributes[1]);
+		Country country = new Country(name);
+		country.setName(name);
+		country.setPopulation(population);
+		return country;
+	}
+	
+	public void saveGeo () {
+		File geoFile = new File(GEO_FILE);
+		try (Writer out = new FileWriter(geoFile)) {
+			for (Country country : countries) {
+				String line = writeCountry(country);
+				out.write(line);
+				out.close();
+			}
 		} catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		      }
+			e.printStackTrace();
+		}
+	}
+	
+	private String writeCountry (Country country) {
+		String line = country.getName() + SEPARATOR + country.getPopulation() + "\n";
+		return line;
 	}
 	
 	

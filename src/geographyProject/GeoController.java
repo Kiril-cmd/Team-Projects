@@ -34,6 +34,8 @@ public class GeoController {
 		// Set selected tab to country when launching the first time
 		currentTab = view.tabCountry;
 		
+		model.loadGeo();
+		
 		topControlsEvents();
 		leftControlsEvents();
 	}
@@ -87,16 +89,16 @@ public class GeoController {
 		 if (currentTab == view.tabCountry)
 		{
 			lastSelectedCountry = currentSelectedItem;
-			lastSelectedState = null;
-			lastSelectedCity = null;
+//			lastSelectedState = null;
+//			lastSelectedCity = null;
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
 				view.tabState.setDisable(false);
 			}
 		} 
 		else if (currentTab == view.tabState) {
-			lastSelectedCountry = null;
+//			lastSelectedCountry = null;
 			lastSelectedState = currentSelectedItem;
-			lastSelectedCity = null;
+//			lastSelectedCity = null;
 			view.tabCountry.setDisable(false);
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
 				view.tabCity.setDisable(false);
@@ -104,8 +106,8 @@ public class GeoController {
 			
 		} 
 		else if (currentTab == view.tabCity) {
-			lastSelectedCountry = null;
-			lastSelectedState = null;
+//			lastSelectedCountry = null;
+//			lastSelectedState = null;
 			lastSelectedCity = currentSelectedItem;
 			view.tabCountry.setDisable(false);
 			view.tabState.setDisable(false);
@@ -173,11 +175,15 @@ public class GeoController {
 			view.itemList.setMouseTransparent(false);
 			view.itemList.setFocusTraversable(true);
 			unblockTabs(currentSelectedItem);
+			
+			model.saveGeo();
 			}
-			catch(Exception e1) {
+		catch(Exception e1) {
 			  view.alertEntryCenter.showAndWait();
 			  setCenterEditable();
 			}
+		
+		
 
 		}
 	
@@ -294,19 +300,6 @@ public class GeoController {
 	}
 	
 	private void updateCityView () {
-		
-		/*
-		view.centerRoot.tfPopulationCity.setText("");
-		view.centerRoot.tfAreaCity.setText("");
-		view.centerRoot.tfMaxElevationCity.setText("");
-		view.centerRoot.tfMinElevationCity.setText("");
-		view.centerRoot.tfAvgElevationCity.setText("");
-		view.centerRoot.tfLanguageCity.setText("");
-		view.centerRoot.tfZipCode.setText("");
-		view.centerRoot.tfMayor.setText("");
-		view.centerRoot.taHistoryCity.setText("");
-		*/
-		
 		
 		City currentCity = model.getCity(currentSelectedItem);
 		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));

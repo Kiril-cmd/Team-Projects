@@ -35,7 +35,7 @@ public class GeoController {
 		currentTab = view.tabCountry;
 		
 		// Load from a file
-		model.loadGeo();
+//		model.loadGeo();
 		
 		topControlsEvents();
 		leftControlsEvents();

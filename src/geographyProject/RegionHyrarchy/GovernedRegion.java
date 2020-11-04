@@ -20,9 +20,6 @@ public abstract class GovernedRegion {
 			//this.id = incrementIdCounter();
 	}
 	
-	public void setLanguages(String languages) {
-		this.languages= languages;
-	}
 	
 //	private int incrementIdCounter() {
 //		idCounter++;
@@ -66,6 +63,10 @@ public abstract class GovernedRegion {
 		return languages;
 	}
 	
+	public void setLanguages(String languages) {
+		this.languages= languages;
+	}
+		
 	public String getHistory() {
 		return history;
 	}

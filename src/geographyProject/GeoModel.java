@@ -135,7 +135,7 @@ public class GeoModel {
 		boolean[] userInputValid = new boolean[userInput.length];
 		
 		for (int i = 0; i < userInput.length; i++) {
-			if (userInput[i] != null && !userInput[i].equals("0") && !userInput[i].equals("0.0"))
+			if (userInput[i] != null && userInput[i] != "null" && !userInput[i].equals("0") && !userInput[i].equals("0.0"))
 				userInputValid[i] = true;
 			else
 				userInputValid[i] = false;	
@@ -145,22 +145,23 @@ public class GeoModel {
 	
 	public void deleteCountry(String countryName) {
 		if (countries.size() > 0 ) {
-		listIndex = getCountryIndex(countryName);
-		countries.remove(listIndex);
+			listIndex = getCountryIndex(countryName);
+			countries.remove(listIndex);
+			
 		}
 	}
 	
 	public void deleteState(String stateName) {
 		if (states.size() > 0) {
-		listIndex = getStateIndex(stateName);
-		states.remove(listIndex);
+			listIndex = getStateIndex(stateName);
+			states.remove(listIndex);
 		}
 	}
 	
 	public void deleteCity(String cityName) {
 		if (cities.size() > 0) {
-		listIndex = getCityIndex(cityName);
-		cities.remove(listIndex);
+			listIndex = getCityIndex(cityName);
+			cities.remove(listIndex);
 		}
 	}
 	
@@ -282,15 +283,25 @@ public class GeoModel {
 	
 	private Country readCountry (String line) {
 		String[] attributes = line.split(SEPARATOR);
+		
+		setEmpty(attributes);
+		
 		String name = attributes[0];
 		long population = Long.parseLong(attributes[1]);
 		int area = Integer.parseInt(attributes[2]);
-		FormOfGovernment formofgovernment = FormOfGovernment.valueOf(attributes[3]);
+		FormOfGovernment formofgovernment;
+		try {
+			formofgovernment = FormOfGovernment.valueOf(attributes[3]);
+		} catch (Exception e){
+			formofgovernment = null;
+		}
 		String languages = attributes[4];
 		String currency = attributes[5];
 		String phoneCode = attributes[6];
 		String capitalCity = attributes[7];
 		String history = attributes[8];
+		
+		
 		
 		Country country = new Country(name);
 		country.setName(name);
@@ -308,6 +319,9 @@ public class GeoModel {
 	
 	private State readState (String line) {
 		String[] attributes = line.split(SEPARATOR);
+		
+		setEmpty(attributes);
+		
 		String name = attributes[0];
 		String country = attributes[1];
 		long population = Long.parseLong(attributes[2]);
@@ -337,6 +351,9 @@ public class GeoModel {
 		
 	private City readCity (String line) {
 		String[] attributes = line.split(SEPARATOR);
+		
+		setEmpty(attributes);
+		
 		String name = attributes[0];
 		String state = attributes[1];
 		long population = Long.parseLong(attributes[2]);
@@ -361,6 +378,15 @@ public class GeoModel {
 		city.setHistory(history);
 				
 		return city;
+	}
+	
+	// Sets string to null if contains "null"
+	private void setEmpty(String[] attributes) {
+		for (int i = 0; i < attributes.length; i++) {
+			if (attributes[i].equals("null")) {
+				attributes[i] = null;
+			}
+		}
 	}
 	
 	public void saveGeo () {

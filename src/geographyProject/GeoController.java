@@ -223,6 +223,8 @@ public class GeoController {
 			model.deleteCity(itemName);
 		
 		updateView(currentTab);
+		model.saveGeo();
+		defaultView();
 	}
 	
 	public String[] getCountryData(int indexCounter) {

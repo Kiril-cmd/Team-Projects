@@ -118,29 +118,42 @@ public class GeoController {
 	private void create(MouseEvent e) {
 		// Country, state or city
 		String entry = view.tfEnterZone.getText();
+		boolean doubleEntry;
 		// Create Country
 		if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
-			if (entry.length() > 0 && !entry.contains(" ")) {
+			doubleEntry = model.doubleCheckerCountry(entry);
+			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addCountry(entry); 
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
+			}else if (doubleEntry == true) {
+				view.alertDoubleEntry.setContentText(view.doubleCountry);
+				view.alertDoubleEntry.showAndWait();
 			} else {
 				view.alertEntry.showAndWait();
 			}
 		}
 		// Create State
-		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {					
-			if (entry.length() > 0 && !entry.contains(" ")) {
+		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
+			doubleEntry = model.doubleCheckerState(entry);
+			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addState(entry, lastSelectedCountry); 
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
+			}else if (doubleEntry == true) {
+				view.alertDoubleEntry.setContentText(view.doubleState);
+				view.alertDoubleEntry.showAndWait();
 			} else {
 				view.alertEntry.showAndWait();
 			}
 		}
 		// Create City
 		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
-			if (entry.length() > 0 && !entry.contains(" ")) {
+			doubleEntry = model.doubleCheckerCity(entry);
+			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addCity(entry, lastSelectedState); 
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
+			}else if (doubleEntry == true) {
+				view.alertDoubleEntry.setContentText(view.doubleCity);
+				view.alertDoubleEntry.showAndWait();
 			} else {
 				view.alertEntry.showAndWait();
 			}
@@ -177,7 +190,7 @@ public class GeoController {
 			view.itemList.setFocusTraversable(true);
 			unblockTabs(currentSelectedItem);
 			// Save to a file
-			model.saveGeo();
+//			model.saveGeo();
 			}
 		catch(Exception e1) {
 			  view.alertEntryCenter.showAndWait();

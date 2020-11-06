@@ -27,6 +27,8 @@ public class GeoModel {
 	private int listIndex;
 	private boolean foundIndex;
 	
+	private boolean[] userInputValid;
+	
 	private final String SEPARATOR = ";";
 	private final String GEO_FILE_COUNTRY = "GeoFileCountry";
 	private final String GEO_FILE_STATE = "GeoFileState";
@@ -34,11 +36,23 @@ public class GeoModel {
 
 	
 	public void addCountry (String newCountry) {
-		listIndex = getCountryIndex(newCountry);
 		countries.add(new Country(newCountry));
 	}
 	
-//	public boolean 
+	public boolean doubleCheckerCountry(String countryName) {
+		listIndex = getCountryIndex(countryName);
+		return foundIndex;	
+	}
+	
+	public boolean doubleCheckerState(String stateName) {
+		listIndex = getStateIndex(stateName);
+		return foundIndex;
+	}
+	
+	public boolean doubleCheckerCity(String cityName) {
+		listIndex = getCityIndex(cityName);
+		return foundIndex;
+	}
 	
 	public void addState (String newState, String country) {
 		states.add(new State(newState, country));
@@ -51,42 +65,82 @@ public class GeoModel {
 	// Method saves entered user inputData (Country) in the concerning object
 	public void saveCountryData(String countryName, String[] userInput, FormOfGovernment formOfGovernment) {
 		listIndex = getCountryIndex(countryName);
+		userInputValid = validateUserInput(userInput);
 		
-		countries.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
-		countries.get(listIndex).setArea(Integer.parseInt(userInput[1]));
-		countries.get(listIndex).setFormOfGovernment(formOfGovernment);
-		countries.get(listIndex).setLanguages(userInput[2].toString());
-		countries.get(listIndex).setCurrency(userInput[3].toString());
-		countries.get(listIndex).setPhoneCode(userInput[4].toString());
-		countries.get(listIndex).setCapitalCity(userInput[5].toString());
-		countries.get(listIndex).setHistory(userInput[6].toString());
+		if (userInputValid[0])
+			countries.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
+		if (userInputValid[1])
+			countries.get(listIndex).setArea(Integer.parseInt(userInput[1]));
+		if (formOfGovernment != null)
+			countries.get(listIndex).setFormOfGovernment(formOfGovernment);
+		if (userInputValid[2])
+			countries.get(listIndex).setLanguages(userInput[2].toString());
+		if (userInputValid[3])
+			countries.get(listIndex).setCurrency(userInput[3].toString());
+		if (userInputValid[4])
+			countries.get(listIndex).setPhoneCode(userInput[4].toString());
+		if (userInputValid[5])
+			countries.get(listIndex).setCapitalCity(userInput[5].toString());
+		if (userInputValid[6])
+			countries.get(listIndex).setHistory(userInput[6].toString());
 	}
 	
 	public void saveStateData(String stateName, String[] userInput) {
 		listIndex = getStateIndex(stateName);
+		userInputValid = validateUserInput(userInput);
 		
-		states.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
-		states.get(listIndex).setArea(Integer.parseInt(userInput[1]));
-		states.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
-		states.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
+		if (userInputValid[0])
+			states.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
+		if (userInputValid[1])
+			states.get(listIndex).setArea(Integer.parseInt(userInput[1]));
+		if (userInputValid[2])
+			states.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
+		if (userInputValid[3])
+			states.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
+		if (userInputValid[4])
+			states.get(listIndex).setLanguages(userInput[4]);
+		if (userInputValid[5])
+			states.get(listIndex).setCapitalCity(userInput[5].toString());
+		if (userInputValid[6])
+			states.get(listIndex).setHistory(userInput[6].toString());
+		
 		states.get(listIndex).setAvgElevation();
-		states.get(listIndex).setLanguages(userInput[4]);
-		states.get(listIndex).setCapitalCity(userInput[5].toString());
-		states.get(listIndex).setHistory(userInput[6].toString());		
 	}
 	
 	public void saveCityData(String cityName, String[] userInput) {
 		listIndex = getCityIndex(cityName);
+		userInputValid = validateUserInput(userInput);
 		
-		cities.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
-		cities.get(listIndex).setArea(Integer.parseInt(userInput[1]));
-		cities.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
-		cities.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
+		if (userInputValid[0])
+			cities.get(listIndex).setPopulation(Integer.parseInt(userInput[0]));
+		if (userInputValid[1])
+			cities.get(listIndex).setArea(Integer.parseInt(userInput[1]));
+		if (userInputValid[2])
+			cities.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
+		if (userInputValid[3])
+			cities.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
+		if (userInputValid[4])
+			cities.get(listIndex).setLanguages(userInput[4]);
+		if (userInputValid[5])
+			cities.get(listIndex).setZipCode(Integer.parseInt(userInput[5]));
+		if (userInputValid[6])
+			cities.get(listIndex).setMayor(userInput[6].toString());
+		if (userInputValid[7])
+			cities.get(listIndex).setHistory(userInput[7].toString());
+		
 		cities.get(listIndex).setAvgElevation();
-		cities.get(listIndex).setLanguages(userInput[4]);
-		cities.get(listIndex).setZipCode(Integer.parseInt(userInput[5]));
-		cities.get(listIndex).setMayor(userInput[6].toString());
-		cities.get(listIndex).setHistory(userInput[7].toString());
+	}
+	
+	private boolean[] validateUserInput(String[] userInput) {
+		boolean[] userInputValid = new boolean[userInput.length];
+		
+		for (int i = 0; i < userInput.length; i++) {
+			if (userInput[i] != null && !userInput[i].equals("0") && !userInput[i].equals("0.0"))
+				userInputValid[i] = true;
+			else
+				userInputValid[i] = false;	
+		}
+		return userInputValid;
 	}
 	
 	public void deleteCountry(String countryName) {
@@ -138,7 +192,7 @@ public class GeoModel {
 		foundIndex = false;
 		
 		for (int i = 0; i < countries.size() && foundIndex == false; i++) {
-			if (countries.get(i).getName() == countrySearchName) {
+			if (countries.get(i).getName().equals(countrySearchName)) {
 				searchIndex = i;
 				foundIndex = true;
 			}	
@@ -151,7 +205,7 @@ public class GeoModel {
 		foundIndex = false;
 		
 		for (int i = 0; i < states.size() && foundIndex == false; i++) {
-			if (states.get(i).getName() == stateSearchName) {
+			if (states.get(i).getName().equals(stateSearchName)) {
 				searchIndex = i;
 				foundIndex = true;
 			}	
@@ -164,7 +218,7 @@ public class GeoModel {
 		foundIndex = false;
 		
 		for (int i = 0; i < cities.size() && foundIndex == false; i++) {
-			if (cities.get(i).getName() == citySearchName) {
+			if (cities.get(i).getName().equals(citySearchName)) {
 				searchIndex = i;
 				foundIndex = true;
 			}	

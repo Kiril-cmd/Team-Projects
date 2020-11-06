@@ -26,9 +26,7 @@ public class GeoView_Center {
 	protected TextField tfLanguagesCountry = new TextField();
 	protected TextField tfCurrency = new TextField();
 	protected TextField tfPhoneCode = new TextField();
-//	protected ListView<String> stateListCountry = new ListView<String>();
 	protected TextField tfCapitalCityCountry = new TextField();
-//	protected ListView<String> cityListCountry = new ListView<String>();
 	protected TextArea taHistoryCountry = new TextArea();
 	
 	protected Control[] controlsCountry = {tfPopulationCountry, tfAreaCountry, cbFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
@@ -42,7 +40,6 @@ public class GeoView_Center {
 	protected TextField tfAvgElevationState = new TextField();
 	protected TextField tfLanguageState = new TextField();
 	protected TextField tfCapitalCityState = new TextField();
-//	protected ListView<String> cityListState = new ListView<String>();
 	protected TextArea taHistoryState = new TextArea();
 	protected Control[] controlsState = {tfPopulationState, tfAreaState, tfMaxElevationState, tfMinElevationState, tfAvgElevationState, tfLanguageState, 
 			tfCapitalCityState, taHistoryState};

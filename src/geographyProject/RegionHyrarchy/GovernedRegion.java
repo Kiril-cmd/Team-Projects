@@ -97,9 +97,9 @@ public abstract class GovernedRegion {
 	
 	// sets avgElevation by using maxElevation & minElevation
 	public void setAvgElevation() {
-		if (maxElevation > 0 & minElevation > 0) {
+		if (maxElevation > 0 && minElevation > 0)
 			this.avgElevation = (maxElevation + minElevation) / 2;
-		}
+		
 	}
 	
 }

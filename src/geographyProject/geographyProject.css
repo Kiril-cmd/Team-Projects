@@ -2,6 +2,13 @@
 	-fx-font-size: 15pt;
 	-fx-cursor: hand;
 }
+
+.toggle-button {
+	-fx-font-size: 15pt;
+	-fx-cursor: hand;
+	-fx-font-weight: bold;
+}
+
 .top-pane {
 	
 	-fx-background-color: #DDD56E /* #e3d105*/;	

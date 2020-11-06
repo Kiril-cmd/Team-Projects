@@ -13,6 +13,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -30,7 +31,7 @@ public class GeoView {
 	
 	// Top controls
 	protected Button btnCreate = new Button ("Create");
-	protected Button btnEdit = new Button ("Edit");
+	protected ToggleButton btnEdit = new ToggleButton ("Edit");
 	protected Button btnDelete = new Button ("Delete");
 	protected Button btnSave = new Button ("Save");
 	protected TextField tfEnterZone = new TextField ();
@@ -43,8 +44,12 @@ public class GeoView {
 	protected ListView<String> itemList = new ListView<String>();
 	
 	// Alerts
-	Alert alertEntry = new Alert(AlertType.ERROR);
-	Alert alertEntryCenter = new Alert(AlertType.ERROR);
+	protected Alert alertEntry = new Alert(AlertType.ERROR);
+	protected Alert alertEntryCenter = new Alert(AlertType.ERROR);
+	protected Alert alertDoubleEntry = new Alert(AlertType.ERROR);
+	protected String doubleCountry = "Country with the entered name already exists";
+	protected String doubleState = "State with the entered name already exists";
+	protected String doubleCity = "City with the entered name already exists";
 		
 	public GeoView(Stage primaryStage, GeoModel model) {
 		this.stage = primaryStage;
@@ -74,6 +79,10 @@ public class GeoView {
 		alertEntryCenter.setTitle("Error Dialog");
 		alertEntryCenter.setHeaderText("Invalid Data");
 		alertEntryCenter.setContentText("Your entry contains invalid data");
+		
+		// Alert when double name
+		alertDoubleEntry.setTitle("Error Dialog");
+		alertDoubleEntry.setHeaderText("Invalid Data");
 		
 		// TO DO: set up scene
 		Scene scene = new Scene(root, 800, 1000);

@@ -13,6 +13,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -30,7 +31,7 @@ public class GeoView {
 	
 	// Top controls
 	protected Button btnCreate = new Button ("Create");
-	protected Button btnEdit = new Button ("Edit");
+	protected ToggleButton btnEdit = new ToggleButton ("Edit");
 	protected Button btnDelete = new Button ("Delete");
 	protected Button btnSave = new Button ("Save");
 	protected TextField tfEnterZone = new TextField ();

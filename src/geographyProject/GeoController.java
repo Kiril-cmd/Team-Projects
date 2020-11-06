@@ -34,6 +34,7 @@ public class GeoController {
 		// Set selected tab to country when launching the first time
 		currentTab = view.tabCountry;
 		
+		
 		// Load from a file
 
 //		model.loadGeo();
@@ -50,9 +51,13 @@ public class GeoController {
 		view.btnSave.setOnMouseClicked(this::save);
 		view.btnDelete.setOnMouseClicked(this::delete);
 		
-		// Listeners
+		// Bindings
 		view.btnEdit.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
+		view.btnCreate.disableProperty().bind(view.btnEdit.selectedProperty());
 		view.btnDelete.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
+		view.btnDelete.disableProperty().bind(view.btnEdit.selectedProperty());
+		
+		view.btnSave.setDisable(true);
 	}
 
 	private void leftControlsEvents () {
@@ -162,8 +167,15 @@ public class GeoController {
 		view.tfEnterZone.setText("");
 	}
 
-	private void edit(MouseEvent e) {		
-		setCenterEditable();
+	private void edit(MouseEvent e) {
+		if (view.btnEdit.isSelected() == true) {
+			setCenterEditable();
+			view.btnSave.setDisable(false);
+		}else {
+			setCenterNotEditable();
+			view.btnSave.setDisable(true);
+		}
+
 	}
 	
 	private void save(MouseEvent e) {
@@ -189,6 +201,8 @@ public class GeoController {
 			view.itemList.setMouseTransparent(false);
 			view.itemList.setFocusTraversable(true);
 			unblockTabs(currentSelectedItem);
+			view.btnSave.setDisable(true);
+			view.btnEdit.setSelected(false);
 			// Save to a file
 //			model.saveGeo();
 			}
@@ -356,8 +370,6 @@ public class GeoController {
 				view.centerRoot.controlsCountry[i].setDisable(false);
 			}
 			// Disable item selection and tabs switching when editing
-			view.itemList.setMouseTransparent(true);
-			view.itemList.setFocusTraversable(false);
 			view.tabState.setDisable(true);
 			view.tabCity.setDisable(true);
 		}
@@ -365,8 +377,6 @@ public class GeoController {
 			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
 				view.centerRoot.controlsState[i].setDisable(false);
 			}
-			view.itemList.setMouseTransparent(true);
-			view.itemList.setFocusTraversable(false);
 			view.tabCountry.setDisable(true);
 			view.tabCity.setDisable(true);
 		}
@@ -374,11 +384,38 @@ public class GeoController {
 			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
 				view.centerRoot.controlsCity[i].setDisable(false);
 			}
-			view.itemList.setMouseTransparent(true);
-			view.itemList.setFocusTraversable(false);
 			view.tabCountry.setDisable(true);
 			view.tabState.setDisable(true);
 		}
+		view.itemList.setMouseTransparent(true);
+		view.itemList.setFocusTraversable(false);
+	}
+	
+	private void setCenterNotEditable() {
+		if (view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
+			for (int i = 0; i < view.centerRoot.controlsCountry.length; i++) {
+				view.centerRoot.controlsCountry[i].setDisable(true);
+			}
+			// Disable item selection and tabs switching when editing
+			view.tabState.setDisable(false);
+			view.tabCity.setDisable(false);
+		}
+		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
+			for (int i = 0; i < view.centerRoot.controlsState.length; i++) {
+				view.centerRoot.controlsState[i].setDisable(true);
+			}
+			view.tabCountry.setDisable(false);
+			view.tabCity.setDisable(false);
+		}
+		else if (view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
+			for (int i = 0; i < view.centerRoot.controlsCity.length; i++) {
+				view.centerRoot.controlsCity[i].setDisable(true);
+			}
+			view.tabCountry.setDisable(false);
+			view.tabState.setDisable(false);
+		}
+		view.itemList.setMouseTransparent(false);
+		view.itemList.setFocusTraversable(true);
 	}
 	
 	private String getSelectedItemName() {

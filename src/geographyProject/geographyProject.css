@@ -19,11 +19,6 @@
 #enter-zone-tf {
 		-fx-alignment: center-left;
 	-fx-font-size: 12pt;
-	
-	
-	
-	
-	
 }
 
 .left-control-btns {
@@ -51,6 +46,6 @@
     -fx-vgap: 10;
 }
 
-.active {
-	
+.text-area *.text {
+    -fx-text-alignment: justify;
 }

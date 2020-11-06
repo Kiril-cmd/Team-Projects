@@ -33,11 +33,12 @@ public class GeoController {
 		
 		// Set selected tab to country when launching the first time
 		currentTab = view.tabCountry;
-		
+
+	
 		// Load from a file
-
-//		model.loadGeo();
-
+		model.loadGeo();
+		
+		updateView(currentTab);
 		
 		topControlsEvents();
 		leftControlsEvents();
@@ -250,7 +251,7 @@ public class GeoController {
 		} else if (currentTab == view.tabState) {
 			for(int i = 0; i < model.states.size(); i++) {
 				State state = model.states.get(i);
-				if (lastSelectedCountry == state.getCountry())
+				if (lastSelectedCountry.equals(state.getCountry()))
 				{
 					String stateText = state.getName();
 					view.items.add(stateText);
@@ -260,7 +261,7 @@ public class GeoController {
 		} else if (currentTab == view.tabCity) {
 			for(int i = 0; i < model.cities.size(); i++) {
 				City city = model.cities.get(i);
-				if (lastSelectedState == city.getState())
+				if (lastSelectedState.equals(city.getState()))
 				{
 					String cityText = city.getName();
 					view.items.add(cityText);

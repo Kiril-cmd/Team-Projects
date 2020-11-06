@@ -28,7 +28,9 @@ public class GeoModel {
 	private boolean foundIndex;
 	
 	private final String SEPARATOR = ";";
-	private final String GEO_FILE = "GeoFile";
+	private final String GEO_FILE_COUNTRY = "GeoFileCountry";
+	private final String GEO_FILE_STATE = "GeoFileState";
+	private final String GEO_FILE_CITY = "GeoFileCity";
 
 	
 	public void addCountry (String newCountry) {
@@ -171,20 +173,56 @@ public class GeoModel {
 	}
 	
 	public void loadGeo () {
-		File geoFile = new File (GEO_FILE);
-		try (Reader inReader = new FileReader(geoFile)) {
-			BufferedReader in = new BufferedReader(inReader);
-			//countries = new ArrayList<Country>();
-			
-			String line = in.readLine();
-			while (line != null) {
-				Country country = readCountry(line);
-				countries.add(country);
-				line = in.readLine();
+		File geoFileCountry = new File (GEO_FILE_COUNTRY);
+		if (geoFileCountry.exists()) {
+			try (Reader inReader = new FileReader(geoFileCountry)) {
+				BufferedReader in = new BufferedReader(inReader);
+				
+				String line = in.readLine();
+				while (line != null) {
+					Country country = readCountry(line);
+					countries.add(country);
+					line = in.readLine();
+				}
+			} catch (Exception e) {
+				System.out.println("An error occurred");
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			System.out.println("An error occurred");
-			e.printStackTrace();
+			
+		File geoFileState = new File (GEO_FILE_STATE);
+					
+		if (geoFileState.exists()) {
+			try (Reader inReader = new FileReader(geoFileState)) {
+				BufferedReader in = new BufferedReader(inReader);
+				
+				String line = in.readLine();
+				while (line != null) {
+					State state= readState(line);
+					states.add(state);
+					line = in.readLine();
+				}
+			} catch (Exception e) {
+				System.out.println("An error occurred");
+				e.printStackTrace();
+			}
+		File geoFileCity = new File (GEO_FILE_CITY);
+		
+		if (geoFileCity.exists()) {
+			try (Reader inReader = new FileReader(geoFileCity)) {
+				BufferedReader in = new BufferedReader(inReader);
+				
+				String line = in.readLine();
+				while (line != null) {
+					City city = readCity(line);
+					cities.add(city);
+					line = in.readLine();
+				}
+			} catch (Exception e) {
+				System.out.println("An error occurred");
+				e.printStackTrace();
+			}
+		}
+		}
 		}
 	}
 	
@@ -192,19 +230,114 @@ public class GeoModel {
 		String[] attributes = line.split(SEPARATOR);
 		String name = attributes[0];
 		long population = Long.parseLong(attributes[1]);
+		int area = Integer.parseInt(attributes[2]);
+		FormOfGovernment formofgovernment = FormOfGovernment.valueOf(attributes[3]);
+		String languages = attributes[4];
+		String currency = attributes[5];
+		String phoneCode = attributes[6];
+		String capitalCity = attributes[7];
+		String history = attributes[8];
+		
 		Country country = new Country(name);
 		country.setName(name);
 		country.setPopulation(population);
+		country.setArea(area);
+		country.setFormOfGovernment(formofgovernment);
+		country.setLanguages(languages);
+		country.setCurrency(currency);
+		country.setPhoneCode(phoneCode);
+		country.setCapitalCity(capitalCity);
+		country.setHistory(history);
+				
 		return country;
 	}
 	
+	private State readState (String line) {
+		String[] attributes = line.split(SEPARATOR);
+		String name = attributes[0];
+		String country = attributes[1];
+		long population = Long.parseLong(attributes[2]);
+		int area = Integer.parseInt(attributes[3]);
+		double maxElevation = Double.parseDouble(attributes [4]);
+		double minElevation = Double.parseDouble(attributes[5]);
+		String languages = attributes[6];
+		String capitalCity = attributes[7];
+		String history = attributes[8];
+		
+		
+		State state = new State(name, country);
+		state.setName(name);
+		state.setCountry(country);
+		state.setPopulation(population);
+		state.setArea(area);
+		state.setMaxElevation(maxElevation);
+		state.setMinElevation(minElevation);
+		state.setAvgElevation();
+		state.setLanguages(languages);
+		state.setCapitalCity(capitalCity);
+		state.setHistory(history);
+		
+		return state;
+	}
+	
+		
+	private City readCity (String line) {
+		String[] attributes = line.split(SEPARATOR);
+		String name = attributes[0];
+		String state = attributes[1];
+		long population = Long.parseLong(attributes[2]);
+		int area = Integer.parseInt(attributes[3]);
+		double maxElevation = Double.parseDouble(attributes [4]);
+		double minElevation = Double.parseDouble(attributes[5]);
+		String languages = attributes[6];
+		long zipCode = Long.parseLong(attributes[7]);
+		String mayor = attributes[8];
+		String history = attributes[9];
+		
+		City city = new City(name, state);
+		city.setName(name);
+		city.setState(state);
+		city.setPopulation(population);
+		city.setArea(area);
+		city.setMaxElevation(maxElevation);
+		city.setMinElevation(minElevation);
+		city.setLanguages(languages);
+		city.setZipCode(zipCode);
+		city.setMayor(mayor);
+		city.setHistory(history);
+				
+		return city;
+	}
+	
 	public void saveGeo () {
-		File geoFile = new File(GEO_FILE);
-		try (Writer out = new FileWriter(geoFile)) {
+		File geoFileCountry = new File(GEO_FILE_COUNTRY);
+		try (Writer out = new FileWriter(geoFileCountry)) {
 			for (Country country : countries) {
 				String line = writeCountry(country);
 				out.write(line);
-				out.close();
+//				out.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		File geoFileState = new File(GEO_FILE_STATE);
+		try (Writer out = new FileWriter(geoFileState)) {
+			for (State state : states) {
+				String line = writeState(state);
+				out.write(line);
+//				out.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		File geoFileCity = new File(GEO_FILE_CITY);
+		try (Writer out = new FileWriter(geoFileCity)) {
+			for (City city: cities) {
+				String line = writeCity(city);
+				out.write(line);
+//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -212,9 +345,27 @@ public class GeoModel {
 	}
 	
 	private String writeCountry (Country country) {
-		String line = country.getName() + SEPARATOR + country.getPopulation() + "\n";
+		String line = country.getName() + SEPARATOR + country.getPopulation() + SEPARATOR + country.getArea() + SEPARATOR + 
+				country.getFormOfGovernment() + SEPARATOR + country.getLanguages() + SEPARATOR + country.getCurrency() + 
+				SEPARATOR + country.getPhoneCode() + SEPARATOR + country.getCapitalCity() + SEPARATOR +
+				country.getHistory() + "\n";
 		return line;
 	}
 	
+	private String writeState (State state) {
+		String line = state.getName() + SEPARATOR + state.getCountry() + SEPARATOR + state.getPopulation() + SEPARATOR + 
+				state.getArea() + SEPARATOR + state.getMaxElevation() + SEPARATOR + state.getMinElevation() + 
+				SEPARATOR + state.getLanguages() + SEPARATOR + state.getCapitalCity() + SEPARATOR + state.getHistory()
+				+ "\n";
+		return line;
+	}
 	
+	private String writeCity (City city) {
+		String line = city.getName() + SEPARATOR + city.getState() + SEPARATOR + city.getPopulation() + SEPARATOR + 
+				city.getArea() + SEPARATOR + city.getMaxElevation() + SEPARATOR + city.getMinElevation() + SEPARATOR +
+				city.getLanguages() + SEPARATOR + city.getZipCode() + SEPARATOR + city.getMayor() + SEPARATOR +
+				city.getHistory() + "\n";
+		return line;
+	}
+		
 }

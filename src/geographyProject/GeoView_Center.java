@@ -30,6 +30,7 @@ public class GeoView_Center {
 	protected TextField tfCapitalCityCountry = new TextField();
 //	protected ListView<String> cityListCountry = new ListView<String>();
 	protected TextArea taHistoryCountry = new TextArea();
+	
 	protected Control[] controlsCountry = {tfPopulationCountry, tfAreaCountry, cbFormOfGovernment, tfLanguagesCountry, tfCurrency, tfPhoneCode, 
 			tfCapitalCityCountry, taHistoryCountry};
 	
@@ -75,6 +76,8 @@ public class GeoView_Center {
 		addStaticElements(countryRoot, lbTextCountry);
 		addControls(countryRoot, controlsCountry);
 		
+		taHistoryCountry.setWrapText(true);
+		
 		setStylesheets(countryRoot);
 		
 		return countryRoot;
@@ -91,6 +94,8 @@ public class GeoView_Center {
 		addStaticElements(stateRoot, lbTextState);
 		addControls(stateRoot, controlsState);
 		
+		taHistoryState.setWrapText(true);
+		
 		setStylesheets(stateRoot);
 		
 		return stateRoot;		
@@ -106,6 +111,8 @@ public class GeoView_Center {
 		tfAvgElevationCity.setEditable(false);
 		addStaticElements(cityRoot, lbTextCity);
 		addControls(cityRoot, controlsCity);
+		
+		taHistoryCity.setWrapText(true);
 		
 		setStylesheets(cityRoot);
 				

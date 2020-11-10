@@ -27,7 +27,10 @@ public class GeoController {
 	private String lastSelectedCity;
 	private String currentSelectedItem;
 	
-	private double minElevationValue;
+	private double minElevationState;
+	private double maxElevationState;
+	private double minElevationCity;
+	private double maxElevationCity;
 	
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
@@ -91,32 +94,45 @@ public class GeoController {
 			} 
 		});
 		
-//		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> showAvgElevation());
-//		view.centerRoot.tfMinElevationCity.textProperty().addListener((observable, oldValue, newValue) -> minElevationValue);
-//		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> showAvgElevation());
-//		view.centerRoot.tfMaxElevationState.textProperty().addListener((observable, oldValue, newValue) -> {minElevationValue = newValue;});
-		
+		view.centerRoot.tfMinElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null && currentSelectedItem != null) 
+				minElevationCity = Double.parseDouble(newValue);
+				showAvgElevation(minElevationCity, maxElevationCity);
+		});
+		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null && currentSelectedItem != null) {
+				maxElevationCity = Double.parseDouble(newValue);
+				showAvgElevation(minElevationCity, maxElevationCity);
+			}
+		});
+		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null && currentSelectedItem != null) {
+				minElevationState = Double.parseDouble(newValue);
+				showAvgElevation(minElevationState, maxElevationState);
+			}
+		});
+		view.centerRoot.tfMaxElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null && currentSelectedItem != null) {
+				maxElevationState = Double.parseDouble(newValue);
+				showAvgElevation(minElevationState, maxElevationState);
+			}
+		});
 	}
 	
-	private void showAvgElevation() {
-		double minElevation = -1;
-		double maxElevation = -1;
+	private void showAvgElevation(double minElevationValue, double maxElevationValue) {
 		double avgElevation;
 		if (currentTab == view.tabState) {
-			minElevation = Double.parseDouble(view.centerRoot.tfMinElevationState.getText());
-			maxElevation = Double.parseDouble(view.centerRoot.tfMaxElevationState.getText());
-			if (minElevation > 0 && maxElevation > 0) {
-				avgElevation = minElevation + maxElevation / 2;
+			if (minElevationValue > 0 && maxElevationValue > 0) {
+				avgElevation = (minElevationValue + maxElevationValue) / 2;
 				view.centerRoot.tfAvgElevationState.setText(Double.toString(avgElevation));
-		}else if (currentTab == view.tabCity) {
-			minElevation = Double.parseDouble(view.centerRoot.tfMinElevationCity.getText());
-			maxElevation = Double.parseDouble(view.centerRoot.tfMaxElevationCity.getText());
-			if (minElevation > 0 && maxElevation > 0) {
-				avgElevation = minElevation + maxElevation / 2;
+			}
+		} else if (currentTab == view.tabCity) {
+			if (minElevationValue > 0 && maxElevationValue > 0) {
+				avgElevation = (minElevationValue + maxElevationValue) / 2;
 				view.centerRoot.tfAvgElevationCity.setText(Double.toString(avgElevation));
 			}
 		}
-		}
+		
 	}
 	
 	private void unblockTabs (String currentSelectedItem) {

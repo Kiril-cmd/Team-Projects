@@ -69,7 +69,7 @@ button:pressed {
 }
 
 #enter-zone-tf {
-		-fx-alignment: center-left;
+	-fx-alignment: center-left;
 	-fx-font-size: 12pt;
 }
 

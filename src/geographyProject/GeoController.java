@@ -27,6 +27,8 @@ public class GeoController {
 	private String lastSelectedCity;
 	private String currentSelectedItem;
 	
+	private double minElevationValue;
+	
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
 		this.view = view;
@@ -88,6 +90,33 @@ public class GeoController {
 				updateCityView();
 			} 
 		});
+		
+//		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> showAvgElevation());
+//		view.centerRoot.tfMinElevationCity.textProperty().addListener((observable, oldValue, newValue) -> minElevationValue);
+//		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> showAvgElevation());
+//		view.centerRoot.tfMaxElevationState.textProperty().addListener((observable, oldValue, newValue) -> {minElevationValue = newValue;});
+		
+	}
+	
+	private void showAvgElevation() {
+		double minElevation = -1;
+		double maxElevation = -1;
+		double avgElevation;
+		if (currentTab == view.tabState) {
+			minElevation = Double.parseDouble(view.centerRoot.tfMinElevationState.getText());
+			maxElevation = Double.parseDouble(view.centerRoot.tfMaxElevationState.getText());
+			if (minElevation > 0 && maxElevation > 0) {
+				avgElevation = minElevation + maxElevation / 2;
+				view.centerRoot.tfAvgElevationState.setText(Double.toString(avgElevation));
+		}else if (currentTab == view.tabCity) {
+			minElevation = Double.parseDouble(view.centerRoot.tfMinElevationCity.getText());
+			maxElevation = Double.parseDouble(view.centerRoot.tfMaxElevationCity.getText());
+			if (minElevation > 0 && maxElevation > 0) {
+				avgElevation = minElevation + maxElevation / 2;
+				view.centerRoot.tfAvgElevationCity.setText(Double.toString(avgElevation));
+			}
+		}
+		}
 	}
 	
 	private void unblockTabs (String currentSelectedItem) {

@@ -94,9 +94,9 @@ public class GeoModel {
 		if (userInputValid[1])
 			states.get(listIndex).setArea(Integer.parseInt(userInput[1]));
 		if (userInputValid[2])
-			states.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
+			states.get(listIndex).setMaxElevation(Double.parseDouble(userInput[2]));
 		if (userInputValid[3])
-			states.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
+			states.get(listIndex).setMinElevation(Double.parseDouble(userInput[3]));
 		if (userInputValid[4])
 			states.get(listIndex).setLanguages(userInput[4]);
 		if (userInputValid[5])
@@ -116,9 +116,9 @@ public class GeoModel {
 		if (userInputValid[1])
 			cities.get(listIndex).setArea(Integer.parseInt(userInput[1]));
 		if (userInputValid[2])
-			cities.get(listIndex).setMaxElevation(Integer.parseInt(userInput[2]));
+			cities.get(listIndex).setMaxElevation(Double.parseDouble(userInput[2]));
 		if (userInputValid[3])
-			cities.get(listIndex).setMinElevation(Integer.parseInt(userInput[3]));
+			cities.get(listIndex).setMinElevation(Double.parseDouble(userInput[3]));
 		if (userInputValid[4])
 			cities.get(listIndex).setLanguages(userInput[4]);
 		if (userInputValid[5])
@@ -372,6 +372,7 @@ public class GeoModel {
 		city.setArea(area);
 		city.setMaxElevation(maxElevation);
 		city.setMinElevation(minElevation);
+		city.setAvgElevation();
 		city.setLanguages(languages);
 		city.setZipCode(zipCode);
 		city.setMayor(mayor);

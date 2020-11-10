@@ -4,7 +4,7 @@
 	-fx-background-color: #6EB8DD;
 	* */
 	
-       -fx-padding: 8 15 15 15;
+     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
     -fx-background-radius: 8;
     -fx-background-color:
@@ -135,4 +135,14 @@ button:pressed {
 
 .text-area *.text {
     -fx-text-alignment: justify;
+}
+
+.text-area {
+	-fx-pref-height: 500;
+	-fx-font-size: 12pt;
+}
+
+.label {
+	fx-font-size: 13pt;
+	fx-font-weight: bold;
 }

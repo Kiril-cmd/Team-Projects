@@ -1,12 +1,57 @@
 .button {
-	-fx-font-size: 15pt;
+	/*-fx-font-size: 15pt;
 	-fx-cursor: hand;
+	-fx-background-color: #6EB8DD;
+	* */
+	
+       -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100%),
+             #9d4024,
+             #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%,#d96e3a,#c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
 }
 
 .toggle-button {
 	-fx-font-size: 15pt;
 	-fx-cursor: hand;
 	-fx-font-weight: bold;
+	-fx-background-color: #6EB8DD;
+	-fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100%),
+             #9d4024,
+             #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%,#d96e3a,#c54e2c);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+}
+
+.button:hover{
+	-fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%,radius 100%,#ea7f4b,#c54e2c);
+}
+button:pressed {
+    -fx-padding: 10 15 13 15;
+     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
+}
+
+.button Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
 }
 
 .top-pane {
@@ -46,6 +91,41 @@
 .left-control-btns .button:hover {
 	-fx-opacity: 1;
 }
+
+.tab-pane .tab-header-area .tab-header-background { 
+    -fx-opacity: 0; 
+} 
+
+.tab-pane 
+{ 
+    -fx-tab-min-width:90px; 
+} 
+
+.tab{ 
+    -fx-background-insets: 0 1 0 1,0,0; 
+} 
+.tab-pane .tab 
+{ 
+    -fx-background-color: #e6e6e6; 
+
+} 
+
+.tab-pane .tab:selected 
+{ 
+    -fx-background-color: #6EB8DD; 
+} 
+
+.tab .tab-label { 
+    -fx-alignment: CENTER; 
+    -fx-text-fill: #828282; 
+    -fx-font-size: 12px; 
+    -fx-font-weight: bold; 
+} 
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER; 
+    -fx-text-fill: #3c3c3c; 
+} 
 
 .main-root {
 	-fx-padding: 15;

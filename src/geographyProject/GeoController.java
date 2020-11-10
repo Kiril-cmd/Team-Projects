@@ -295,8 +295,6 @@ public class GeoController {
 					view.items.add(cityText);
 				}
 			}
-			
-			
 		} 
 		view.showCenterView(currentTab);		
 	}

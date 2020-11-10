@@ -372,6 +372,7 @@ public class GeoModel {
 		city.setArea(area);
 		city.setMaxElevation(maxElevation);
 		city.setMinElevation(minElevation);
+		city.setAvgElevation();
 		city.setLanguages(languages);
 		city.setZipCode(zipCode);
 		city.setMayor(mayor);

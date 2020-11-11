@@ -8,6 +8,7 @@ import geographyProject.RegionHyrarchy.State;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import geographyProject.RegionHyrarchy.City;
 import javafx.beans.binding.Bindings;
@@ -116,6 +117,22 @@ public class GeoController {
 				maxElevationState = Double.parseDouble(newValue);
 				showAvgElevation(minElevationState, maxElevationState);
 			}
+		});
+		
+		view.tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != "") {
+				if (currentTab == view.tabCountry) {
+					ArrayList<String> searchedCountries = model.getSearchedCountry(newValue);
+					
+					view.items.clear();
+					for (String serachedName : searchedCountries) {
+						view.items.add(serachedName);
+					}
+				}
+			}else if (newValue == "") {
+				updateView(currentTab);
+			}
+
 		});
 	}
  

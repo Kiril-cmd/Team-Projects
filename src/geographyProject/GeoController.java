@@ -132,7 +132,6 @@ public class GeoController {
 				view.centerRoot.tfAvgElevationCity.setText(Double.toString(avgElevation));
 			}
 		}
-		
 	}
 	
 	private void unblockTabs (String currentSelectedItem) {

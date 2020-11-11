@@ -174,6 +174,7 @@ public class GeoController {
 			doubleEntry = model.doubleCheckerCountry(entry);
 			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addCountry(entry); 
+				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			}else if (doubleEntry == true) {
 				view.alertDoubleEntry.setContentText(view.doubleCountry);
@@ -187,6 +188,7 @@ public class GeoController {
 			doubleEntry = model.doubleCheckerState(entry);
 			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addState(entry, lastSelectedCountry); 
+				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			}else if (doubleEntry == true) {
 				view.alertDoubleEntry.setContentText(view.doubleState);
@@ -200,6 +202,7 @@ public class GeoController {
 			doubleEntry = model.doubleCheckerCity(entry);
 			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addCity(entry, lastSelectedState); 
+				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			}else if (doubleEntry == true) {
 				view.alertDoubleEntry.setContentText(view.doubleCity);

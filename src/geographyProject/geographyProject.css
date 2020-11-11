@@ -4,6 +4,17 @@
 	-fx-background-color: #6EB8DD;
 	* */
 	
+	-fx-background-color:
+            #DDD56E,
+            linear-gradient(#6EB8DD, #58B1DD),
+            linear-gradient(#42A9DD, #2CA2DD),
+            linear-gradient(#169BDD, #0093DD);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+	/*
      -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
     -fx-background-radius: 8;
@@ -15,7 +26,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
-    -fx-text-fill: white;
+    -fx-text-fill: white; */
 }
 
 .toggle-button {
@@ -37,12 +48,26 @@
     -fx-text-fill: white;
 }
 
-.button:hover{
+.button:hover {
+	-fx-background-color:
+            #000000,
+            linear-gradient(#7ebcea, #2f4b8f),
+            linear-gradient(#426ab7, #263e75),
+            linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight:bold;
+	/*
 	-fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100),
             #9d4024,
             #d86e3a,
             radial-gradient(center 50% 50%,radius 100%,#ea7f4b,#c54e2c);
+            * */
+            
 }
 button:pressed {
     -fx-padding: 10 15 13 15;
@@ -79,6 +104,8 @@ button:pressed {
 } 
 
 .left-control-btns .button {
+	
+	
 	-fx-font-size: 15pt;
 	 /* #8aaae5*/
 	 -fx-background-color: #6EB8DD;
@@ -96,23 +123,21 @@ button:pressed {
     -fx-opacity: 0; 
 } 
 
-.tab-pane 
-{ 
+.tab-pane { 
     -fx-tab-min-width:90px; 
 } 
 
-.tab{ 
+.tab { 
     -fx-background-insets: 0 1 0 1,0,0; 
 } 
 .tab-pane .tab 
 { 
-    -fx-background-color: #e6e6e6; 
+    -fx-background-color: #e6e6e6;
 
 } 
 
-.tab-pane .tab:selected 
-{ 
-    -fx-background-color: #6EB8DD; 
+.tab-pane .tab:selected  { 
+    -fx-background-color: #6EB8DD;
 } 
 
 .tab .tab-label { 
@@ -124,13 +149,14 @@ button:pressed {
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER; 
-    -fx-text-fill: #3c3c3c; 
+    -fx-text-fill: #3c3c3c;
 } 
 
 .main-root {
 	-fx-padding: 15;
 	-fx-hgap: 10;
     -fx-vgap: 10;
+    -fx-background-color: #6EB8DD;
 }
 
 .text-area *.text {
@@ -143,6 +169,6 @@ button:pressed {
 }
 
 .label {
-	fx-font-size: 13pt;
-	fx-font-weight: bold;
+	-fx-font-size: 13pt;
+	-fx-font-weight: bold;
 }

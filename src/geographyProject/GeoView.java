@@ -69,12 +69,14 @@ public class GeoView {
 		root.setTop(createDataControls());
 		root.setLeft(createLeftControls());
 		root.setCenter(centerView);
+		centerView.getStyleClass().add("center-view");
+		root.getStyleClass().add("main-root");
 		
-		
+				
 		// Alert when invalid itemName
 		alertEntry.setTitle("Error Dialog");
 		alertEntry.setHeaderText("Invalid Data");
-		alertEntry.setContentText("Your entry is empty or contains spaces");
+		alertEntry.setContentText("Your entry is empty or contains spaces unnecessary spaces");
 		
 		// Alert when invalid centerEntry
 		alertEntryCenter.setTitle("Error Dialog");
@@ -86,7 +88,7 @@ public class GeoView {
 		alertDoubleEntry.setHeaderText("Invalid Data");
 		
 		// TO DO: set up scene
-		Scene scene = new Scene(root, 800, 1000);
+		Scene scene = new Scene(root, 1000, 1000);
 		scene.getStylesheets().add(getClass().getResource("geographyProject.css").toExternalForm());
 		stage.setScene(scene);
 
@@ -140,6 +142,8 @@ public class GeoView {
 		itemList.setItems(items);
 		
 		leftControlBtns.getStyleClass().add("left-control-btns");
+		leftControls.getStyleClass().add("left-pane");
+		tfSearch.getStyleClass().add("search");
 
 		return leftControls;
 	}

@@ -67,7 +67,7 @@ public class GeoView_Center {
 	public GridPane createCountryView() {
 		GridPane countryRoot = new GridPane();
 		
-		String[] lbTextCountry = {"Population", "Area", "Form-of-government", "Languages", "Currency", "Phone code", 
+		String[] lbTextCountry = {"Population", "Area (km²)", "Form-of-government", "Languages", "Currency", "Phone code", 
 				 "Capital city", "History"};
 		
 		addStaticElements(countryRoot, lbTextCountry);
@@ -84,7 +84,7 @@ public class GeoView_Center {
 	public GridPane createStateView() {
 		GridPane stateRoot = new GridPane();
 		
-		String[] lbTextState = {"Population", "Area", "Highest elevation", "Lowest Elevation", "Average Elevation", "Language", 
+		String[] lbTextState = {"Population", "Area (km²)", "Highest elevation (m)", "Lowest Elevation (m)", "Average Elevation (m)", "Language", 
 				"Capital city", "History"};
 		
 		tfAvgElevationState.setEditable(false);
@@ -102,7 +102,7 @@ public class GeoView_Center {
 	public GridPane createCityView() {
 		GridPane cityRoot = new GridPane();
 		
-		String[] lbTextCity = {"Population", "Area", "Highest elevation", "Lowest elevation", "Average elevation",
+		String[] lbTextCity = {"Population", "Area (km²)", "Highest elevation (m)", "Lowest elevation (m)", "Average elevation (m)",
 				"Language", "Zip code", "Mayor", "History"};
 		
 		tfAvgElevationCity.setEditable(false);

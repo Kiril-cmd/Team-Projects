@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import geographyProject.RegionHyrarchy.City;
 import geographyProject.RegionHyrarchy.Country;
@@ -149,14 +150,33 @@ public class GeoModel {
 	public void deleteCountry(String countryName) {
 		if (countries.size() > 0 ) {
 			listIndex = getCountryIndex(countryName);
-			countries.remove(listIndex);
-			
+			for (State state : states) {
+				if (state.getCountry().equals(countryName)) {
+					String stateName = state.getName();
+					states.remove(state);
+					
+					for (City city : cities) {
+						if (city.getState().equals(state.getName())) {
+							String cityName = city.getName();
+							cities.remove(city);
+						}
+					}
+				}
+				
+			}
+			countries.remove(listIndex);		
 		}
 	}
 	
 	public void deleteState(String stateName) {
 		if (states.size() > 0) {
 			listIndex = getStateIndex(stateName);
+			for (City city : cities) {
+				if (city.getState().equals(stateName)) {
+					String cityName = city.getName();
+					deleteCity(cityName);
+				}
+			}
 			states.remove(listIndex);
 		}
 	}
@@ -190,13 +210,39 @@ public class GeoModel {
 		return city;
 	}
 	
-	public ArrayList<String> getSearchedCountry(String searchName) {
+	public ArrayList<String> getSearchedCountries(String searchName) {
 		searchedItems.clear();
 		
 		for (Country currentCountry : countries) {
 			currentName = currentCountry.getName();
 			
-			if (currentName.contains(searchName))
+			if (Pattern.compile(Pattern.quote(searchName), Pattern.CASE_INSENSITIVE).matcher(currentName).find())
+				searchedItems.add(currentName) ;			
+		}	
+		return searchedItems;
+	}
+	
+	public ArrayList<String> getSearchedStates(String searchName, String lastSelectedCountry){
+		searchedItems.clear();
+		
+		for (State currentState : states) {
+			currentName = currentState.getName();
+			
+			if (Pattern.compile(Pattern.quote(searchName), Pattern.CASE_INSENSITIVE).matcher(currentName).find() && 
+					currentState.getCountry().equals(lastSelectedCountry))
+				searchedItems.add(currentName) ;			
+		}	
+		return searchedItems;
+	}
+	
+	public ArrayList<String> getSearchedCities(String searchName, String lastSelectedState){
+		searchedItems.clear();
+		
+		for (City currentCity : cities) {
+			currentName = currentCity.getName();
+			
+			if (Pattern.compile(Pattern.quote(searchName), Pattern.CASE_INSENSITIVE).matcher(currentName).find() && 
+					currentCity.getState().equals(lastSelectedState))
 				searchedItems.add(currentName) ;			
 		}	
 		return searchedItems;

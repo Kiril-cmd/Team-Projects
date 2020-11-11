@@ -33,6 +33,8 @@ public class GeoController {
 	private double minElevationCity;
 	private double maxElevationCity;
 	
+	private ArrayList<String> searchedItems = new ArrayList<>();
+	
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
 		this.view = view;
@@ -61,6 +63,9 @@ public class GeoController {
 		view.btnEdit.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
 		view.btnCreate.disableProperty().bind(view.btnEdit.selectedProperty());
 		view.btnDelete.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
+		view.btnDelete.disableProperty().bind(Bindings.isEmpty(model.countries));
+		view.btnDelete.disableProperty().bind(Bindings.isEmpty(model.states));
+		view.btnDelete.disableProperty().bind(Bindings.isEmpty(model.cities));
 		view.btnDelete.disableProperty().bind(view.btnEdit.selectedProperty());
 		
 		view.btnSave.setDisable(true);
@@ -121,14 +126,22 @@ public class GeoController {
 		
 		view.tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != "") {
+				view.items.clear();
+//				if (!searchedItems.isEmpty())
+					searchedItems.clear();
+				
 				if (currentTab == view.tabCountry) {
-					ArrayList<String> searchedCountries = model.getSearchedCountry(newValue);
-					
-					view.items.clear();
-					for (String serachedName : searchedCountries) {
-						view.items.add(serachedName);
-					}
+					searchedItems = model.getSearchedCountries(newValue);					
+				}else if (currentTab == view.tabState) {
+					searchedItems = model.getSearchedStates(newValue, lastSelectedCountry);
+				}else if (currentTab == view.tabCity) {
+					searchedItems = model.getSearchedCities(newValue, lastSelectedState);
 				}
+				
+				for (String searchedItem : searchedItems) {
+					view.items.add(searchedItem);
+				}
+				
 			}else if (newValue == "") {
 				updateView(currentTab);
 			}
@@ -278,18 +291,18 @@ public class GeoController {
 		}
 	
 	private void delete(MouseEvent e) {
-		String itemName = getSelectedItemName();
-		
-		if (view.tabCountry.isSelected())
-			model.deleteCountry(itemName);
-		if (view.tabState.isSelected())
-			model.deleteState(itemName);
-		if (view.tabCity.isSelected())
-			model.deleteCity(itemName);
-		
-		updateView(currentTab);
-		model.saveGeo();
-		defaultView();
+		if (currentSelectedItem != null) {
+			if (view.tabCountry.isSelected())
+				model.deleteCountry(currentSelectedItem);
+			if (view.tabState.isSelected())
+				model.deleteState(currentSelectedItem);
+			if (view.tabCity.isSelected())
+				model.deleteCity(currentSelectedItem);
+			
+			updateView(currentTab);
+			model.saveGeo();
+			defaultView();
+		}
 	}
 	
 	public String[] getCountryData(int indexCounter) {

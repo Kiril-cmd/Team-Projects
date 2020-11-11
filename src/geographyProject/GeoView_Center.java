@@ -120,7 +120,7 @@ public class GeoView_Center {
 		Label[] lbListCountries = new Label[lbTextCountry.length];
 		int columnIndex = 0;
 		Label lbInformation = new Label("Information");
-		
+		lbInformation.setId("information-label");
 		pane.add(lbInformation, columnIndex, 0);
 		
 		for (int i = 0; i < lbListCountries.length; i++) {
@@ -143,7 +143,7 @@ public class GeoView_Center {
 	}
 	
 	private void setStylesheets (GridPane pane) {
-		pane.getStyleClass().add("main-root");
+		pane.getStyleClass().add("center-view");
 	}
 	
 	//getters for countryView, stateView and cityView

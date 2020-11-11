@@ -188,7 +188,7 @@ public class GeoController {
 		// Create Country
 		if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCountry) {
 			doubleEntry = model.doubleCheckerCountry(entry);
-			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
+			if (entry.length() > 0 && entry.charAt(0) != ' ' && entry.charAt(entry.length() - 1) != ' ' && doubleEntry == false) {
 				model.addCountry(entry); 
 				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
@@ -202,7 +202,7 @@ public class GeoController {
 		// Create State
 		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
 			doubleEntry = model.doubleCheckerState(entry);
-			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
+			if (entry.length() > 0 && entry.charAt(0) != ' ' && entry.charAt(entry.length() - 1) != ' ' && doubleEntry == false) {
 				model.addState(entry, lastSelectedCountry); 
 				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
@@ -216,7 +216,7 @@ public class GeoController {
 		// Create City
 		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
 			doubleEntry = model.doubleCheckerCity(entry);
-			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
+			if (entry.length() > 0 && entry.charAt(0) != ' ' && entry.charAt(entry.length() - 1) != ' ' && doubleEntry == false) {
 				model.addCity(entry, lastSelectedState); 
 				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());

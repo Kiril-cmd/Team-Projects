@@ -14,7 +14,7 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
     -fx-font-weight:bold;
 	/*
      -fx-padding: 8 15 15 15;
@@ -41,7 +41,7 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
     -fx-font-weight:bold;
 }
 
@@ -55,7 +55,21 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
+    -fx-font-weight:bold;
+}
+
+.toggle-button:selected {
+	-fx-background-color:
+            #6EB8DD,
+            linear-gradient(#E2FFFF, #FFFFFF),
+            linear-gradient(#A7F0FF, #C4FFFF),
+            linear-gradient(#6EB8DD, #8BD4FA);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
     -fx-font-weight:bold;
 }
 
@@ -69,7 +83,7 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
     -fx-font-weight:bold;
 	/*
 	-fx-background-color:
@@ -114,11 +128,10 @@
 
 .tab-pane { 
     -fx-tab-min-width:90px; 
+    
 } 
 
-.tab { 
-    -fx-background-insets: 0 1 0 1,0,0; 
-} 
+
 .tab-pane .tab:disabled {
 	-fx-background-color: #A7F0FF;
 	
@@ -146,12 +159,52 @@
     -fx-alignment: CENTER; 
     -fx-text-fill: white;
 } 
+.left-pane {
+	-fx-background-color: #DDD56E;
+	-fx-border-width: 0 5px 0 0;
+	-fx-border-color: #DDD56E;
+}
+.left-control-btns {
+	-fx-background-color: white;
+}
+/* LIST VIEW */
+.list-cell{
+	-fx-font-size: 11pt;
+}
+
+/* SEARCH */
+.search {
+	-fx-border-width: 5px; 
+	-fx-border-color: #6EB8DD;
+ 	-fx-alignment: center-left;
+	-fx-font-size: 12pt;
+ }
+ 
 /* CENTER VIEW */
-.main-root {
+.scroll-pane .viewport {
+   -fx-background-color: transparent;
+}
+.center-view {
+	
+	-fx-background-color: white;
 	-fx-padding: 15;
 	-fx-hgap: 10;
     -fx-vgap: 10;
-    -fx-background-color: #6EB8DD;
+}
+
+.main-root {
+	 -fx-background-color: white;
+	 
+}
+#information-label {
+	-fx-font-weight: bold;
+}
+.label {
+	-fx-font-size: 13pt;
+}
+
+.text-field {
+	-fx-font-size: 12pt;
 }
 /* TEXT AREA */
 .text-area *.text {
@@ -163,7 +216,4 @@
 	-fx-font-size: 12pt;
 }
 
-.label {
-	-fx-font-size: 13pt;
-	-fx-font-weight: bold;
-}
+

@@ -19,9 +19,9 @@ import javafx.collections.ObservableList;
 
 public class GeoModel {
 	
-	public final ObservableList<Country> countries = FXCollections.observableArrayList();
-	public final ObservableList<State> states = FXCollections.observableArrayList();
-	public final ObservableList<City> cities = FXCollections.observableArrayList();
+	protected final ObservableList<Country> countries = FXCollections.observableArrayList();
+	protected final ObservableList<State> states = FXCollections.observableArrayList();
+	protected final ObservableList<City> cities = FXCollections.observableArrayList();
 	
 	private int searchIndex;
 	private int listIndex;

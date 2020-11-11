@@ -42,6 +42,7 @@ public class GeoView {
 	protected Tab tabCity = new Tab("City");
 	protected ObservableList<String> items = FXCollections.observableArrayList();
 	protected ListView<String> itemList = new ListView<String>();
+	protected TextField tfSearch = new TextField();
 	
 	// Alerts
 	protected Alert alertEntry = new Alert(AlertType.ERROR);
@@ -128,9 +129,13 @@ public class GeoView {
 		
 		leftControlBtns.getChildren().addAll(tabPane);
 		
+		Region leftSpacer = new Region();
+		leftSpacer.setPrefHeight(10);
+		tfSearch.setPromptText("Enter search name");
+		
 		
 		VBox leftControls = new VBox();
-		leftControls.getChildren().addAll(leftControlBtns, itemList);
+		leftControls.getChildren().addAll(leftControlBtns, itemList, leftSpacer, tfSearch);
 		
 		itemList.setItems(items);
 		

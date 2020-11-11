@@ -29,6 +29,9 @@ public class GeoModel {
 	
 	private boolean[] userInputValid;
 	
+	ArrayList<String> searchedItems = new ArrayList<>();;
+	String currentName;
+	
 	private final String SEPARATOR = ";";
 	private final String GEO_FILE_COUNTRY = "GeoFileCountry";
 	private final String GEO_FILE_STATE = "GeoFileState";
@@ -37,6 +40,14 @@ public class GeoModel {
 	
 	public void addCountry (String newCountry) {
 		countries.add(new Country(newCountry));
+	}
+	
+	public void addState (String newState, String country) {
+		states.add(new State(newState, country));
+	}
+	
+	public void addCity (String newCity, String state) {
+		cities.add(new City(newCity, state));
 	}
 	
 	public boolean doubleCheckerCountry(String countryName) {
@@ -52,14 +63,6 @@ public class GeoModel {
 	public boolean doubleCheckerCity(String cityName) {
 		listIndex = getCityIndex(cityName);
 		return foundIndex;
-	}
-	
-	public void addState (String newState, String country) {
-		states.add(new State(newState, country));
-	}
-	
-	public void addCity (String newCity, String state) {
-		cities.add(new City(newCity, state));
 	}
 	
 	// Method saves entered user inputData (Country) in the concerning object
@@ -185,6 +188,18 @@ public class GeoModel {
 		City city = cities.get(listIndex);
 		
 		return city;
+	}
+	
+	public ArrayList<String> getSearchedCountry(String searchName) {
+		searchedItems.clear();
+		
+		for (Country currentCountry : countries) {
+			currentName = currentCountry.getName();
+			
+			if (currentName.contains(searchName))
+				searchedItems.add(currentName) ;			
+		}	
+		return searchedItems;
 	}
 		
 	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList

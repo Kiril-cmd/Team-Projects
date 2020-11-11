@@ -8,6 +8,7 @@ import geographyProject.RegionHyrarchy.State;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import geographyProject.RegionHyrarchy.City;
 import javafx.beans.binding.Bindings;
@@ -117,6 +118,22 @@ public class GeoController {
 				showAvgElevation(minElevationState, maxElevationState);
 			}
 		});
+		
+		view.tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != "") {
+				if (currentTab == view.tabCountry) {
+					ArrayList<String> searchedCountries = model.getSearchedCountry(newValue);
+					
+					view.items.clear();
+					for (String serachedName : searchedCountries) {
+						view.items.add(serachedName);
+					}
+				}
+			}else if (newValue == "") {
+				updateView(currentTab);
+			}
+
+		});
 	}
  
 	private void showAvgElevation(double minElevationValue, double maxElevationValue) {
@@ -173,6 +190,7 @@ public class GeoController {
 			doubleEntry = model.doubleCheckerCountry(entry);
 			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addCountry(entry); 
+				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			}else if (doubleEntry == true) {
 				view.alertDoubleEntry.setContentText(view.doubleCountry);
@@ -186,6 +204,7 @@ public class GeoController {
 			doubleEntry = model.doubleCheckerState(entry);
 			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addState(entry, lastSelectedCountry); 
+				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			}else if (doubleEntry == true) {
 				view.alertDoubleEntry.setContentText(view.doubleState);
@@ -199,6 +218,7 @@ public class GeoController {
 			doubleEntry = model.doubleCheckerCity(entry);
 			if (entry.length() > 0 && !entry.contains(" ") && doubleEntry == false) {
 				model.addCity(entry, lastSelectedState); 
+				model.saveGeo();
 				updateView(view.tabPane.getSelectionModel().getSelectedItem());
 			}else if (doubleEntry == true) {
 				view.alertDoubleEntry.setContentText(view.doubleCity);

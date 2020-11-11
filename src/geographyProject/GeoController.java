@@ -118,7 +118,7 @@ public class GeoController {
 			}
 		});
 	}
-	
+	 
 	private void showAvgElevation(double minElevationValue, double maxElevationValue) {
 		double avgElevation;
 		if (currentTab == view.tabState) {

@@ -149,35 +149,27 @@ public class GeoModel {
 	
 	public void deleteCountry(String countryName) {
 		if (countries.size() > 0 ) {
-			listIndex = getCountryIndex(countryName);
-			for (State state : states) {
-				if (state.getCountry().equals(countryName)) {
-					String stateName = state.getName();
-					states.remove(state);
-					
-					for (City city : cities) {
-						if (city.getState().equals(state.getName())) {
-							String cityName = city.getName();
-							cities.remove(city);
-						}
-					}
+			for (int i = 0; i < states.size(); i++) {
+				if (states.get(i).getCountry().equals(countryName)) {
+					deleteState(states.get(i).getName());
+					i--;
 				}
-				
 			}
-			countries.remove(listIndex);		
+			listIndex = getCountryIndex(countryName);
+			countries.remove(listIndex);
 		}
 	}
 	
 	public void deleteState(String stateName) {
 		if (states.size() > 0) {
-			listIndex = getStateIndex(stateName);
-			for (City city : cities) {
-				if (city.getState().equals(stateName)) {
-					String cityName = city.getName();
-					deleteCity(cityName);
+			for (int i = 0; i < cities.size(); i++) {
+				if (cities.get(i).getState().equals(stateName)) {
+					deleteCity(cities.get(i).getName());
+					i--;
 				}
 			}
-			states.remove(listIndex);
+		listIndex = getStateIndex(stateName);
+		states.remove(listIndex);
 		}
 	}
 	

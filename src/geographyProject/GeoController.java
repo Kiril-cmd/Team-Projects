@@ -62,10 +62,6 @@ public class GeoController {
 		// Bindings
 		view.btnEdit.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
 		view.btnCreate.disableProperty().bind(view.btnEdit.selectedProperty());
-		view.btnDelete.disableProperty().bind(Bindings.isEmpty(view.itemList.getSelectionModel().getSelectedItems()));
-		view.btnDelete.disableProperty().bind(Bindings.isEmpty(model.countries));
-		view.btnDelete.disableProperty().bind(Bindings.isEmpty(model.states));
-		view.btnDelete.disableProperty().bind(Bindings.isEmpty(model.cities));
 		view.btnDelete.disableProperty().bind(view.btnEdit.selectedProperty());
 		
 		view.btnSave.setDisable(true);

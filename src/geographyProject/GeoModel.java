@@ -38,7 +38,7 @@ public class GeoModel {
 	private final String GEO_FILE_STATE = "GeoFileState";
 	private final String GEO_FILE_CITY = "GeoFileCity";
 
-	
+	// For adding country, state and city items
 	public void addCountry (String newCountry) {
 		countries.add(new Country(newCountry));
 	}
@@ -50,23 +50,24 @@ public class GeoModel {
 	public void addCity (String newCity, String state) {
 		cities.add(new City(newCity, state));
 	}
-	
+
+	// Check if country , state (saved in single country) and city (saved in a single state) already exists
 	public boolean doubleCheckerCountry(String countryName) {
 		listIndex = getCountryIndex(countryName);
 		return foundIndex;	
 	}
 	
-	public boolean doubleCheckerState(String stateName) {
-		listIndex = getStateIndex(stateName);
+	public boolean doubleCheckerState(String stateName, String country) {
+		listIndex = getStateIndex(stateName, country);
 		return foundIndex;
 	}
 	
-	public boolean doubleCheckerCity(String cityName) {
-		listIndex = getCityIndex(cityName);
+	public boolean doubleCheckerCity(String cityName, String state) {
+		listIndex = getCityIndex(cityName, state);
 		return foundIndex;
 	}
 	
-	// Method saves entered user inputData (Country) in the concerning object
+	// Save entered user inputData (country, state, city) in the concerned object
 	public void saveCountryData(String countryName, String[] userInput, FormOfGovernment formOfGovernment) {
 		listIndex = getCountryIndex(countryName);
 		userInputValid = validateUserInput(userInput);
@@ -89,8 +90,8 @@ public class GeoModel {
 			countries.get(listIndex).setHistory(userInput[6].toString());
 	}
 	
-	public void saveStateData(String stateName, String[] userInput) {
-		listIndex = getStateIndex(stateName);
+	public void saveStateData(String stateName, String country, String[] userInput) {
+		listIndex = getStateIndex(stateName, country);
 		userInputValid = validateUserInput(userInput);
 		
 		if (userInputValid[0])
@@ -111,8 +112,8 @@ public class GeoModel {
 		states.get(listIndex).setAvgElevation();
 	}
 	
-	public void saveCityData(String cityName, String[] userInput) {
-		listIndex = getCityIndex(cityName);
+	public void saveCityData(String cityName, String state, String[] userInput) {
+		listIndex = getCityIndex(cityName, state);
 		userInputValid = validateUserInput(userInput);
 		
 		if (userInputValid[0])
@@ -135,6 +136,7 @@ public class GeoModel {
 		cities.get(listIndex).setAvgElevation();
 	}
 	
+	// Checks if entered userInput is valid
 	private boolean[] validateUserInput(String[] userInput) {
 		boolean[] userInputValid = new boolean[userInput.length];
 		
@@ -146,12 +148,13 @@ public class GeoModel {
 		}
 		return userInputValid;
 	}
-	
+
+	// Deletes country object and the related state and city objects 
 	public void deleteCountry(String countryName) {
 		if (countries.size() > 0 ) {
 			for (int i = 0; i < states.size(); i++) {
 				if (states.get(i).getCountry().equals(countryName)) {
-					deleteState(states.get(i).getName());
+					deleteState(states.get(i).getName(), countryName);
 					i--;
 				}
 			}
@@ -160,48 +163,51 @@ public class GeoModel {
 		}
 	}
 	
-	public void deleteState(String stateName) {
+	// Deletes state object and the related city objects
+	public void deleteState(String stateName, String country) {
 		if (states.size() > 0) {
 			for (int i = 0; i < cities.size(); i++) {
 				if (cities.get(i).getState().equals(stateName)) {
-					deleteCity(cities.get(i).getName());
+					deleteCity(cities.get(i).getName(), stateName);
 					i--;
 				}
 			}
-		listIndex = getStateIndex(stateName);
+		listIndex = getStateIndex(stateName, country);
 		states.remove(listIndex);
 		}
 	}
 	
-	public void deleteCity(String cityName) {
+	// Deletes city object in the concerned state
+	public void deleteCity(String cityName, String state) {
 		if (cities.size() > 0) {
-			listIndex = getCityIndex(cityName);
+			listIndex = getCityIndex(cityName, state);
 			cities.remove(listIndex);
 		}
 	}
 	
+	// Getter for country, state and city objects
 	public Country getCountry(String countryName) {
 		listIndex = getCountryIndex(countryName);
 		Country country = countries.get(listIndex);
 		
-		return country;
-		
+		return country;		
 	}
 	
-	public State getState(String stateName) {
-		listIndex = getStateIndex(stateName);
+	public State getState(String stateName, String country) {
+		listIndex = getStateIndex(stateName, country);
 		State state = states.get(listIndex);
 		
 		return state;
 	}
 	
-	public City getCity(String cityName) {
-		listIndex = getCityIndex(cityName);
+	public City getCity(String cityName, String state) {
+		listIndex = getCityIndex(cityName, state);
 		City city = cities.get(listIndex);
 		
 		return city;
 	}
 	
+	// Getter for searched objects
 	public ArrayList<String> getSearchedCountries(String searchName) {
 		searchedItems.clear();
 		
@@ -240,7 +246,7 @@ public class GeoModel {
 		return searchedItems;
 	}
 		
-	// getCountryIndex, getStateIndex and getCityIndex methods search the index of the searchName in the ArrayList
+	// Get the index of the searched object in the observableLists
 	public int getCountryIndex(String countrySearchName) {
 		searchIndex = -1;
 		foundIndex = false;
@@ -254,12 +260,12 @@ public class GeoModel {
 		return searchIndex;
 	}
 	
-	public int getStateIndex(String stateSearchName) {
+	public int getStateIndex(String stateSearchName, String country) {
 		searchIndex = -1;
 		foundIndex = false;
 		
 		for (int i = 0; i < states.size() && foundIndex == false; i++) {
-			if (states.get(i).getName().equals(stateSearchName)) {
+			if (states.get(i).getName().equals(stateSearchName) && states.get(i).getCountry().equals(country)) {
 				searchIndex = i;
 				foundIndex = true;
 			}	
@@ -267,12 +273,12 @@ public class GeoModel {
 		return searchIndex;
 	}
 	
-	public int getCityIndex(String citySearchName) {
+	public int getCityIndex(String citySearchName, String state) {
 		searchIndex = -1;
 		foundIndex = false;
 		
 		for (int i = 0; i < cities.size() && foundIndex == false; i++) {
-			if (cities.get(i).getName().equals(citySearchName)) {
+			if (cities.get(i).getName().equals(citySearchName) && cities.get(i).getState().equals(state)) {
 				searchIndex = i;
 				foundIndex = true;
 			}	
@@ -280,6 +286,7 @@ public class GeoModel {
 		return searchIndex;
 	}
 	
+	// Loads the data
 	public void loadGeo () {
 		File geoFileCountry = new File (GEO_FILE_COUNTRY);
 		if (geoFileCountry.exists()) {
@@ -334,6 +341,7 @@ public class GeoModel {
 		}
 	}
 	
+	// Reads files
 	private Country readCountry (String line) {
 		String[] attributes = line.split(SEPARATOR);
 		
@@ -384,8 +392,7 @@ public class GeoModel {
 		String languages = attributes[6];
 		String capitalCity = attributes[7];
 		String history = attributes[8];
-		
-		
+				
 		State state = new State(name, country);
 		state.setName(name);
 		state.setCountry(country);
@@ -399,8 +406,7 @@ public class GeoModel {
 		state.setHistory(history);
 		
 		return state;
-	}
-	
+	}	
 		
 	private City readCity (String line) {
 		String[] attributes = line.split(SEPARATOR);
@@ -442,14 +448,14 @@ public class GeoModel {
 			}
 		}
 	}
-	
+
+	// Saves files
 	public void saveGeo () {
 		File geoFileCountry = new File(GEO_FILE_COUNTRY);
 		try (Writer out = new FileWriter(geoFileCountry)) {
 			for (Country country : countries) {
 				String line = writeCountry(country);
 				out.write(line);
-//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -460,7 +466,6 @@ public class GeoModel {
 			for (State state : states) {
 				String line = writeState(state);
 				out.write(line);
-//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -471,13 +476,13 @@ public class GeoModel {
 			for (City city: cities) {
 				String line = writeCity(city);
 				out.write(line);
-//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	// Write to file
 	private String writeCountry (Country country) {
 		String line = country.getName() + SEPARATOR + country.getPopulation() + SEPARATOR + country.getArea() + SEPARATOR + 
 				country.getFormOfGovernment() + SEPARATOR + country.getLanguages() + SEPARATOR + country.getCurrency() + 
@@ -501,5 +506,5 @@ public class GeoModel {
 				city.getHistory() + "\n";
 		return line;
 	}
-		
+	
 }

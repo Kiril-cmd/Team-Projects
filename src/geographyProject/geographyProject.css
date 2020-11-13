@@ -1,10 +1,5 @@
 /* BUTTONS */
-.button {
-	/*-fx-font-size: 15pt;
-	-fx-cursor: hand;
-	-fx-background-color: #6EB8DD;
-	* */
-	
+.button {	
 	-fx-background-color:
             #6EB8DD,
             linear-gradient(#FFFFFF, #E2FFFF),
@@ -16,19 +11,6 @@
     -fx-text-fill: white;
     -fx-font-size: 13px;
     -fx-font-weight:bold;
-	/*
-     -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
-    -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100%),
-             #9d4024,
-             #d86e3a,
-            radial-gradient(center 50% 50%, radius 100%,#d96e3a,#c54e2c);
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
-    -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
-    -fx-text-fill: white; */
 }
 
 .toggle-button {
@@ -85,30 +67,18 @@
     -fx-text-fill: white;
     -fx-font-size: 13px;
     -fx-font-weight:bold;
-	/*
-	-fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%,#a34313 0%,#903b12 100),
-            #9d4024,
-            #d86e3a,
-            radial-gradient(center 50% 50%,radius 100%,#ea7f4b,#c54e2c);
-            * */
-            
 }
 
 
-
+/* TOP PANE */
 .top-pane {
-	
 	-fx-background-color: #DDD56E /* #e3d105*/;	
 	-fx-padding: 15 20 15 20;
 	-fx-spacing: 20;
 }
 
 .top-pane .button {
-	
 	-fx-font-weight: bold;
-	
-	
 }
 
 #enter-zone-tf {
@@ -121,16 +91,14 @@
     -fx-spacing: 10px;
 } 
 
-/* TABS*/
+/* TABS */
 .tab-pane .tab-header-area .tab-header-background { 
     -fx-opacity: 0; 
 } 
 
 .tab-pane { 
     -fx-tab-min-width:90px; 
-    
 } 
-
 
 .tab-pane .tab:disabled {
 	-fx-background-color: #A7F0FF;
@@ -141,7 +109,6 @@
 }
 .tab-pane .tab { 
     -fx-background-color: #8BD4FA;
-	
 } 
 
 .tab-pane .tab:selected  { 
@@ -159,14 +126,17 @@
     -fx-alignment: CENTER; 
     -fx-text-fill: white;
 } 
+
 .left-pane {
 	-fx-background-color: #DDD56E;
 	-fx-border-width: 0 5px 0 0;
 	-fx-border-color: #DDD56E;
 }
+
 .left-control-btns {
 	-fx-background-color: white;
 }
+
 /* LIST VIEW */
 .list-cell{
 	-fx-font-size: 11pt;
@@ -185,7 +155,6 @@
    -fx-background-color: transparent;
 }
 .center-view {
-	
 	-fx-background-color: white;
 	-fx-padding: 15;
 	-fx-hgap: 10;
@@ -196,9 +165,11 @@
 	 -fx-background-color: white;
 	 
 }
+
 #information-label {
 	-fx-font-weight: bold;
 }
+
 .label {
 	-fx-font-size: 13pt;
 }
@@ -206,6 +177,7 @@
 .text-field {
 	-fx-font-size: 12pt;
 }
+
 /* TEXT AREA */
 .text-area *.text {
     -fx-text-alignment: justify;

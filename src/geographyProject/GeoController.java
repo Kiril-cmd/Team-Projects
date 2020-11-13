@@ -1,13 +1,9 @@
 package geographyProject;
 
 import geographyProject.RegionHyrarchy.Country;
-import geographyProject.RegionHyrarchy.GovernedRegion;
 import geographyProject.RegionHyrarchy.GovernedRegion.FormOfGovernment;
 import geographyProject.RegionHyrarchy.State;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import geographyProject.RegionHyrarchy.City;
@@ -22,7 +18,7 @@ public class GeoController {
 	private GeoView view;
 
 	private Tab currentTab = new Tab ();
-	
+
 	private String lastSelectedCountry;
 	private String lastSelectedState;
 	private String lastSelectedCity;
@@ -41,7 +37,6 @@ public class GeoController {
 		
 		// Set selected tab to country when launching the first time
 		currentTab = view.tabCountry;
-
 	
 		// Load from a file
 		model.loadGeo();
@@ -81,7 +76,7 @@ public class GeoController {
 			
 			defaultView();
 		});
-		
+
 		// Track the current item selection
 		view.itemList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->{
 			currentSelectedItem = newValue;
@@ -96,35 +91,44 @@ public class GeoController {
 			} 
 		});
 		
+		// Tracks Min and Max Elevation values in State and City then calculates the average
 		view.centerRoot.tfMinElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null) 
-				minElevationCity = Double.parseDouble(newValue);
-				showAvgElevation(minElevationCity, maxElevationCity);
+			if (newValue != null && currentSelectedItem != null && newValue != "") {
+					minElevationCity = Double.parseDouble(newValue);
+					showAvgElevation(minElevationCity, maxElevationCity);
+			} else {
+				view.centerRoot.tfAvgElevationState.clear();
+			}
 		});
 		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null) {
-				maxElevationCity = Double.parseDouble(newValue);
-				showAvgElevation(minElevationCity, maxElevationCity);
+			if (newValue != null && currentSelectedItem != null && newValue != "") {
+					maxElevationCity = Double.parseDouble(newValue);
+					showAvgElevation(minElevationCity, maxElevationCity);
+			} else {
+				view.centerRoot.tfAvgElevationState.clear();
 			}
 		});
 		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null) {
+			if (newValue != null && currentSelectedItem != null && newValue != "") {
 				minElevationState = Double.parseDouble(newValue);
 				showAvgElevation(minElevationState, maxElevationState);
+			} else {
+				view.centerRoot.tfAvgElevationState.clear();
 			}
 		});
 		view.centerRoot.tfMaxElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null) {
+			if (newValue != null && currentSelectedItem != null && newValue != "") {
 				maxElevationState = Double.parseDouble(newValue);
 				showAvgElevation(minElevationState, maxElevationState);
+			} else {
+				view.centerRoot.tfAvgElevationState.clear();
 			}
 		});
 		
 		view.tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != "") {
 				view.items.clear();
-//				if (!searchedItems.isEmpty())
-					searchedItems.clear();
+				searchedItems.clear();
 				
 				if (currentTab == view.tabCountry) {
 					searchedItems = model.getSearchedCountries(newValue);					
@@ -141,7 +145,6 @@ public class GeoController {
 			}else if (newValue == "") {
 				updateView(currentTab);
 			}
-
 		});
 	}
  
@@ -165,25 +168,18 @@ public class GeoController {
 		 if (currentTab == view.tabCountry)
 		{
 			lastSelectedCountry = currentSelectedItem;
-//			lastSelectedState = null;
-//			lastSelectedCity = null;
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedCountry != null ) {
 				view.tabState.setDisable(false);
 			}
 		} 
 		else if (currentTab == view.tabState) {
-//			lastSelectedCountry = null;
 			lastSelectedState = currentSelectedItem;
-//			lastSelectedCity = null;
 			view.tabCountry.setDisable(false);
 			if(view.itemList.getSelectionModel().isEmpty() == false && lastSelectedState != null ) {
 				view.tabCity.setDisable(false);
 			}
-			
 		} 
 		else if (currentTab == view.tabCity) {
-//			lastSelectedCountry = null;
-//			lastSelectedState = null;
 			lastSelectedCity = currentSelectedItem;
 			view.tabCountry.setDisable(false);
 			view.tabState.setDisable(false);
@@ -254,12 +250,11 @@ public class GeoController {
 	private void save(MouseEvent e) {
 		
 		String[] userInput;
-		String itemName = getSelectedItemName();
+		String itemName = currentSelectedItem;
 		FormOfGovernment formOfGovernment = view.centerRoot.cbFormOfGovernment.getSelectionModel().getSelectedItem();
 		int indexCounter = 0;
 		
 		try {
-			
 			if (view.tabCountry.isSelected()) {
 				userInput = getCountryData(indexCounter);
 				model.saveCountryData(itemName, userInput, formOfGovernment);
@@ -278,12 +273,12 @@ public class GeoController {
 			view.btnEdit.setSelected(false);
 			// Save to a file
 			model.saveGeo();
-			}
+		} 
 		catch(Exception e1) {
 			  view.alertEntryCenter.showAndWait();
 			  setCenterEditable();
-			}
 		}
+	}
 	
 	private void delete(MouseEvent e) {
 		if (currentSelectedItem != null) {
@@ -342,7 +337,7 @@ public class GeoController {
 
 	private void updateView (Tab currentTab) {
 		view.items.clear();
-		
+		// Updates the list of items
 		if (currentTab == view.tabCountry) {
 			for (int i = 0; i < model.countries.size(); i++) {
 				Country country = model.countries.get(i);
@@ -358,7 +353,6 @@ public class GeoController {
 					view.items.add(stateText);
 				}
 			}
-			
 		} else if (currentTab == view.tabCity) {
 			for(int i = 0; i < model.cities.size(); i++) {
 				City city = model.cities.get(i);
@@ -372,6 +366,7 @@ public class GeoController {
 		view.showCenterView(currentTab);		
 	}
 	
+	// Updates Center View
 	private void updateCountryView () {
 		Country currentCountry = model.getCountry(currentSelectedItem);
 		view.centerRoot.tfPopulationCountry.setText(Long.toString(currentCountry.getPopulation()));
@@ -490,10 +485,4 @@ public class GeoController {
 		view.itemList.setMouseTransparent(false);
 		view.itemList.setFocusTraversable(true);
 	}
-	
-	private String getSelectedItemName() {
-		String selectedItem = view.itemList.getSelectionModel().getSelectedItem();
-		return selectedItem;
-	}
-	
 }

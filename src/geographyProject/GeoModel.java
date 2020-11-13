@@ -430,7 +430,7 @@ public class GeoModel {
 		city.setZipCode(zipCode);
 		city.setMayor(mayor);
 		city.setHistory(history);
-				
+		
 		return city;
 	}
 	
@@ -449,7 +449,6 @@ public class GeoModel {
 			for (Country country : countries) {
 				String line = writeCountry(country);
 				out.write(line);
-//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -460,7 +459,6 @@ public class GeoModel {
 			for (State state : states) {
 				String line = writeState(state);
 				out.write(line);
-//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -471,7 +469,6 @@ public class GeoModel {
 			for (City city: cities) {
 				String line = writeCity(city);
 				out.write(line);
-//				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

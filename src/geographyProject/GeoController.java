@@ -206,7 +206,7 @@ public class GeoController {
 		}
 		// Create State
 		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabState) {
-			doubleEntry = model.doubleCheckerState(entry);
+			doubleEntry = model.doubleCheckerState(entry, lastSelectedCountry);
 			if (entry.length() > 0 && entry.charAt(0) != ' ' && entry.charAt(entry.length() - 1) != ' ' && doubleEntry == false) {
 				model.addState(entry, lastSelectedCountry); 
 				model.saveGeo();
@@ -220,7 +220,7 @@ public class GeoController {
 		}
 		// Create City
 		else if(view.tabPane.getSelectionModel().getSelectedItem() == view.tabCity) {
-			doubleEntry = model.doubleCheckerCity(entry);
+			doubleEntry = model.doubleCheckerCity(entry, lastSelectedState);
 			if (entry.length() > 0 && entry.charAt(0) != ' ' && entry.charAt(entry.length() - 1) != ' ' && doubleEntry == false) {
 				model.addCity(entry, lastSelectedState); 
 				model.saveGeo();
@@ -260,10 +260,10 @@ public class GeoController {
 				model.saveCountryData(itemName, userInput, formOfGovernment);
 			}else if(view.tabState.isSelected()) {
 				userInput = getStateData(indexCounter);
-				model.saveStateData(itemName, userInput);
+				model.saveStateData(itemName, lastSelectedCountry, userInput);
 			}else if(view.tabCity.isSelected()) {
 				userInput = getCityData(indexCounter);
-				model.saveCityData(itemName, userInput);		
+				model.saveCityData(itemName, lastSelectedState, userInput);		
 			}
 			// Enable all tabs and item selection again
 			view.itemList.setMouseTransparent(false);
@@ -285,9 +285,9 @@ public class GeoController {
 			if (view.tabCountry.isSelected())
 				model.deleteCountry(currentSelectedItem);
 			if (view.tabState.isSelected())
-				model.deleteState(currentSelectedItem);
+				model.deleteState(currentSelectedItem, lastSelectedCountry);
 			if (view.tabCity.isSelected())
-				model.deleteCity(currentSelectedItem);
+				model.deleteCity(currentSelectedItem, lastSelectedState);
 			
 			updateView(currentTab);
 			model.saveGeo();
@@ -380,7 +380,7 @@ public class GeoController {
 	}
 	
 	private void updateStateView () {
-		State currentState = model.getState(currentSelectedItem);
+		State currentState = model.getState(currentSelectedItem, lastSelectedCountry);
 		view.centerRoot.tfPopulationState.setText(Long.toString(currentState.getPopulation()));
 		view.centerRoot.tfAreaState.setText(Long.toString(currentState.getArea()));
 		view.centerRoot.tfMaxElevationState.setText(Double.toString(currentState.getMaxElevation()));
@@ -392,7 +392,7 @@ public class GeoController {
 	}
 	
 	private void updateCityView () {
-		City currentCity = model.getCity(currentSelectedItem);
+		City currentCity = model.getCity(currentSelectedItem, lastSelectedState);
 		view.centerRoot.tfPopulationCity.setText(Long.toString(currentCity.getPopulation()));
 		view.centerRoot.tfAreaCity.setText(Integer.toString(currentCity.getArea()));
 		view.centerRoot.tfMaxElevationCity.setText(Double.toString(currentCity.getMaxElevation()));

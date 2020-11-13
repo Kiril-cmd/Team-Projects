@@ -1,7 +1,5 @@
 package geographyProject.RegionHyrarchy;
 
-import java.util.ArrayList;
-
 public abstract class GovernedRegion {
 	private String name;
 	private int area;
@@ -16,15 +14,7 @@ public abstract class GovernedRegion {
 
 	public GovernedRegion(String name){
 			this.name = name;
-			
-			//this.id = incrementIdCounter();
 	}
-	
-	
-//	private int incrementIdCounter() {
-//		idCounter++;
-//		return idCounter;
-//	}
 
 	// getters & setters
 	public String getName() {
@@ -98,8 +88,7 @@ public abstract class GovernedRegion {
 	// sets avgElevation by using maxElevation & minElevation
 	public void setAvgElevation() {
 		if (maxElevation > 0 && minElevation > 0)
-			this.avgElevation = (maxElevation + minElevation) / 2;
-		
+			this.avgElevation = (maxElevation + minElevation) / 2;	
 	}
 	
 }

@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 
 import geographyProject.RegionHyrarchy.City;
 import geographyProject.RegionHyrarchy.Country;
-import geographyProject.RegionHyrarchy.GovernedRegion;
 import geographyProject.RegionHyrarchy.State;
 import geographyProject.RegionHyrarchy.GovernedRegion.FormOfGovernment;
 import javafx.collections.FXCollections;

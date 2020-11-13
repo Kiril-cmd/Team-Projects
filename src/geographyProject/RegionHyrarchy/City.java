@@ -3,7 +3,6 @@ package geographyProject.RegionHyrarchy;
 public class City extends GovernedRegion{
 	private long zipCode;
 	private String Mayor;
-	private String country;
 	private String state;
 		
 	public City (String name, String state) {
@@ -28,14 +27,6 @@ public class City extends GovernedRegion{
 		Mayor = mayor;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getState() {
 		return state;
 	}
@@ -43,6 +34,5 @@ public class City extends GovernedRegion{
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
+		
 }

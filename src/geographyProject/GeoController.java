@@ -97,7 +97,7 @@ public class GeoController {
 					minElevationCity = Double.parseDouble(newValue);
 					showAvgElevation(minElevationCity, maxElevationCity);
 			} else {
-				view.centerRoot.tfAvgElevationState.clear();
+				view.centerRoot.tfAvgElevationCity.clear();
 			}
 		});
 		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -105,7 +105,7 @@ public class GeoController {
 					maxElevationCity = Double.parseDouble(newValue);
 					showAvgElevation(minElevationCity, maxElevationCity);
 			} else {
-				view.centerRoot.tfAvgElevationState.clear();
+				view.centerRoot.tfAvgElevationCity.clear();
 			}
 		});
 		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> {

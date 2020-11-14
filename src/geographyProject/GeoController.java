@@ -93,34 +93,55 @@ public class GeoController {
 		
 		// Tracks Min and Max Elevation values in State and City then calculates the average
 		view.centerRoot.tfMinElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
+			try{
+				if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
 					minElevationCity = Double.parseDouble(newValue);
 					showAvgElevation(minElevationCity, maxElevationCity);
-			} else {
+				} else {
+					view.centerRoot.tfAvgElevationCity.clear();
+				}
+			}
+			catch(Exception e) {
 				view.centerRoot.tfAvgElevationCity.clear();
 			}
 		});
 		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
-					maxElevationCity = Double.parseDouble(newValue);
-					showAvgElevation(minElevationCity, maxElevationCity);
-			} else {
+			try {
+				if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
+						maxElevationCity = Double.parseDouble(newValue);
+						showAvgElevation(minElevationCity, maxElevationCity);
+				} else {
+					view.centerRoot.tfAvgElevationCity.clear();
+				}
+			}
+			catch(Exception e) {
 				view.centerRoot.tfAvgElevationCity.clear();
 			}
+			
 		});
 		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
-				minElevationState = Double.parseDouble(newValue);
-				showAvgElevation(minElevationState, maxElevationState);
-			} else {
+			try {
+				if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
+					minElevationState = Double.parseDouble(newValue);
+					showAvgElevation(minElevationState, maxElevationState);
+				} else {
+					view.centerRoot.tfAvgElevationState.clear();
+				}
+			}
+			catch (Exception e) {
 				view.centerRoot.tfAvgElevationState.clear();
 			}
 		});
 		view.centerRoot.tfMaxElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
-				maxElevationState = Double.parseDouble(newValue);
-				showAvgElevation(minElevationState, maxElevationState);
-			} else {
+			try {
+				if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
+					maxElevationState = Double.parseDouble(newValue);
+					showAvgElevation(minElevationState, maxElevationState);
+				} else {
+					view.centerRoot.tfAvgElevationState.clear();
+				}
+			}
+			catch (Exception e) {
 				view.centerRoot.tfAvgElevationState.clear();
 			}
 		});

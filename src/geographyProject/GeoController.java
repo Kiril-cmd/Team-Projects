@@ -93,7 +93,7 @@ public class GeoController {
 		
 		// Tracks Min and Max Elevation values in State and City then calculates the average
 		view.centerRoot.tfMinElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && newValue != "") {
+			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
 					minElevationCity = Double.parseDouble(newValue);
 					showAvgElevation(minElevationCity, maxElevationCity);
 			} else {
@@ -101,7 +101,7 @@ public class GeoController {
 			}
 		});
 		view.centerRoot.tfMaxElevationCity.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && newValue != "") {
+			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
 					maxElevationCity = Double.parseDouble(newValue);
 					showAvgElevation(minElevationCity, maxElevationCity);
 			} else {
@@ -109,7 +109,7 @@ public class GeoController {
 			}
 		});
 		view.centerRoot.tfMinElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && newValue != "") {
+			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
 				minElevationState = Double.parseDouble(newValue);
 				showAvgElevation(minElevationState, maxElevationState);
 			} else {
@@ -117,7 +117,7 @@ public class GeoController {
 			}
 		});
 		view.centerRoot.tfMaxElevationState.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null && currentSelectedItem != null && newValue != "") {
+			if (newValue != null && currentSelectedItem != null && !newValue.equals("")) {
 				maxElevationState = Double.parseDouble(newValue);
 				showAvgElevation(minElevationState, maxElevationState);
 			} else {
@@ -126,7 +126,7 @@ public class GeoController {
 		});
 		
 		view.tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != "") {
+			if (!newValue.equals("")) {
 				view.items.clear();
 				searchedItems.clear();
 				
@@ -142,7 +142,7 @@ public class GeoController {
 					view.items.add(searchedItem);
 				}
 
-			}else if (newValue == "") {
+			}else if (newValue.equals("")) {
 				updateView(currentTab);
 			}
 		});

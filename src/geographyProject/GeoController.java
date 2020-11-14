@@ -141,7 +141,7 @@ public class GeoController {
 				for (String searchedItem : searchedItems) {
 					view.items.add(searchedItem);
 				}
-				
+
 			}else if (newValue == "") {
 				updateView(currentTab);
 			}
